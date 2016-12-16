@@ -24,6 +24,11 @@ xcuserdata/
 # Ignore Mac DS_Store files
 .DS_Store
 
+# Ignore FFMpeg source and output file
+FFMpegSource
+FFMpegOutput
+FFMpegLibrary
+
 ## Obj-C/Swift specific
 *.hmap
 *.ipa

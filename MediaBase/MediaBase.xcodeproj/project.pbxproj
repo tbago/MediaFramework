@@ -8,11 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		D0940E021E037F31001637A5 /* MediaBase.h in Headers */ = {isa = PBXBuildFile; fileRef = D0940E011E037F31001637A5 /* MediaBase.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		D0940E401E038177001637A5 /* MediaInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = D0940E3E1E038177001637A5 /* MediaInfo.h */; };
+		D0940E401E038177001637A5 /* MediaInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = D0940E3E1E038177001637A5 /* MediaInfo.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D0940E411E038177001637A5 /* MediaInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = D0940E3F1E038177001637A5 /* MediaInfo.m */; };
-		D0940E451E038318001637A5 /* StreamInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = D0940E431E038318001637A5 /* StreamInfo.h */; };
+		D0940E451E038318001637A5 /* StreamInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = D0940E431E038318001637A5 /* StreamInfo.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D0940E461E038318001637A5 /* StreamInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = D0940E441E038318001637A5 /* StreamInfo.m */; };
-		D0940E491E038528001637A5 /* CompassedFrame.h in Headers */ = {isa = PBXBuildFile; fileRef = D0940E471E038528001637A5 /* CompassedFrame.h */; };
+		D0940E491E038528001637A5 /* CompassedFrame.h in Headers */ = {isa = PBXBuildFile; fileRef = D0940E471E038528001637A5 /* CompassedFrame.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D0940E4A1E038528001637A5 /* CompassedFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = D0940E481E038528001637A5 /* CompassedFrame.m */; };
 /* End PBXBuildFile section */
 

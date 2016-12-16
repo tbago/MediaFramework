@@ -14,6 +14,6 @@
 
 @property (nonatomic) int32_t                       identify;
 @property (nonatomic, copy) NSString                *name;
-@property (nonatomic, copy) NSString                *format;        ///< media format
-@property (strong, nonatomic) NSArray<StreamInfo *> streamArray;    ///< stream info array
+@property (nonatomic, copy) NSString                *format;            ///< media format
+@property (strong, nonatomic) NSArray<StreamInfo *> *streamArray;       ///< stream info array
 @end

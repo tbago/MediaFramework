@@ -15,6 +15,23 @@
 		D0940E2B1E0380E8001637A5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D0940E291E0380E8001637A5 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		D0940E361E038161001637A5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D0940E321E038161001637A5 /* MediaBase.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D0940DFE1E037F31001637A5;
+			remoteInfo = MediaBase;
+		};
+		D0940E3C1E038169001637A5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D0940E381E038169001637A5 /* FFMpegDemuxer.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D0940DAD1E0377A6001637A5;
+			remoteInfo = FFMpegDemuxer;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		D0940E181E0380E7001637A5 /* MediaFrameworkTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MediaFrameworkTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0940E1C1E0380E7001637A5 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -26,6 +43,8 @@
 		D0940E271E0380E7001637A5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D0940E2A1E0380E8001637A5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D0940E2C1E0380E8001637A5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D0940E321E038161001637A5 /* MediaBase.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = MediaBase.xcodeproj; path = ../MediaBase/MediaBase.xcodeproj; sourceTree = "<group>"; };
+		D0940E381E038169001637A5 /* FFMpegDemuxer.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = FFMpegDemuxer.xcodeproj; path = ../FFMpegDemuxer/FFMpegDemuxer.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -42,6 +61,8 @@
 		D0940E0F1E0380E7001637A5 = {
 			isa = PBXGroup;
 			children = (
+				D0940E381E038169001637A5 /* FFMpegDemuxer.xcodeproj */,
+				D0940E321E038161001637A5 /* MediaBase.xcodeproj */,
 				D0940E1A1E0380E7001637A5 /* MediaFrameworkTest */,
 				D0940E191E0380E7001637A5 /* Products */,
 			);
@@ -77,6 +98,22 @@
 				D0940E1C1E0380E7001637A5 /* main.m */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		D0940E331E038161001637A5 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D0940E371E038161001637A5 /* MediaBase.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D0940E391E038169001637A5 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D0940E3D1E038169001637A5 /* FFMpegDemuxer.framework */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -124,12 +161,39 @@
 			mainGroup = D0940E0F1E0380E7001637A5;
 			productRefGroup = D0940E191E0380E7001637A5 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = D0940E391E038169001637A5 /* Products */;
+					ProjectRef = D0940E381E038169001637A5 /* FFMpegDemuxer.xcodeproj */;
+				},
+				{
+					ProductGroup = D0940E331E038161001637A5 /* Products */;
+					ProjectRef = D0940E321E038161001637A5 /* MediaBase.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				D0940E171E0380E7001637A5 /* MediaFrameworkTest */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		D0940E371E038161001637A5 /* MediaBase.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = MediaBase.framework;
+			remoteRef = D0940E361E038161001637A5 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		D0940E3D1E038169001637A5 /* FFMpegDemuxer.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = FFMpegDemuxer.framework;
+			remoteRef = D0940E3C1E038169001637A5 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		D0940E161E0380E7001637A5 /* Resources */ = {
@@ -302,6 +366,7 @@
 				D0940E311E0380E8001637A5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

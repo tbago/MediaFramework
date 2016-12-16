@@ -21,6 +21,9 @@ xcuserdata/
 *.moved-aside
 *.xcuserstate
 
+# Ignore Mac DS_Store files
+.DS_Store
+
 ## Obj-C/Swift specific
 *.hmap
 *.ipa

@@ -7,7 +7,7 @@
 //
 
 #include <Foundation/Foundation.h>
-#import "MovieInfo.h"
+#import <MediaBase/MediaBase.h>
 
 /**
  *  Demuxer media file by ffmpeg
@@ -32,7 +32,20 @@
 
 - (MovieInfo *)getMovieInfoByIndex:(uint32_t) index;
 
-- (
+- (CompassedFrame *)readFrame;
+
+- (BOOL)seekToPosition:(int64_t) position
+          realPosition:(int64_t *) realPosition;
+
+- (int64_t)getCurrentTime;
+
+- (int64_t)getCurrentPosition;
+/**
+ *  Whether read end of the file
+ *
+ *  @return
+ */
+- (BOOL)eof;
 @end
 
 /**

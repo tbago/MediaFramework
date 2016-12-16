@@ -8,8 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		D0940E021E037F31001637A5 /* MediaBase.h in Headers */ = {isa = PBXBuildFile; fileRef = D0940E011E037F31001637A5 /* MediaBase.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		D0940E401E038177001637A5 /* MediaInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = D0940E3E1E038177001637A5 /* MediaInfo.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		D0940E411E038177001637A5 /* MediaInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = D0940E3F1E038177001637A5 /* MediaInfo.m */; };
+		D0940E401E038177001637A5 /* MovieInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = D0940E3E1E038177001637A5 /* MovieInfo.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D0940E411E038177001637A5 /* MovieInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = D0940E3F1E038177001637A5 /* MovieInfo.m */; };
 		D0940E451E038318001637A5 /* StreamInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = D0940E431E038318001637A5 /* StreamInfo.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D0940E461E038318001637A5 /* StreamInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = D0940E441E038318001637A5 /* StreamInfo.m */; };
 		D0940E491E038528001637A5 /* CompassedFrame.h in Headers */ = {isa = PBXBuildFile; fileRef = D0940E471E038528001637A5 /* CompassedFrame.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -20,8 +20,8 @@
 		D0940DFE1E037F31001637A5 /* MediaBase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MediaBase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0940E011E037F31001637A5 /* MediaBase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MediaBase.h; sourceTree = "<group>"; };
 		D0940E031E037F31001637A5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D0940E3E1E038177001637A5 /* MediaInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MediaInfo.h; sourceTree = "<group>"; };
-		D0940E3F1E038177001637A5 /* MediaInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MediaInfo.m; sourceTree = "<group>"; };
+		D0940E3E1E038177001637A5 /* MovieInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MovieInfo.h; sourceTree = "<group>"; };
+		D0940E3F1E038177001637A5 /* MovieInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MovieInfo.m; sourceTree = "<group>"; };
 		D0940E421E03823D001637A5 /* MediaConstant.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MediaConstant.h; sourceTree = "<group>"; };
 		D0940E431E038318001637A5 /* StreamInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StreamInfo.h; sourceTree = "<group>"; };
 		D0940E441E038318001637A5 /* StreamInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StreamInfo.m; sourceTree = "<group>"; };
@@ -61,8 +61,8 @@
 			children = (
 				D0940E011E037F31001637A5 /* MediaBase.h */,
 				D0940E421E03823D001637A5 /* MediaConstant.h */,
-				D0940E3E1E038177001637A5 /* MediaInfo.h */,
-				D0940E3F1E038177001637A5 /* MediaInfo.m */,
+				D0940E3E1E038177001637A5 /* MovieInfo.h */,
+				D0940E3F1E038177001637A5 /* MovieInfo.m */,
 				D0940E431E038318001637A5 /* StreamInfo.h */,
 				D0940E441E038318001637A5 /* StreamInfo.m */,
 				D0940E471E038528001637A5 /* CompassedFrame.h */,
@@ -82,7 +82,7 @@
 				D0940E491E038528001637A5 /* CompassedFrame.h in Headers */,
 				D0940E451E038318001637A5 /* StreamInfo.h in Headers */,
 				D0940E021E037F31001637A5 /* MediaBase.h in Headers */,
-				D0940E401E038177001637A5 /* MediaInfo.h in Headers */,
+				D0940E401E038177001637A5 /* MovieInfo.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -153,7 +153,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D0940E411E038177001637A5 /* MediaInfo.m in Sources */,
+				D0940E411E038177001637A5 /* MovieInfo.m in Sources */,
 				D0940E461E038318001637A5 /* StreamInfo.m in Sources */,
 				D0940E4A1E038528001637A5 /* CompassedFrame.m in Sources */,
 			);

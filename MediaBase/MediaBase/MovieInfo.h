@@ -1,5 +1,5 @@
 //
-//  MediaInfo.h
+//  MovieInfo.h
 //  MediaBase
 //
 //  Created by tbago on 16/12/16.
@@ -10,7 +10,7 @@
 
 #import "StreamInfo.h"
 
-@interface MediaInfo : NSObject
+@interface MovieInfo : NSObject
 
 @property (nonatomic) int32_t                       identify;
 @property (nonatomic, copy) NSString                *name;

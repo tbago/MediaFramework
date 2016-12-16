@@ -11,6 +11,7 @@
 		D0940DE31E037807001637A5 /* FFMpegDemuxerImp.h in Headers */ = {isa = PBXBuildFile; fileRef = D0940DE11E037807001637A5 /* FFMpegDemuxerImp.h */; };
 		D0940DE41E037807001637A5 /* FFMpegDemuxerImp.m in Sources */ = {isa = PBXBuildFile; fileRef = D0940DE21E037807001637A5 /* FFMpegDemuxerImp.m */; };
 		D0940DE91E03799D001637A5 /* FFMpegDemuxer.m in Sources */ = {isa = PBXBuildFile; fileRef = D0940DE81E03799D001637A5 /* FFMpegDemuxer.m */; };
+		D0940E4C1E038666001637A5 /* MediaBase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0940E4B1E038666001637A5 /* MediaBase.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +21,7 @@
 		D0940DE11E037807001637A5 /* FFMpegDemuxerImp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFMpegDemuxerImp.h; sourceTree = "<group>"; };
 		D0940DE21E037807001637A5 /* FFMpegDemuxerImp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFMpegDemuxerImp.m; sourceTree = "<group>"; };
 		D0940DE81E03799D001637A5 /* FFMpegDemuxer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFMpegDemuxer.m; sourceTree = "<group>"; };
+		D0940E4B1E038666001637A5 /* MediaBase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaBase.framework; path = "../MediaFrameworkTest/Build/Products/Debug-iphonesimulator/MediaBase.framework"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -27,6 +29,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D0940E4C1E038666001637A5 /* MediaBase.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -36,6 +39,7 @@
 		D0940DA31E0377A6001637A5 = {
 			isa = PBXGroup;
 			children = (
+				D0940E4B1E038666001637A5 /* MediaBase.framework */,
 				D0940DAF1E0377A7001637A5 /* FFMpegDemuxer */,
 				D0940DAE1E0377A6001637A5 /* Products */,
 			);

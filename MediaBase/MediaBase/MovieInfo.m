@@ -1,13 +1,13 @@
 //
-//  MediaInfo.m
+//  MovieInfo.m
 //  MediaBase
 //
 //  Created by tbago on 16/12/16.
 //  Copyright © 2016年 tbago. All rights reserved.
 //
 
-#import "MediaInfo.h"
+#import "MovieInfo.h"
 
-@implementation MediaInfo
+@implementation MovieInfo
 
 @end

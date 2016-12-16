@@ -7,9 +7,11 @@
 //
 
 #import "ViewController.h"
+#import <FFMpegDemuxer/FFMpegDemuxer.h>
 
 @interface ViewController ()
 
+@property (strong, nonatomic) FFMpegDemuxer     *ffmpegDemuxer;
 @end
 
 @implementation ViewController
@@ -19,9 +21,16 @@
     // Do any additional setup after loading the view, typically from a nib.
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (IBAction)testButtonClick:(UIButton *)sender {
+    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"demo" ofType:@"mp4"];
+    [self.ffmpegDemuxer openFileByPath:filePath];
 }
 
+#pragma mark - get & set
+- (FFMpegDemuxer *)ffmpegDemuxer {
+    if (_ffmpegDemuxer == nil) {
+        _ffmpegDemuxer = createFFMpegDemuxer();
+    }
+    return _ffmpegDemuxer;
+}
 @end

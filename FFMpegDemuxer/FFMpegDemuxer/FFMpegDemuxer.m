@@ -7,7 +7,6 @@
 //
 
 #import "FFMpegDemuxer.h"
-#import "FFMpegDemuxerImp.h"
 
 @implementation FFMpegDemuxer
 
@@ -45,7 +44,3 @@
 }
 @end
 
-FFMpegDemuxer *createFFMpegDemuxer() {
-    FFMpegDemuxer *demuxer = [[FFMpegDemuxerImp alloc] init];
-    return demuxer;
-}

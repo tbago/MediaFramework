@@ -11,6 +11,8 @@
 
 /**
  *  Demuxer media file by ffmpeg
+ *  This is only interface object,all method are implement by subclass
+ *  Please call 'createFFMpegDemuxer' function to create instance.
  */
 @interface FFMpegDemuxer : NSObject
 

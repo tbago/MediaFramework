@@ -13,6 +13,8 @@
 		D0940E261E0380E7001637A5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D0940E241E0380E7001637A5 /* Main.storyboard */; };
 		D0940E281E0380E7001637A5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D0940E271E0380E7001637A5 /* Assets.xcassets */; };
 		D0940E2B1E0380E8001637A5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D0940E291E0380E8001637A5 /* LaunchScreen.storyboard */; };
+		D0940FCE1E03B805001637A5 /* FFMpegDemuxer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0940E3D1E038169001637A5 /* FFMpegDemuxer.framework */; };
+		D0940FD01E03B8CF001637A5 /* demo.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = D0940FCF1E03B8C2001637A5 /* demo.mp4 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +47,7 @@
 		D0940E2C1E0380E8001637A5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D0940E321E038161001637A5 /* MediaBase.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = MediaBase.xcodeproj; path = ../MediaBase/MediaBase.xcodeproj; sourceTree = "<group>"; };
 		D0940E381E038169001637A5 /* FFMpegDemuxer.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = FFMpegDemuxer.xcodeproj; path = ../FFMpegDemuxer/FFMpegDemuxer.xcodeproj; sourceTree = "<group>"; };
+		D0940FCF1E03B8C2001637A5 /* demo.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = demo.mp4; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,6 +55,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D0940FCE1E03B805001637A5 /* FFMpegDemuxer.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -83,6 +87,7 @@
 				D0940E1F1E0380E7001637A5 /* AppDelegate.m */,
 				D0940E211E0380E7001637A5 /* ViewController.h */,
 				D0940E221E0380E7001637A5 /* ViewController.m */,
+				D0940FCF1E03B8C2001637A5 /* demo.mp4 */,
 				D0940E241E0380E7001637A5 /* Main.storyboard */,
 				D0940E271E0380E7001637A5 /* Assets.xcassets */,
 				D0940E291E0380E8001637A5 /* LaunchScreen.storyboard */,
@@ -200,6 +205,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D0940FD01E03B8CF001637A5 /* demo.mp4 in Resources */,
 				D0940E2B1E0380E8001637A5 /* LaunchScreen.storyboard in Resources */,
 				D0940E281E0380E7001637A5 /* Assets.xcassets in Resources */,
 				D0940E261E0380E7001637A5 /* Main.storyboard in Resources */,

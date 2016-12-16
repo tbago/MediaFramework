@@ -16,6 +16,13 @@ FFMpegDemuxer *createFFMpegDemuxer() {
     return demuxer;
 }
 
+@interface FFMpegDemuxerImp()
+{
+    AVFormatContext* _formatContext;
+}
+@property (strong, nonatomic) MovieInfo     *movieInfo;     ///< current file movie info
+
+@end
 @implementation FFMpegDemuxerImp
 
 - (instancetype)init {
@@ -105,13 +112,16 @@ FFMpegDemuxer *createFFMpegDemuxer() {
         return NO;
     }
     
-    AVFormatContext* formatContext = NULL;
-    int ret = avformat_open_input(&formatContext, [filePath UTF8String], formatContext, NULL);
+
+    int ret = avformat_open_input(&_formatContext, [filePath UTF8String], format, NULL);
     if (!ret) {
         NSLog(@"Open input failed");
         return NO;
     }
     
+    avformat_find_stream_info(_formatContext, NULL);
+    
+    [self buildMovieInfo:filePath];
     return YES;
 }
 
@@ -120,5 +130,33 @@ FFMpegDemuxer *createFFMpegDemuxer() {
 - (void)innerInitFFMpeg {
     av_register_all();
     avformat_network_init();
+}
+
+- (void)buildMovieInfo:(NSString *) filePath {
+    self.movieInfo.name = [[filePath lastPathComponent] stringByDeletingPathExtension];
+    self.movieInfo.format = [NSString stringWithUTF8String:_formatContext->iformat->name];
+    
+    ///< store movie meta data
+    if (_formatContext->metadata != NULL) {
+        AVDictionaryEntry *t = NULL;
+        t = av_dict_get(_formatContext->metadata, "", t, AV_DICT_IGNORE_SUFFIX);
+        while (t != NULL)
+        {
+            if (t->key != NULL && t->value != NULL)
+            {
+                
+            }
+            t = av_dict_get(_formatContext->metadata, "", t, AV_DICT_IGNORE_SUFFIX);
+        }
+    }
+}
+
+#pragma mark - get & set
+
+- (MovieInfo *)movieInfo {
+    if (_movieInfo == nil) {
+        _movieInfo = [[MovieInfo alloc] init];
+    }
+    return _movieInfo;
 }
 @end

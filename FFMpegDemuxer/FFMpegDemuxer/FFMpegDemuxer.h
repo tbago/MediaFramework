@@ -48,6 +48,8 @@
  *  @return
  */
 - (BOOL)eof;
+
+- (void)closeInputFile;
 @end
 
 /**

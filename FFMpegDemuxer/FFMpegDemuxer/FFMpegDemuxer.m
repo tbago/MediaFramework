@@ -42,5 +42,9 @@
 - (BOOL)eof {
     return YES;
 }
+
+- (void)closeInputFile {
+
+}
 @end
 

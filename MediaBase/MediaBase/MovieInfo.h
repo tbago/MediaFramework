@@ -11,9 +11,25 @@
 #import "StreamInfo.h"
 
 @interface MovieInfo : NSObject
+/**
+ *  Add stream info to movie info
+ *
+ *  @param streamInfo
+ */
+- (void)addStreamInfoToMovieInfo:(StreamInfo *) streamInfo;
 
-@property (nonatomic) int32_t                       identify;
-@property (nonatomic, copy) NSString                *name;
-@property (nonatomic, copy) NSString                *format;            ///< media format
-@property (strong, nonatomic) NSArray<StreamInfo *> *streamArray;       ///< stream info array
+/**
+ *  Add metadata to movie info
+ *
+ *  @param key   metadata key
+ *  @param value metadata value
+ */
+- (void)addMetaDataToStreamInfo:(NSString *) key
+                          value:(NSString *) value;
+
+@property (nonatomic) int32_t                                                   identify;
+@property (nonatomic, copy) NSString                                            *name;
+@property (nonatomic, copy) NSString                                            *format;            ///< media format
+@property (strong, nonatomic, readonly) NSArray<StreamInfo *>                   *streamArray;       ///< stream info array
+@property (strong, nonatomic, readonly) NSDictionary<NSString *, NSString *>    *metaData;          ///< stream meta data
 @end

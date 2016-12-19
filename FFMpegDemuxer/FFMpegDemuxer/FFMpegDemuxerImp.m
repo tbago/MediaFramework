@@ -22,8 +22,9 @@ FFMpegDemuxer *createFFMpegDemuxer() {
 {
     AVFormatContext* _formatContext;
 }
-@property (strong, nonatomic) MovieInfo     *movieInfo;     ///< current file movie info
-
+@property (strong, nonatomic) MovieInfo         *movieInfo;                 ///< current file movie info
+@property (strong, nonatomic) CompassedFrame    *currentCompassedFrame;
+@property (nonatomic) BOOL                      fileEof;                    ///< read end of file
 @end
 @implementation FFMpegDemuxerImp
 
@@ -37,6 +38,7 @@ FFMpegDemuxer *createFFMpegDemuxer() {
 }
 
 - (BOOL)openFileByPath:(NSString *)filePath {
+    [self closeInputFile];
     
     av_log_set_callback(ffmpeg_log);
     
@@ -127,7 +129,64 @@ FFMpegDemuxer *createFFMpegDemuxer() {
     avformat_find_stream_info(_formatContext, NULL);
     
     [self buildMovieInfo:filePath];
+    
+    self.fileEof = NO;
     return YES;
+}
+
+- (void)closeInputFile {
+    if (_formatContext != NULL) {
+        avformat_close_input(&_formatContext);
+        _formatContext = NULL;
+    }
+}
+
+- (uint32_t)getMovieCount {
+    return 1;
+}
+
+- (MovieInfo *)getMovieInfoByIndex:(uint32_t)index {
+    if (index == 0) {
+        return self.movieInfo;
+    }
+    return NULL;
+}
+
+- (CompassedFrame *)readFrame {
+    AVPacket pkt;
+    int ret = 0;
+    bool bHasPkt = NO;
+    do{
+        ret = av_read_frame(_formatContext, &pkt);
+        if (ret < 0)
+        {
+            if (AVERROR(EAGAIN) == ret) {
+                continue;
+            }
+            else {
+                self.fileEof = YES;
+                break;
+            }
+        }
+        else {
+            bHasPkt = YES;
+            break;
+        }
+    } while(true);
+    if (bHasPkt) {
+        self.currentCompassedFrame.keyFrame           = pkt.flags & AV_PKT_FLAG_KEY;
+        self.currentCompassedFrame.presentTimeStamp   = pkt.pts;
+        self.currentCompassedFrame.decompassTimeStamp = pkt.dts;
+        self.currentCompassedFrame.position           = pkt.pos;
+        
+        
+        av_free_packet(&pkt);
+    }
+    return NULL;
+}
+
+- (BOOL)eof {
+    return self.fileEof;
 }
 
 #pragma mark - private method
@@ -177,7 +236,6 @@ FFMpegDemuxer *createFFMpegDemuxer() {
                 avStream->duration = duration/1000;
             }
         }
-        
         
         AVCodecParameters *codecParam = avStream->codecpar;
         if (codecParam == NULL) {
@@ -260,6 +318,13 @@ FFMpegDemuxer *createFFMpegDemuxer() {
         _movieInfo = [[MovieInfo alloc] init];
     }
     return _movieInfo;
+}
+
+- (CompassedFrame *)currentCompassedFrame {
+    if (_currentCompassedFrame == nil) {
+        _currentCompassedFrame = [[CompassedFrame alloc] init];
+    }
+    return _currentCompassedFrame;
 }
 @end
 

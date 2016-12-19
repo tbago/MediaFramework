@@ -14,6 +14,10 @@
     return NO;
 }
 
+- (void)closeInputFile {
+    
+}
+
 - (uint32_t)getMovieCount {
     return 0;
 }
@@ -43,8 +47,5 @@
     return YES;
 }
 
-- (void)closeInputFile {
-
-}
 @end
 

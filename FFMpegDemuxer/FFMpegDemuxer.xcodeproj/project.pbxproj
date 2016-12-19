@@ -308,9 +308,9 @@
 				D0940DE81E03799D001637A5 /* FFMpegDemuxer.m */,
 				D0940DE11E037807001637A5 /* FFMpegDemuxerImp.h */,
 				D0940DE21E037807001637A5 /* FFMpegDemuxerImp.m */,
-				D0940DB21E0377A7001637A5 /* Info.plist */,
 				D040599C1E078C6600BEC12E /* FFMpegCommon.h */,
 				D040599D1E078C6600BEC12E /* FFMpegCommon.m */,
+				D0940DB21E0377A7001637A5 /* Info.plist */,
 			);
 			path = FFMpegDemuxer;
 			sourceTree = "<group>";

@@ -22,14 +22,16 @@
 @property (nonatomic) ResuableCodecID       codecID;
 @property (nonatomic, copy) NSString        *codecName;
 @property (nonatomic, copy) NSString        *language;
-@property (nonatomic) int32_t               bitrate;
+@property (nonatomic) int64_t               bitrate;    ///< The average bitrate of the encoded data (in bits per second)
 @property (nonatomic) int64_t               duration;   ///< stream duration in ms, -1 is unkonwn
 ///< video param
 @property (nonatomic) int32_t               width;
 @property (nonatomic) int32_t               height;
-@property (nonatomic) int64_t               framerate;
-@property (nonatomic) ResuablePixelFormat   pixfmt;
-@property (nonatomic) int32_t               pixelAspectRatio;
+@property (nonatomic) ResuablePixelFormat   pixelFormat;
+@property (nonatomic) int32_t               framerateNumerator;
+@property (nonatomic) int32_t               framerateDenominator;
+@property (nonatomic) int32_t               pixelAspectRatioNumerator;
+@property (nonatomic) int32_t               pixelAspectRatioDenominator;
 ///< audio param
 @property (nonatomic) ResuableSampleFormat  sampleFormat;
 @property (nonatomic) int32_t               samplerate;

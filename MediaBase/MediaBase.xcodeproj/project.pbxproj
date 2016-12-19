@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		D05031521E07AF7A002F6F6F /* ResuableCodecID.h in Headers */ = {isa = PBXBuildFile; fileRef = D050314F1E07ABDB002F6F6F /* ResuableCodecID.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D05031531E07AF7A002F6F6F /* ResuablePixelFormat.h in Headers */ = {isa = PBXBuildFile; fileRef = D05031511E07AE35002F6F6F /* ResuablePixelFormat.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D05031551E07B923002F6F6F /* ResuableSampleFormat.h in Headers */ = {isa = PBXBuildFile; fileRef = D05031541E07B7C4002F6F6F /* ResuableSampleFormat.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D0940E021E037F31001637A5 /* MediaBase.h in Headers */ = {isa = PBXBuildFile; fileRef = D0940E011E037F31001637A5 /* MediaBase.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D0940E401E038177001637A5 /* MovieInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = D0940E3E1E038177001637A5 /* MovieInfo.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D0940E411E038177001637A5 /* MovieInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = D0940E3F1E038177001637A5 /* MovieInfo.m */; };
@@ -95,6 +96,7 @@
 				D0940E4D1E038870001637A5 /* MediaConstant.h in Headers */,
 				D05031521E07AF7A002F6F6F /* ResuableCodecID.h in Headers */,
 				D05031531E07AF7A002F6F6F /* ResuablePixelFormat.h in Headers */,
+				D05031551E07B923002F6F6F /* ResuableSampleFormat.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

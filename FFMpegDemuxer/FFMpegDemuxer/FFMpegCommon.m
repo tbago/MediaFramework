@@ -153,7 +153,6 @@ ResuableCodecID FFMpegCodecIDToMeidaCodecID(enum AVCodecID ffCodecID)
         case AV_CODEC_ID_ANM:                      return R_CODEC_ID_ANM;
         case AV_CODEC_ID_BINKVIDEO:                return R_CODEC_ID_BINKVIDEO;
         case AV_CODEC_ID_IFF_ILBM:                 return R_CODEC_ID_IFF_ILBM;
-        case AV_CODEC_ID_IFF_BYTERUN1:             return R_CODEC_ID_IFF_BYTERUN1;
         case AV_CODEC_ID_KGV1:                     return R_CODEC_ID_KGV1;
         case AV_CODEC_ID_YOP:                      return R_CODEC_ID_YOP;
         case AV_CODEC_ID_VP8:                      return R_CODEC_ID_VP8;
@@ -412,139 +411,139 @@ ResuableCodecID FFMpegCodecIDToMeidaCodecID(enum AVCodecID ffCodecID)
     }
 }
 
-media_base::SampleFormat FFMpegPixelFormatToMediaPixelFormat( AVSampleFormat sample_fmt)
+ResuablePixelFormat FFMpegPixelFormatToMediaPixelFormat(enum AVPixelFormat ffPixelFormat)
+{
+    switch (ffPixelFormat)
+    {
+        case AV_PIX_FMT_YUV420P:               return R_PIX_FMT_YUV420P;
+        case AV_PIX_FMT_YUYV422:               return R_PIX_FMT_YUYV422;
+        case AV_PIX_FMT_RGB24:                 return R_PIX_FMT_RGB24;
+        case AV_PIX_FMT_BGR24:                 return R_PIX_FMT_BGR24;
+        case AV_PIX_FMT_YUV422P:               return R_PIX_FMT_YUV422P;
+        case AV_PIX_FMT_YUV444P:               return R_PIX_FMT_YUV444P;
+        case AV_PIX_FMT_YUV410P:               return R_PIX_FMT_YUV410P;
+        case AV_PIX_FMT_YUV411P:               return R_PIX_FMT_YUV411P;
+        case AV_PIX_FMT_GRAY8:                 return R_PIX_FMT_GRAY8;
+        case AV_PIX_FMT_MONOWHITE:             return R_PIX_FMT_MONOWHITE;
+        case AV_PIX_FMT_MONOBLACK:             return R_PIX_FMT_MONOBLACK;
+        case AV_PIX_FMT_PAL8:                  return R_PIX_FMT_PAL8;
+        case AV_PIX_FMT_YUVJ420P:              return R_PIX_FMT_YUVJ420P;
+        case AV_PIX_FMT_YUVJ422P:              return R_PIX_FMT_YUVJ422P;
+        case AV_PIX_FMT_YUVJ444P:              return R_PIX_FMT_YUVJ444P;
+        case AV_PIX_FMT_XVMC_MPEG2_MC:         return R_PIX_FMT_XVMC_MPEG2_MC;
+        case AV_PIX_FMT_XVMC_MPEG2_IDCT:       return R_PIX_FMT_XVMC_MPEG2_IDCT;
+        case AV_PIX_FMT_UYVY422:               return R_PIX_FMT_UYVY422;
+        case AV_PIX_FMT_UYYVYY411:             return R_PIX_FMT_UYYVYY411;
+        case AV_PIX_FMT_BGR8:                  return R_PIX_FMT_BGR8;
+        case AV_PIX_FMT_BGR4:                  return R_PIX_FMT_BGR4;
+        case AV_PIX_FMT_BGR4_BYTE:             return R_PIX_FMT_BGR4_BYTE;
+        case AV_PIX_FMT_RGB8:                  return R_PIX_FMT_RGB8;
+        case AV_PIX_FMT_RGB4:                  return R_PIX_FMT_RGB4;
+        case AV_PIX_FMT_RGB4_BYTE:             return R_PIX_FMT_RGB4_BYTE;
+        case AV_PIX_FMT_NV12:                  return R_PIX_FMT_NV12;
+        case AV_PIX_FMT_NV21:                  return R_PIX_FMT_NV21;
+        case AV_PIX_FMT_ARGB:                  return R_PIX_FMT_ARGB;
+        case AV_PIX_FMT_RGBA:                  return R_PIX_FMT_RGBA;
+        case AV_PIX_FMT_ABGR:                  return R_PIX_FMT_ABGR;
+        case AV_PIX_FMT_BGRA:                  return R_PIX_FMT_BGRA;
+        case AV_PIX_FMT_GRAY16BE:              return R_PIX_FMT_GRAY16BE;
+        case AV_PIX_FMT_GRAY16LE:              return R_PIX_FMT_GRAY16LE;
+        case AV_PIX_FMT_YUV440P:               return R_PIX_FMT_YUV440P;
+        case AV_PIX_FMT_YUVJ440P:              return R_PIX_FMT_YUVJ440P;
+        case AV_PIX_FMT_YUVA420P:              return R_PIX_FMT_YUVA420P;
+        case AV_PIX_FMT_VDPAU_H264:            return R_PIX_FMT_VDPAU_H264;
+        case AV_PIX_FMT_VDPAU_MPEG1:           return R_PIX_FMT_VDPAU_MPEG1;
+        case AV_PIX_FMT_VDPAU_MPEG2:           return R_PIX_FMT_VDPAU_MPEG2;
+        case AV_PIX_FMT_VDPAU_WMV3:            return R_PIX_FMT_VDPAU_WMV3;
+        case AV_PIX_FMT_VDPAU_VC1:             return R_PIX_FMT_VDPAU_VC1;
+        case AV_PIX_FMT_RGB48BE:               return R_PIX_FMT_RGB48BE;
+        case AV_PIX_FMT_RGB48LE:               return R_PIX_FMT_RGB48LE;
+        case AV_PIX_FMT_RGB565BE:              return R_PIX_FMT_RGB565BE;
+        case AV_PIX_FMT_RGB565LE:              return R_PIX_FMT_RGB565LE;
+        case AV_PIX_FMT_RGB555BE:              return R_PIX_FMT_RGB555BE;
+        case AV_PIX_FMT_RGB555LE:              return R_PIX_FMT_RGB555LE;
+        case AV_PIX_FMT_BGR565BE:              return R_PIX_FMT_BGR565BE;
+        case AV_PIX_FMT_BGR565LE:              return R_PIX_FMT_BGR565LE;
+        case AV_PIX_FMT_BGR555BE:              return R_PIX_FMT_BGR555BE;
+        case AV_PIX_FMT_BGR555LE:              return R_PIX_FMT_BGR555LE;
+        case AV_PIX_FMT_VAAPI_MOCO:            return R_PIX_FMT_VAAPI_MOCO;
+        case AV_PIX_FMT_VAAPI_IDCT:            return R_PIX_FMT_VAAPI_IDCT;
+        case AV_PIX_FMT_VAAPI_VLD:             return R_PIX_FMT_VAAPI_VLD;
+        case AV_PIX_FMT_RGB444LE:              return R_PIX_FMT_RGB444LE;
+        case AV_PIX_FMT_RGB444BE:              return R_PIX_FMT_RGB444BE;
+        case AV_PIX_FMT_BGR444LE:              return R_PIX_FMT_BGR444LE;
+        case AV_PIX_FMT_BGR444BE:              return R_PIX_FMT_BGR444BE;
+        case AV_PIX_FMT_GRAY8A:                return R_PIX_FMT_GRAY8A;
+        case AV_PIX_FMT_BGR48BE:               return R_PIX_FMT_BGR48BE;
+        case AV_PIX_FMT_BGR48LE:               return R_PIX_FMT_BGR48LE;
+        case AV_PIX_FMT_YUV420P9BE:            return R_PIX_FMT_YUV420P9BE;
+        case AV_PIX_FMT_YUV420P9LE:            return R_PIX_FMT_YUV420P9LE;
+        case AV_PIX_FMT_YUV420P10BE:           return R_PIX_FMT_YUV420P10BE;
+        case AV_PIX_FMT_YUV420P10LE:           return R_PIX_FMT_YUV420P10LE;
+        case AV_PIX_FMT_YUV422P10BE:           return R_PIX_FMT_YUV422P10BE;
+        case AV_PIX_FMT_YUV422P10LE:           return R_PIX_FMT_YUV422P10LE;
+        case AV_PIX_FMT_YUV444P9BE:            return R_PIX_FMT_YUV444P9BE;
+        case AV_PIX_FMT_YUV444P9LE:            return R_PIX_FMT_YUV444P9LE;
+        case AV_PIX_FMT_YUV444P10BE:           return R_PIX_FMT_YUV444P10BE;
+        case AV_PIX_FMT_YUV444P10LE:           return R_PIX_FMT_YUV444P10LE;
+        case AV_PIX_FMT_YUV422P9BE:            return R_PIX_FMT_YUV422P9BE;
+        case AV_PIX_FMT_YUV422P9LE:            return R_PIX_FMT_YUV422P9LE;
+        case AV_PIX_FMT_VDA_VLD:               return R_PIX_FMT_VDA_VLD;
+        case AV_PIX_FMT_GBRP:                  return R_PIX_FMT_GBRP;
+        case AV_PIX_FMT_GBRP9BE:               return R_PIX_FMT_GBRP9BE;
+        case AV_PIX_FMT_GBRP9LE:               return R_PIX_FMT_GBRP9LE;
+        case AV_PIX_FMT_GBRP10BE:              return R_PIX_FMT_GBRP10BE;
+        case AV_PIX_FMT_GBRP10LE:              return R_PIX_FMT_GBRP10LE;
+        case AV_PIX_FMT_GBRP16BE:              return R_PIX_FMT_GBRP16BE;
+        case AV_PIX_FMT_GBRP16LE:              return R_PIX_FMT_GBRP16LE;
+        case AV_PIX_FMT_RGBA64BE:              return R_PIX_FMT_RGBA64BE;
+        case AV_PIX_FMT_RGBA64LE:              return R_PIX_FMT_RGBA64LE;
+        case AV_PIX_FMT_BGRA64BE:              return R_PIX_FMT_BGRA64BE;
+        case AV_PIX_FMT_BGRA64LE:              return R_PIX_FMT_BGRA64LE;
+        case AV_PIX_FMT_0RGB:                  return R_PIX_FMT_0RGB;
+        case AV_PIX_FMT_RGB0:                  return R_PIX_FMT_RGB0;
+        case AV_PIX_FMT_0BGR:                  return R_PIX_FMT_0BGR;
+        case AV_PIX_FMT_BGR0:                  return R_PIX_FMT_BGR0;
+        case AV_PIX_FMT_YUVA444P:              return R_PIX_FMT_YUVA444P;
+        default:                                return R_PIX_FMT_NONE;
+    }
+}
+
+ResuableSampleFormat FFMpegSampleFormatToMediaSampleFormat(enum AVSampleFormat sample_fmt)
 {
     switch(sample_fmt)
     {
         case AV_SAMPLE_FMT_U8:
-            return media_base::SAMPLE_FMT_U8;
+            return R_SAMPLE_FMT_U8;
             break;
         case AV_SAMPLE_FMT_U8P:
-            return media_base::SAMPLE_FMT_U8P;
+            return R_SAMPLE_FMT_U8P;
             break;
         case AV_SAMPLE_FMT_S16:
-            return media_base::SAMPLE_FMT_S16;
+            return R_SAMPLE_FMT_S16;
             break;
         case AV_SAMPLE_FMT_S16P:
-            return media_base::SAMPLE_FMT_S16P;
+            return R_SAMPLE_FMT_S16P;
             break;
         case AV_SAMPLE_FMT_S32:
-            return media_base::SAMPLE_FMT_S32;
+            return R_SAMPLE_FMT_S32;
             break;
         case AV_SAMPLE_FMT_S32P:
-            return media_base::SAMPLE_FMT_S32P;
+            return R_SAMPLE_FMT_S32P;
         case AV_SAMPLE_FMT_FLT:
-            return media_base::SAMPLE_FMT_FLT;
+            return R_SAMPLE_FMT_FLT;
             break;
         case AV_SAMPLE_FMT_FLTP:
-            return media_base::SAMPLE_FMT_FLTP;
+            return R_SAMPLE_FMT_FLTP;
             break;
         case AV_SAMPLE_FMT_DBL:
-            return media_base::SAMPLE_FMT_DBL;
+            return R_SAMPLE_FMT_DBL;
             break;
         case AV_SAMPLE_FMT_DBLP:
-            return media_base::SAMPLE_FMT_DBLP;
+            return R_SAMPLE_FMT_DBLP;
             break;
         default:
-            return media_base::SAMPLE_FMT_NONE;
+            return R_SAMPLE_FMT_NONE;
             break;
-    }
-}
-
-ResuablePixelFormat FFMpegPixelFormatToMediaPixelFormat(AVPixelFormat ffPixelFormat)
-{
-    switch (ffPixelFormat)
-    {
-        case PIX_FMT_YUV420P:               return R_PIX_FMT_YUV420P;
-        case PIX_FMT_YUYV422:               return R_PIX_FMT_YUYV422;
-        case PIX_FMT_RGB24:                 return R_PIX_FMT_RGB24;
-        case PIX_FMT_BGR24:                 return R_PIX_FMT_BGR24;
-        case PIX_FMT_YUV422P:               return R_PIX_FMT_YUV422P;
-        case PIX_FMT_YUV444P:               return R_PIX_FMT_YUV444P;
-        case PIX_FMT_YUV410P:               return R_PIX_FMT_YUV410P;
-        case PIX_FMT_YUV411P:               return R_PIX_FMT_YUV411P;
-        case PIX_FMT_GRAY8:                 return R_PIX_FMT_GRAY8;
-        case PIX_FMT_MONOWHITE:             return R_PIX_FMT_MONOWHITE;
-        case PIX_FMT_MONOBLACK:             return R_PIX_FMT_MONOBLACK;
-        case PIX_FMT_PAL8:                  return R_PIX_FMT_PAL8;
-        case PIX_FMT_YUVJ420P:              return R_PIX_FMT_YUVJ420P;
-        case PIX_FMT_YUVJ422P:              return R_PIX_FMT_YUVJ422P;
-        case PIX_FMT_YUVJ444P:              return R_PIX_FMT_YUVJ444P;
-        case PIX_FMT_XVMC_MPEG2_MC:         return R_PIX_FMT_XVMC_MPEG2_MC;
-        case PIX_FMT_XVMC_MPEG2_IDCT:       return R_PIX_FMT_XVMC_MPEG2_IDCT;
-        case PIX_FMT_UYVY422:               return R_PIX_FMT_UYVY422;
-        case PIX_FMT_UYYVYY411:             return R_PIX_FMT_UYYVYY411;
-        case PIX_FMT_BGR8:                  return R_PIX_FMT_BGR8;
-        case PIX_FMT_BGR4:                  return R_PIX_FMT_BGR4;
-        case PIX_FMT_BGR4_BYTE:             return R_PIX_FMT_BGR4_BYTE;
-        case PIX_FMT_RGB8:                  return R_PIX_FMT_RGB8;
-        case PIX_FMT_RGB4:                  return R_PIX_FMT_RGB4;
-        case PIX_FMT_RGB4_BYTE:             return R_PIX_FMT_RGB4_BYTE;
-        case PIX_FMT_NV12:                  return R_PIX_FMT_NV12;
-        case PIX_FMT_NV21:                  return R_PIX_FMT_NV21;
-        case PIX_FMT_ARGB:                  return R_PIX_FMT_ARGB;
-        case PIX_FMT_RGBA:                  return R_PIX_FMT_RGBA;
-        case PIX_FMT_ABGR:                  return R_PIX_FMT_ABGR;
-        case PIX_FMT_BGRA:                  return R_PIX_FMT_BGRA;
-        case PIX_FMT_GRAY16BE:              return R_PIX_FMT_GRAY16BE;
-        case PIX_FMT_GRAY16LE:              return R_PIX_FMT_GRAY16LE;
-        case PIX_FMT_YUV440P:               return R_PIX_FMT_YUV440P;
-        case PIX_FMT_YUVJ440P:              return R_PIX_FMT_YUVJ440P;
-        case PIX_FMT_YUVA420P:              return R_PIX_FMT_YUVA420P;
-        case PIX_FMT_VDPAU_H264:            return R_PIX_FMT_VDPAU_H264;
-        case PIX_FMT_VDPAU_MPEG1:           return R_PIX_FMT_VDPAU_MPEG1;
-        case PIX_FMT_VDPAU_MPEG2:           return R_PIX_FMT_VDPAU_MPEG2;
-        case PIX_FMT_VDPAU_WMV3:            return R_PIX_FMT_VDPAU_WMV3;
-        case PIX_FMT_VDPAU_VC1:             return R_PIX_FMT_VDPAU_VC1;
-        case PIX_FMT_RGB48BE:               return R_PIX_FMT_RGB48BE;
-        case PIX_FMT_RGB48LE:               return R_PIX_FMT_RGB48LE;
-        case PIX_FMT_RGB565BE:              return R_PIX_FMT_RGB565BE;
-        case PIX_FMT_RGB565LE:              return R_PIX_FMT_RGB565LE;
-        case PIX_FMT_RGB555BE:              return R_PIX_FMT_RGB555BE;
-        case PIX_FMT_RGB555LE:              return R_PIX_FMT_RGB555LE;
-        case PIX_FMT_BGR565BE:              return R_PIX_FMT_BGR565BE;
-        case PIX_FMT_BGR565LE:              return R_PIX_FMT_BGR565LE;
-        case PIX_FMT_BGR555BE:              return R_PIX_FMT_BGR555BE;
-        case PIX_FMT_BGR555LE:              return R_PIX_FMT_BGR555LE;
-        case PIX_FMT_VAAPI_MOCO:            return R_PIX_FMT_VAAPI_MOCO;
-        case PIX_FMT_VAAPI_IDCT:            return R_PIX_FMT_VAAPI_IDCT;
-        case PIX_FMT_VAAPI_VLD:             return R_PIX_FMT_VAAPI_VLD;
-        case PIX_FMT_RGB444LE:              return R_PIX_FMT_RGB444LE;
-        case PIX_FMT_RGB444BE:              return R_PIX_FMT_RGB444BE;
-        case PIX_FMT_BGR444LE:              return R_PIX_FMT_BGR444LE;
-        case PIX_FMT_BGR444BE:              return R_PIX_FMT_BGR444BE;
-        case PIX_FMT_GRAY8A:                return R_PIX_FMT_GRAY8A;
-        case PIX_FMT_BGR48BE:               return R_PIX_FMT_BGR48BE;
-        case PIX_FMT_BGR48LE:               return R_PIX_FMT_BGR48LE;
-        case PIX_FMT_YUV420P9BE:            return R_PIX_FMT_YUV420P9BE;
-        case PIX_FMT_YUV420P9LE:            return R_PIX_FMT_YUV420P9LE;
-        case PIX_FMT_YUV420P10BE:           return R_PIX_FMT_YUV420P10BE;
-        case PIX_FMT_YUV420P10LE:           return R_PIX_FMT_YUV420P10LE;
-        case PIX_FMT_YUV422P10BE:           return R_PIX_FMT_YUV422P10BE;
-        case PIX_FMT_YUV422P10LE:           return R_PIX_FMT_YUV422P10LE;
-        case PIX_FMT_YUV444P9BE:            return R_PIX_FMT_YUV444P9BE;
-        case PIX_FMT_YUV444P9LE:            return R_PIX_FMT_YUV444P9LE;
-        case PIX_FMT_YUV444P10BE:           return R_PIX_FMT_YUV444P10BE;
-        case PIX_FMT_YUV444P10LE:           return R_PIX_FMT_YUV444P10LE;
-        case PIX_FMT_YUV422P9BE:            return R_PIX_FMT_YUV422P9BE;
-        case PIX_FMT_YUV422P9LE:            return R_PIX_FMT_YUV422P9LE;
-        case PIX_FMT_VDA_VLD:               return R_PIX_FMT_VDA_VLD;
-        case PIX_FMT_GBRP:                  return R_PIX_FMT_GBRP;
-        case PIX_FMT_GBRP9BE:               return R_PIX_FMT_GBRP9BE;
-        case PIX_FMT_GBRP9LE:               return R_PIX_FMT_GBRP9LE;
-        case PIX_FMT_GBRP10BE:              return R_PIX_FMT_GBRP10BE;
-        case PIX_FMT_GBRP10LE:              return R_PIX_FMT_GBRP10LE;
-        case PIX_FMT_GBRP16BE:              return R_PIX_FMT_GBRP16BE;
-        case PIX_FMT_GBRP16LE:              return R_PIX_FMT_GBRP16LE;
-        case PIX_FMT_RGBA64BE:              return R_PIX_FMT_RGBA64BE;
-        case PIX_FMT_RGBA64LE:              return R_PIX_FMT_RGBA64LE;
-        case PIX_FMT_BGRA64BE:              return R_PIX_FMT_BGRA64BE;
-        case PIX_FMT_BGRA64LE:              return R_PIX_FMT_BGRA64LE;
-        case PIX_FMT_0RGB:                  return R_PIX_FMT_0RGB;
-        case PIX_FMT_RGB0:                  return R_PIX_FMT_RGB0;
-        case PIX_FMT_0BGR:                  return R_PIX_FMT_0BGR;
-        case PIX_FMT_BGR0:                  return R_PIX_FMT_BGR0;
-        case PIX_FMT_YUVA444P:              return R_PIX_FMT_YUVA444P;
-        default:                            return R_PIX_FMT_NONE;
     }
 }

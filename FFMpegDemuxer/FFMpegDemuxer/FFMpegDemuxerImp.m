@@ -178,8 +178,8 @@ FFMpegDemuxer *createFFMpegDemuxer() {
             }
         }
         
-//        AVCodecContext *pCodecContext = _formatContext->streams[i]->codec;
-        AVCodecParameters *codecParam = _formatContext->streams[i]->codecpar;
+        
+        AVCodecParameters *codecParam = avStream->codecpar;
         if (codecParam == NULL) {
             streamInfo.streamType = UnknownStream;
             streamInfo.codecID = R_CODEC_ID_NONE;
@@ -188,23 +188,68 @@ FFMpegDemuxer *createFFMpegDemuxer() {
         }
         
         else if (codecParam->codec_type == AVMEDIA_TYPE_VIDEO) {
-            streamInfo.streamType = VideoStream;
-            streamInfo.width      = codecParam->width;
-            streamInfo.height     = codecParam->height;
+            streamInfo.streamType  = VideoStream;
+            streamInfo.width       = codecParam->width;
+            streamInfo.height      = codecParam->height;
+            streamInfo.pixelFormat = FFMpegPixelFormatToMediaPixelFormat(codecParam->format);
             
-            streamInfo.
+            ///< get video frame rate
+            streamInfo.framerateNumerator   = avStream->time_base.num;
+            streamInfo.framerateDenominator = avStream->time_base.den;
+            if (![self isValidFramerate:streamInfo.framerateNumerator framerateDenominator:streamInfo.framerateDenominator]) {
+                ///< use 30 as framerate
+                streamInfo.framerateNumerator   = 30;
+                streamInfo.framerateDenominator = 1;
+            }
+            
+            if (codecParam->sample_aspect_ratio.num == 0) {
+                streamInfo.pixelAspectRatioNumerator = 0;
+                streamInfo.pixelAspectRatioDenominator = 0;
+            }
+            else {
+                streamInfo.pixelAspectRatioNumerator = codecParam->sample_aspect_ratio.num;
+                streamInfo.pixelAspectRatioNumerator = codecParam->sample_aspect_ratio.den;
+            }
         }
         else if (codecParam->codec_type == AVMEDIA_TYPE_AUDIO) {
             streamInfo.streamType = AudioStream;
+
+            streamInfo.channels = codecParam->channels;
+            streamInfo.samplerate = codecParam->sample_rate;
+            streamInfo.sampleFormat = FFMpegSampleFormatToMediaSampleFormat(codecParam->format);
         }
         else if (codecParam->codec_type == AVMEDIA_TYPE_SUBTITLE) {
-            streamInfo.streamType == SubtitleStream;
+            streamInfo.streamType = SubtitleStream;
         }
         else {
             streamInfo.streamType = UnknownStream;
         }
+        
+        ///< common set media value
         streamInfo.bitrate = codecParam->bit_rate;
+        if (codecParam->codec_id != AV_CODEC_ID_NONE && codecParam->codec_id != AV_CODEC_ID_PROBE) {
+            AVCodec *pCodec       = avcodec_find_decoder(codecParam->codec_id);
+            if (pCodec != NULL) {
+                streamInfo.codecName  = [NSString stringWithUTF8String:pCodec->name];
+            }
+        }
+        else {
+            streamInfo.streamType = UnknownStream;
+        }
+        streamInfo.codecID = FFMpegCodecIDToMeidaCodecID(codecParam->codec_id);
+        
         [self.movieInfo addStreamInfoToMovieInfo:streamInfo];
+    }
+}
+
+- (BOOL)isValidFramerate:(int32_t) framerateNumerator
+    framerateDenominator:(int32_t) framerateDenominator
+{
+    double framerateValue = 1.0 * framerateNumerator /framerateDenominator;
+    if (framerateValue >= 121 || framerateValue < 1) {
+        return NO;
+    } else {
+        return YES;
     }
 }
 

@@ -10,4 +10,12 @@
 
 @implementation StreamInfo
 
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        _duration = -1;
+    }
+    return self;
+}
+
 @end

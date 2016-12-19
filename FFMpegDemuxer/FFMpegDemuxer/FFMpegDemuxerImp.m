@@ -7,9 +7,11 @@
 //
 
 #import "FFMpegDemuxerImp.h"
-#include "avformat.h"
+#include "FFMpegCommon.h"
 
 #define FMT_PROB_DATA_SIZE 1*1024*1024 //1M
+
+void ffmpeg_log(void* avcl, int level, const char *fmt, va_list vl);
 
 FFMpegDemuxer *createFFMpegDemuxer() {
     FFMpegDemuxer *demuxer = [[FFMpegDemuxerImp alloc] init];
@@ -28,12 +30,16 @@ FFMpegDemuxer *createFFMpegDemuxer() {
 - (instancetype)init {
     self = [super init];
     if (self) {
+        _formatContext = NULL;
         [self innerInitFFMpeg];
     }
     return self;
 }
 
 - (BOOL)openFileByPath:(NSString *)filePath {
+    
+    av_log_set_callback(ffmpeg_log);
+    
     AVInputFormat* format = NULL;
     
     if ([filePath hasPrefix:@"rtsp://"]) {
@@ -111,10 +117,9 @@ FFMpegDemuxer *createFFMpegDemuxer() {
         NSLog(@"Cannot find input stream format");
         return NO;
     }
-    
 
     int ret = avformat_open_input(&_formatContext, [filePath UTF8String], format, NULL);
-    if (!ret) {
+    if (ret != 0) {
         NSLog(@"Open input failed");
         return NO;
     }
@@ -144,10 +149,62 @@ FFMpegDemuxer *createFFMpegDemuxer() {
         {
             if (t->key != NULL && t->value != NULL)
             {
-                
+                NSString *keyString = [NSString stringWithUTF8String:t->key];
+                NSString *valueString = [NSString stringWithUTF8String:t->value];
+                [self.movieInfo addMetaDataToStreamInfo:keyString value:valueString];
             }
             t = av_dict_get(_formatContext->metadata, "", t, AV_DICT_IGNORE_SUFFIX);
         }
+    }
+    
+    ///< build stream info
+    for (uint32_t i = 0; i < _formatContext->nb_streams; i++) {
+        AVStream* avStream = _formatContext->streams[i];
+        StreamInfo *streamInfo = [[StreamInfo alloc] init];
+        streamInfo.streamId = avStream->id;
+        
+        AVDictionaryEntry *tag = av_dict_get(avStream->metadata, "language", NULL, 0);
+        if (tag != NULL && tag->value != NULL) {
+            streamInfo.language = [NSString stringWithUTF8String:tag->value];
+        }
+        else {
+            streamInfo.language = @"eng";
+        }
+        
+        if (avStream->duration != AV_NOPTS_VALUE) {
+            int64_t duration = av_rescale_q(avStream->duration, avStream->time_base, gGloabalTimeBase);
+            if (duration > 0) {
+                avStream->duration = duration/1000;
+            }
+        }
+        
+//        AVCodecContext *pCodecContext = _formatContext->streams[i]->codec;
+        AVCodecParameters *codecParam = _formatContext->streams[i]->codecpar;
+        if (codecParam == NULL) {
+            streamInfo.streamType = UnknownStream;
+            streamInfo.codecID = R_CODEC_ID_NONE;
+            [self.movieInfo addStreamInfoToMovieInfo:streamInfo];
+            continue;
+        }
+        
+        else if (codecParam->codec_type == AVMEDIA_TYPE_VIDEO) {
+            streamInfo.streamType = VideoStream;
+            streamInfo.width      = codecParam->width;
+            streamInfo.height     = codecParam->height;
+            
+            streamInfo.
+        }
+        else if (codecParam->codec_type == AVMEDIA_TYPE_AUDIO) {
+            streamInfo.streamType = AudioStream;
+        }
+        else if (codecParam->codec_type == AVMEDIA_TYPE_SUBTITLE) {
+            streamInfo.streamType == SubtitleStream;
+        }
+        else {
+            streamInfo.streamType = UnknownStream;
+        }
+        streamInfo.bitrate = codecParam->bit_rate;
+        [self.movieInfo addStreamInfoToMovieInfo:streamInfo];
     }
 }
 
@@ -160,3 +217,26 @@ FFMpegDemuxer *createFFMpegDemuxer() {
     return _movieInfo;
 }
 @end
+
+//////////////////////////////////////////////////////////////////////////
+//ffmepg log call back
+void ffmpeg_log(void* avcl, int level, const char *fmt, va_list vl)
+{
+    char buffer[256];
+    if (level == AV_LOG_WARNING) {
+        vsnprintf(buffer, 256, fmt, vl);
+        NSLog(@"ffmpeg demuxer warning:%s", buffer);
+    }
+    else if (level == AV_LOG_ERROR) {
+        vsnprintf(buffer, 256, fmt, vl);
+        NSLog(@"ffmpeg demuxer error:%s", buffer);
+    }
+    else if (level == AV_LOG_FATAL) {
+        vsnprintf(buffer, 256, fmt, vl);
+        NSLog(@"ffmpeg demuxer fatal:%s", buffer);
+    }
+    else if (level == AV_LOG_TRACE) {
+        vsnprintf(buffer, 256, fmt, vl);
+        NSLog(@"ffmpeg demuxer trace:%s", buffer);
+    }
+}

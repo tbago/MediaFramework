@@ -25,6 +25,7 @@
  */
 - (BOOL)openFileByPath:(NSString *) filePath;
 
+- (void)closeInputFile;
 /**
  *  Get file movie count
  *
@@ -49,7 +50,6 @@
  */
 - (BOOL)eof;
 
-- (void)closeInputFile;
 @end
 
 /**

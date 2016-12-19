@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D040599E1E078C6600BEC12E /* FFMpegCommon.h in Headers */ = {isa = PBXBuildFile; fileRef = D040599C1E078C6600BEC12E /* FFMpegCommon.h */; };
+		D040599F1E078C6600BEC12E /* FFMpegCommon.m in Sources */ = {isa = PBXBuildFile; fileRef = D040599D1E078C6600BEC12E /* FFMpegCommon.m */; };
 		D0940DB11E0377A7001637A5 /* FFMpegDemuxer.h in Headers */ = {isa = PBXBuildFile; fileRef = D0940DB01E0377A7001637A5 /* FFMpegDemuxer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D0940DE31E037807001637A5 /* FFMpegDemuxerImp.h in Headers */ = {isa = PBXBuildFile; fileRef = D0940DE11E037807001637A5 /* FFMpegDemuxerImp.h */; };
 		D0940DE41E037807001637A5 /* FFMpegDemuxerImp.m in Sources */ = {isa = PBXBuildFile; fileRef = D0940DE21E037807001637A5 /* FFMpegDemuxerImp.m */; };
@@ -131,6 +133,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D040599C1E078C6600BEC12E /* FFMpegCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFMpegCommon.h; sourceTree = "<group>"; };
+		D040599D1E078C6600BEC12E /* FFMpegCommon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFMpegCommon.m; sourceTree = "<group>"; };
 		D0940DAD1E0377A6001637A5 /* FFMpegDemuxer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FFMpegDemuxer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0940DB01E0377A7001637A5 /* FFMpegDemuxer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FFMpegDemuxer.h; sourceTree = "<group>"; };
 		D0940DB21E0377A7001637A5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -305,6 +309,8 @@
 				D0940DE11E037807001637A5 /* FFMpegDemuxerImp.h */,
 				D0940DE21E037807001637A5 /* FFMpegDemuxerImp.m */,
 				D0940DB21E0377A7001637A5 /* Info.plist */,
+				D040599C1E078C6600BEC12E /* FFMpegCommon.h */,
+				D040599D1E078C6600BEC12E /* FFMpegCommon.m */,
 			);
 			path = FFMpegDemuxer;
 			sourceTree = "<group>";
@@ -575,6 +581,7 @@
 				D0940EE91E0392CB001637A5 /* avassert.h in Headers */,
 				D0940F2B1E0392CB001637A5 /* twofish.h in Headers */,
 				D0940F201E0392CB001637A5 /* ripemd.h in Headers */,
+				D040599E1E078C6600BEC12E /* FFMpegCommon.h in Headers */,
 				D0940F0B1E0392CB001637A5 /* intfloat.h in Headers */,
 				D0940EF21E0392CB001637A5 /* camellia.h in Headers */,
 				D0940EEE1E0392CB001637A5 /* blowfish.h in Headers */,
@@ -708,6 +715,7 @@
 			files = (
 				D0940DE41E037807001637A5 /* FFMpegDemuxerImp.m in Sources */,
 				D0940DE91E03799D001637A5 /* FFMpegDemuxer.m in Sources */,
+				D040599F1E078C6600BEC12E /* FFMpegCommon.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

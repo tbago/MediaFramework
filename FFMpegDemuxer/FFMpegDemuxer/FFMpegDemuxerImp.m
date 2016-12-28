@@ -173,12 +173,15 @@ FFMpegDemuxer *createFFMpegDemuxer() {
             break;
         }
     } while(true);
+    
     if (bHasPkt) {
         self.currentCompassedFrame.keyFrame           = pkt.flags & AV_PKT_FLAG_KEY;
         self.currentCompassedFrame.presentTimeStamp   = pkt.pts;
         self.currentCompassedFrame.decompassTimeStamp = pkt.dts;
         self.currentCompassedFrame.position           = pkt.pos;
+        self.currentCompassedFrame.duration           = pkt.duration;
         
+        self.currentCompassedFrame.frameData          = [[NSData alloc] initWithBytes:pkt.data length:pkt.size];
         
         av_free_packet(&pkt);
     }
@@ -294,6 +297,29 @@ FFMpegDemuxer *createFFMpegDemuxer() {
         else {
             streamInfo.streamType = UnknownStream;
         }
+        
+        ///< stream metadata
+        if (avStream->metadata != NULL) {
+            AVDictionaryEntry *t = NULL;
+            t = av_dict_get(avStream->metadata, "", t, AV_DICT_IGNORE_SUFFIX);
+            while (t != NULL)
+            {
+                if (t->key != NULL && t->value != NULL)
+                {
+                    NSString *keyString = [NSString stringWithUTF8String:t->key];
+                    NSString *valueString = [NSString stringWithUTF8String:t->value];
+                    [streamInfo addMetaDataToStreamInfo:keyString
+                                                  value:valueString];
+                }
+                t = av_dict_get(avStream->metadata, "", t, AV_DICT_IGNORE_SUFFIX);
+            }
+        }
+        
+        ///< stream extra data
+        if (codecParam->extradata != NULL && codecParam->extradata_size > 0) {
+            streamInfo.extraData = [[NSData alloc] initWithBytes:codecParam->extradata length:codecParam->extradata_size];
+        }
+        
         streamInfo.codecID = FFMpegCodecIDToMeidaCodecID(codecParam->codec_id);
         
         [self.movieInfo addStreamInfoToMovieInfo:streamInfo];

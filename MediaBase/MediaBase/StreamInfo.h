@@ -36,4 +36,12 @@
 @property (nonatomic) ResuableSampleFormat  sampleFormat;
 @property (nonatomic) int32_t               samplerate;
 @property (nonatomic) int32_t               channels;
+
+///< metadata
+@property (strong, nonatomic, readonly) NSDictionary<NSString *, NSString *>    *metaData;          ///< stream metadata
+- (void)addMetaDataToStreamInfo:(NSString *) key
+                          value:(NSString *) value;
+
+///< extra data
+@property (nonatomic, copy) NSData          *extraData;
 @end

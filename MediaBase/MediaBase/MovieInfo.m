@@ -29,8 +29,8 @@
     [self.innerStreamArray addObject:streamInfo];
 }
 
-- (void)addMetaDataToStreamInfo:(NSString *)key
-                          value:(NSString *)value {
+- (void)addMetaDataToMovieInfo:(NSString *)key
+                         value:(NSString *)value {
     self.innerMetaData[key] = value;
 }
 

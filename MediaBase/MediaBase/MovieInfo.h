@@ -24,12 +24,12 @@
  *  @param key   metadata key
  *  @param value metadata value
  */
-- (void)addMetaDataToStreamInfo:(NSString *) key
-                          value:(NSString *) value;
+- (void)addMetaDataToMovieInfo:(NSString *) key
+                         value:(NSString *) value;
 
 @property (nonatomic) int32_t                                                   identify;
 @property (nonatomic, copy) NSString                                            *name;
 @property (nonatomic, copy) NSString                                            *format;            ///< media format
 @property (strong, nonatomic, readonly) NSArray<StreamInfo *>                   *streamArray;       ///< stream info array
-@property (strong, nonatomic, readonly) NSDictionary<NSString *, NSString *>    *metaData;          ///< stream meta data
+@property (strong, nonatomic, readonly) NSDictionary<NSString *, NSString *>    *metaData;          ///< movie metadata
 @end

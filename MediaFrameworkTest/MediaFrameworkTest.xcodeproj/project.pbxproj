@@ -18,6 +18,11 @@
 		D0A9676E1E136217004D4372 /* FFMpegDemuxer.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D0940E3D1E038169001637A5 /* FFMpegDemuxer.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D0A967721E13621B004D4372 /* MediaBase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0940E371E038161001637A5 /* MediaBase.framework */; };
 		D0A967731E13621B004D4372 /* MediaBase.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D0940E371E038161001637A5 /* MediaBase.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D0A967851E136380004D4372 /* amf.c in Sources */ = {isa = PBXBuildFile; fileRef = D0A967771E136380004D4372 /* amf.c */; };
+		D0A967861E136380004D4372 /* hashswf.c in Sources */ = {isa = PBXBuildFile; fileRef = D0A9677D1E136380004D4372 /* hashswf.c */; };
+		D0A967871E136380004D4372 /* log.c in Sources */ = {isa = PBXBuildFile; fileRef = D0A9677F1E136380004D4372 /* log.c */; };
+		D0A967881E136380004D4372 /* parseurl.c in Sources */ = {isa = PBXBuildFile; fileRef = D0A967811E136380004D4372 /* parseurl.c */; };
+		D0A967891E136380004D4372 /* rtmp.c in Sources */ = {isa = PBXBuildFile; fileRef = D0A967831E136380004D4372 /* rtmp.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -80,6 +85,20 @@
 		D0940E321E038161001637A5 /* MediaBase.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = MediaBase.xcodeproj; path = ../MediaBase/MediaBase.xcodeproj; sourceTree = "<group>"; };
 		D0940E381E038169001637A5 /* FFMpegDemuxer.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = FFMpegDemuxer.xcodeproj; path = ../FFMpegDemuxer/FFMpegDemuxer.xcodeproj; sourceTree = "<group>"; };
 		D0940FCF1E03B8C2001637A5 /* demo.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = demo.mp4; sourceTree = "<group>"; };
+		D0A967771E136380004D4372 /* amf.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = amf.c; sourceTree = "<group>"; };
+		D0A967781E136380004D4372 /* amf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = amf.h; sourceTree = "<group>"; };
+		D0A967791E136380004D4372 /* bytes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = bytes.h; sourceTree = "<group>"; };
+		D0A9677A1E136380004D4372 /* dh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dh.h; sourceTree = "<group>"; };
+		D0A9677B1E136380004D4372 /* dhgroups.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dhgroups.h; sourceTree = "<group>"; };
+		D0A9677C1E136380004D4372 /* handshake.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = handshake.h; sourceTree = "<group>"; };
+		D0A9677D1E136380004D4372 /* hashswf.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = hashswf.c; sourceTree = "<group>"; };
+		D0A9677E1E136380004D4372 /* http.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = http.h; sourceTree = "<group>"; };
+		D0A9677F1E136380004D4372 /* log.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = log.c; sourceTree = "<group>"; };
+		D0A967801E136380004D4372 /* log.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = log.h; sourceTree = "<group>"; };
+		D0A967811E136380004D4372 /* parseurl.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = parseurl.c; sourceTree = "<group>"; };
+		D0A967821E136380004D4372 /* rtmp_sys.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rtmp_sys.h; sourceTree = "<group>"; };
+		D0A967831E136380004D4372 /* rtmp.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = rtmp.c; sourceTree = "<group>"; };
+		D0A967841E136380004D4372 /* rtmp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rtmp.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,6 +135,7 @@
 		D0940E1A1E0380E7001637A5 /* MediaFrameworkTest */ = {
 			isa = PBXGroup;
 			children = (
+				D0A967761E136357004D4372 /* librtmp */,
 				D0940E1E1E0380E7001637A5 /* AppDelegate.h */,
 				D0940E1F1E0380E7001637A5 /* AppDelegate.m */,
 				D0940E211E0380E7001637A5 /* ViewController.h */,
@@ -152,6 +172,27 @@
 				D0940E3D1E038169001637A5 /* FFMpegDemuxer.framework */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		D0A967761E136357004D4372 /* librtmp */ = {
+			isa = PBXGroup;
+			children = (
+				D0A967771E136380004D4372 /* amf.c */,
+				D0A967781E136380004D4372 /* amf.h */,
+				D0A967791E136380004D4372 /* bytes.h */,
+				D0A9677A1E136380004D4372 /* dh.h */,
+				D0A9677B1E136380004D4372 /* dhgroups.h */,
+				D0A9677C1E136380004D4372 /* handshake.h */,
+				D0A9677D1E136380004D4372 /* hashswf.c */,
+				D0A9677E1E136380004D4372 /* http.h */,
+				D0A9677F1E136380004D4372 /* log.c */,
+				D0A967801E136380004D4372 /* log.h */,
+				D0A967811E136380004D4372 /* parseurl.c */,
+				D0A967821E136380004D4372 /* rtmp_sys.h */,
+				D0A967831E136380004D4372 /* rtmp.c */,
+				D0A967841E136380004D4372 /* rtmp.h */,
+			);
+			path = librtmp;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -255,9 +296,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D0A967871E136380004D4372 /* log.c in Sources */,
 				D0940E231E0380E7001637A5 /* ViewController.m in Sources */,
+				D0A967891E136380004D4372 /* rtmp.c in Sources */,
+				D0A967861E136380004D4372 /* hashswf.c in Sources */,
 				D0940E201E0380E7001637A5 /* AppDelegate.m in Sources */,
+				D0A967851E136380004D4372 /* amf.c in Sources */,
 				D0940E1D1E0380E7001637A5 /* main.m in Sources */,
+				D0A967881E136380004D4372 /* parseurl.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

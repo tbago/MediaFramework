@@ -23,9 +23,10 @@ FFMpegDemuxer *createFFMpegDemuxer() {
     AVFormatContext* _formatContext;
 }
 @property (strong, nonatomic) MovieInfo         *movieInfo;                 ///< current file movie info
-@property (strong, nonatomic) CompassedFrame    *currentCompassedFrame;
 @property (nonatomic) BOOL                      fileEof;                    ///< read end of file
+
 @end
+
 @implementation FFMpegDemuxerImp
 
 - (instancetype)init {
@@ -156,6 +157,8 @@ FFMpegDemuxer *createFFMpegDemuxer() {
     AVPacket pkt;
     int ret = 0;
     bool bHasPkt = NO;
+    StreamType readStramType = UnknownStream;
+    
     do{
         ret = av_read_frame(_formatContext, &pkt);
         if (ret < 0)
@@ -169,21 +172,40 @@ FFMpegDemuxer *createFFMpegDemuxer() {
             }
         }
         else {
-            bHasPkt = YES;
-            break;
+            ///< check is video frame or audio frame
+            ///< for now only support video and audio frame, also not support multi video audio stream
+            AVCodecParameters *codecParam = _formatContext->streams[pkt.stream_index]->codecpar;
+            if (codecParam->codec_type == AVMEDIA_TYPE_VIDEO) {
+                readStramType = VideoStream;
+                bHasPkt = YES;
+                break;
+            }
+            else if (codecParam->codec_type == AVMEDIA_TYPE_AUDIO) {
+                readStramType = AudioStream;
+                bHasPkt = YES;
+                break;
+            }
+            else {
+                continue;
+            }
         }
     } while(true);
     
-    if (bHasPkt) {
-        self.currentCompassedFrame.keyFrame           = pkt.flags & AV_PKT_FLAG_KEY;
-        self.currentCompassedFrame.presentTimeStamp   = pkt.pts;
-        self.currentCompassedFrame.decompassTimeStamp = pkt.dts;
-        self.currentCompassedFrame.position           = pkt.pos;
-        self.currentCompassedFrame.duration           = pkt.duration;
+    if (bHasPkt && readStramType != UnknownStream)
+    {
+        CompassedFrame *compassedFrame    = [[CompassedFrame alloc] init];
+        compassedFrame.streamType         = readStramType;
+        compassedFrame.keyFrame           = pkt.flags & AV_PKT_FLAG_KEY;
+        compassedFrame.presentTimeStamp   = pkt.pts;
+        compassedFrame.decompassTimeStamp = pkt.dts;
+        compassedFrame.position           = pkt.pos;
+        compassedFrame.duration           = pkt.duration;
         
-        self.currentCompassedFrame.frameData          = [[NSData alloc] initWithBytes:pkt.data length:pkt.size];
+        compassedFrame.frameData          = [[NSData alloc] initWithBytes:pkt.data length:pkt.size];
         
         av_free_packet(&pkt);
+        
+        return compassedFrame;
     }
     return NULL;
 }
@@ -213,7 +235,7 @@ FFMpegDemuxer *createFFMpegDemuxer() {
             {
                 NSString *keyString = [NSString stringWithUTF8String:t->key];
                 NSString *valueString = [NSString stringWithUTF8String:t->value];
-                [self.movieInfo addMetaDataToStreamInfo:keyString value:valueString];
+                [self.movieInfo addMetaDataToMovieInfo:keyString value:valueString];
             }
             t = av_dict_get(_formatContext->metadata, "", t, AV_DICT_IGNORE_SUFFIX);
         }
@@ -346,12 +368,6 @@ FFMpegDemuxer *createFFMpegDemuxer() {
     return _movieInfo;
 }
 
-- (CompassedFrame *)currentCompassedFrame {
-    if (_currentCompassedFrame == nil) {
-        _currentCompassedFrame = [[CompassedFrame alloc] init];
-    }
-    return _currentCompassedFrame;
-}
 @end
 
 //////////////////////////////////////////////////////////////////////////

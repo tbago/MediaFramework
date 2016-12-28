@@ -25,6 +25,11 @@
 //    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"demo" ofType:@"mp4"];
     NSString *filePath = @"rtsp://192.168.42.1/live";
     [self.ffmpegDemuxer openFileByPath:filePath];
+    MovieInfo *moveInfo = [self.ffmpegDemuxer getMovieInfoByIndex:0];
+    while (true) {
+        CompassedFrame *compassedFrame = [self.ffmpegDemuxer readFrame];
+        NSLog(@"frame info pts:%lld dts:%lld", compassedFrame.presentTimeStamp, compassedFrame.decompassTimeStamp);
+    }
 }
 
 #pragma mark - get & set

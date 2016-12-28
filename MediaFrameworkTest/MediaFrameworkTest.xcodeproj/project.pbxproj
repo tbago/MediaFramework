@@ -13,8 +13,11 @@
 		D0940E261E0380E7001637A5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D0940E241E0380E7001637A5 /* Main.storyboard */; };
 		D0940E281E0380E7001637A5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D0940E271E0380E7001637A5 /* Assets.xcassets */; };
 		D0940E2B1E0380E8001637A5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D0940E291E0380E8001637A5 /* LaunchScreen.storyboard */; };
-		D0940FCE1E03B805001637A5 /* FFMpegDemuxer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0940E3D1E038169001637A5 /* FFMpegDemuxer.framework */; };
 		D0940FD01E03B8CF001637A5 /* demo.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = D0940FCF1E03B8C2001637A5 /* demo.mp4 */; };
+		D0A9676D1E136217004D4372 /* FFMpegDemuxer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0940E3D1E038169001637A5 /* FFMpegDemuxer.framework */; };
+		D0A9676E1E136217004D4372 /* FFMpegDemuxer.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D0940E3D1E038169001637A5 /* FFMpegDemuxer.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D0A967721E13621B004D4372 /* MediaBase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0940E371E038161001637A5 /* MediaBase.framework */; };
+		D0A967731E13621B004D4372 /* MediaBase.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D0940E371E038161001637A5 /* MediaBase.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -32,7 +35,36 @@
 			remoteGlobalIDString = D0940DAD1E0377A6001637A5;
 			remoteInfo = FFMpegDemuxer;
 		};
+		D0A9676F1E136217004D4372 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D0940E381E038169001637A5 /* FFMpegDemuxer.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D0940DAC1E0377A6001637A5;
+			remoteInfo = FFMpegDemuxer;
+		};
+		D0A967741E13621B004D4372 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D0940E321E038161001637A5 /* MediaBase.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D0940DFD1E037F31001637A5;
+			remoteInfo = MediaBase;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		D0A967711E136217004D4372 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				D0A967731E13621B004D4372 /* MediaBase.framework in Embed Frameworks */,
+				D0A9676E1E136217004D4372 /* FFMpegDemuxer.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		D0940E181E0380E7001637A5 /* MediaFrameworkTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MediaFrameworkTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -55,7 +87,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D0940FCE1E03B805001637A5 /* FFMpegDemuxer.framework in Frameworks */,
+				D0A967721E13621B004D4372 /* MediaBase.framework in Frameworks */,
+				D0A9676D1E136217004D4372 /* FFMpegDemuxer.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -131,10 +164,13 @@
 				D0940E141E0380E7001637A5 /* Sources */,
 				D0940E151E0380E7001637A5 /* Frameworks */,
 				D0940E161E0380E7001637A5 /* Resources */,
+				D0A967711E136217004D4372 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				D0A967701E136217004D4372 /* PBXTargetDependency */,
+				D0A967751E13621B004D4372 /* PBXTargetDependency */,
 			);
 			name = MediaFrameworkTest;
 			productName = MediaFrameworkTest;
@@ -226,6 +262,19 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		D0A967701E136217004D4372 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = FFMpegDemuxer;
+			targetProxy = D0A9676F1E136217004D4372 /* PBXContainerItemProxy */;
+		};
+		D0A967751E13621B004D4372 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = MediaBase;
+			targetProxy = D0A967741E13621B004D4372 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		D0940E241E0380E7001637A5 /* Main.storyboard */ = {

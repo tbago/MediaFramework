@@ -24,7 +24,10 @@
 - (IBAction)testButtonClick:(UIButton *)sender {
 //    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"demo" ofType:@"mp4"];
     NSString *filePath = @"rtsp://192.168.42.1/live";
-    [self.ffmpegDemuxer openFileByPath:filePath];
+    BOOL openRet = [self.ffmpegDemuxer openFileByPath:filePath];
+    if (!openRet) {
+        return;
+    }
     MovieInfo *moveInfo = [self.ffmpegDemuxer getMovieInfoByIndex:0];
     while (true) {
         CompassedFrame *compassedFrame = [self.ffmpegDemuxer readFrame];

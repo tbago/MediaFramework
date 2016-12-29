@@ -203,7 +203,7 @@ FFMpegDemuxer *createFFMpegDemuxer() {
         
         compassedFrame.frameData          = [[NSData alloc] initWithBytes:pkt.data length:pkt.size];
         
-        av_free_packet(&pkt);
+        av_packet_unref(&pkt);
         
         return compassedFrame;
     }

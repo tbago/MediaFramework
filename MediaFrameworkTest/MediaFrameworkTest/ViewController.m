@@ -34,11 +34,11 @@
 
 - (IBAction)testButtonClick:(UIButton *)sender {
 //    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"demo" ofType:@"mp4"];
-    NSString *filePath = @"rtsp://192.168.42.1/live";
-    BOOL openRet = [self.ffmpegDemuxer openFileByPath:filePath];
-    if (!openRet) {
-        return;
-    }
+//    NSString *filePath = @"rtsp://192.168.42.1/live";
+//    BOOL openRet = [self.ffmpegDemuxer openFileByPath:filePath];
+//    if (!openRet) {
+//        return;
+//    }
     
     
 ///< ffmpeg decoder test

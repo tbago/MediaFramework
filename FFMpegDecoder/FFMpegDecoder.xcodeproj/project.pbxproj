@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		D05860AE1E149D77001B72A8 /* FFMpegDecoder.m in Sources */ = {isa = PBXBuildFile; fileRef = D05860AD1E149D77001B72A8 /* FFMpegDecoder.m */; };
+		D0840F271E14BD4E002A2AB9 /* FFMpegDecoderImp.h in Headers */ = {isa = PBXBuildFile; fileRef = D0840F251E14BD4E002A2AB9 /* FFMpegDecoderImp.h */; };
+		D0840F281E14BD4E002A2AB9 /* FFMpegDecoderImp.m in Sources */ = {isa = PBXBuildFile; fileRef = D0840F261E14BD4E002A2AB9 /* FFMpegDecoderImp.m */; };
 		D0978AA21E14B95B0000B004 /* FFMpegCommon.h in Headers */ = {isa = PBXBuildFile; fileRef = D0978AA01E14B95B0000B004 /* FFMpegCommon.h */; };
 		D0978AA31E14B95B0000B004 /* FFMpegCommon.m in Sources */ = {isa = PBXBuildFile; fileRef = D0978AA11E14B95B0000B004 /* FFMpegCommon.m */; };
 		D0978AA51E14BB830000B004 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = D0978AA41E14BB830000B004 /* libz.tbd */; };
@@ -131,6 +133,8 @@
 
 /* Begin PBXFileReference section */
 		D05860AD1E149D77001B72A8 /* FFMpegDecoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFMpegDecoder.m; sourceTree = "<group>"; };
+		D0840F251E14BD4E002A2AB9 /* FFMpegDecoderImp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFMpegDecoderImp.h; sourceTree = "<group>"; };
+		D0840F261E14BD4E002A2AB9 /* FFMpegDecoderImp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFMpegDecoderImp.m; sourceTree = "<group>"; };
 		D0978AA01E14B95B0000B004 /* FFMpegCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFMpegCommon.h; sourceTree = "<group>"; };
 		D0978AA11E14B95B0000B004 /* FFMpegCommon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFMpegCommon.m; sourceTree = "<group>"; };
 		D0978AA41E14BB830000B004 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
@@ -512,6 +516,8 @@
 				D0D30CCC1E14A57D00797FA5 /* FFMpegDecoderEnumerator.m */,
 				D0978AA01E14B95B0000B004 /* FFMpegCommon.h */,
 				D0978AA11E14B95B0000B004 /* FFMpegCommon.m */,
+				D0840F251E14BD4E002A2AB9 /* FFMpegDecoderImp.h */,
+				D0840F261E14BD4E002A2AB9 /* FFMpegDecoderImp.m */,
 				D0F72AF91E1499A900921FB9 /* Info.plist */,
 			);
 			path = FFMpegDecoder;
@@ -621,6 +627,7 @@
 				D0D30D861E14B0E800797FA5 /* hwcontext.h in Headers */,
 				D0D30D6A1E14B0E800797FA5 /* audio_fifo.h in Headers */,
 				D0D30D5F1E14B0E800797FA5 /* avfiltergraph.h in Headers */,
+				D0840F271E14BD4E002A2AB9 /* FFMpegDecoderImp.h in Headers */,
 				D0D30D751E14B0E800797FA5 /* cast5.h in Headers */,
 				D0D30D811E14B0E800797FA5 /* fifo.h in Headers */,
 				D0D30D541E14B0E800797FA5 /* qsv.h in Headers */,
@@ -704,6 +711,7 @@
 			files = (
 				D05860AE1E149D77001B72A8 /* FFMpegDecoder.m in Sources */,
 				D0D30CCE1E14A57D00797FA5 /* FFMpegDecoderEnumerator.m in Sources */,
+				D0840F281E14BD4E002A2AB9 /* FFMpegDecoderImp.m in Sources */,
 				D0978AA31E14B95B0000B004 /* FFMpegCommon.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

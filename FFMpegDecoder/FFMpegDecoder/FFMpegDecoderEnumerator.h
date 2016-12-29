@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-#import "FFMpegDecoder.h"
+@class FFMpegDecoder;
 
 /**
  *  Enum all ffmpeg decoders

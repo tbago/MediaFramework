@@ -8,6 +8,7 @@
 
 #import "FFMpegDecoderEnumerator.h"
 #import "FFMpegCommon.h"
+#import "FFMpegDecoderImp.h"
 
 #include "libavcodec/avcodec.h"
 

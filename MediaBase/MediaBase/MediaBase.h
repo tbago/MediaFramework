@@ -18,3 +18,4 @@ FOUNDATION_EXPORT const unsigned char MediaBaseVersionString[];
 #import <Mediabase/StreamInfo.h>
 #import <Mediabase/MovieInfo.h>
 #import <Mediabase/CompassedFrame.h>
+#import <Mediabase/RawVideoFrame.h>

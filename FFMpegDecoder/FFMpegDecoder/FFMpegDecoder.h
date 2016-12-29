@@ -7,23 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <MediaBase/ResuableCodecID.h>
-
-typedef NS_ENUM(NSInteger, FFMpegDecoderType) {
-    FFMpegUnknownDecoder,
-    FFmpegVideoDecoder,
-    FFMpegAudioDecoder,
-    FFMpegSubtitleDecoder,
-};
-
-@interface FFMpegCodecInfo : NSObject
-
-@property (nonatomic) FFMpegDecoderType     type;
-@property (nonatomic) ResuableCodecID       codecID;
-@property (nonatomic, copy) NSString        *name;
-@property (nonatomic) uint32_t              score;
-
-@end
+#import <FFMpegDecoder/FFMpegDecoderEnumerator.h>
 
 /**
  *  Decoder media packet by ffmpeg

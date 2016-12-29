@@ -8,10 +8,6 @@
 
 #import "FFMpegDecoder.h"
 
-@implementation FFMpegCodecInfo
-
-@end
-
 @implementation FFMpegDecoder
 
 @end

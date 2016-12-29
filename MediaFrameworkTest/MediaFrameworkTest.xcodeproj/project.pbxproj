@@ -54,6 +54,13 @@
 			remoteGlobalIDString = D0940DFD1E037F31001637A5;
 			remoteInfo = MediaBase;
 		};
+		D0F72B031E1499AA00921FB9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D0F72AFF1E1499A900921FB9 /* FFMpegDecoder.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D0F72AF41E1499A800921FB9;
+			remoteInfo = FFMpegDecoder;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -99,6 +106,7 @@
 		D0A967821E136380004D4372 /* rtmp_sys.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rtmp_sys.h; sourceTree = "<group>"; };
 		D0A967831E136380004D4372 /* rtmp.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = rtmp.c; sourceTree = "<group>"; };
 		D0A967841E136380004D4372 /* rtmp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rtmp.h; sourceTree = "<group>"; };
+		D0F72AFF1E1499A900921FB9 /* FFMpegDecoder.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = FFMpegDecoder.xcodeproj; path = ../FFMpegDecoder/FFMpegDecoder.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,6 +125,7 @@
 		D0940E0F1E0380E7001637A5 = {
 			isa = PBXGroup;
 			children = (
+				D0F72AFF1E1499A900921FB9 /* FFMpegDecoder.xcodeproj */,
 				D0940E381E038169001637A5 /* FFMpegDemuxer.xcodeproj */,
 				D0940E321E038161001637A5 /* MediaBase.xcodeproj */,
 				D0940E1A1E0380E7001637A5 /* MediaFrameworkTest */,
@@ -195,6 +204,14 @@
 			path = librtmp;
 			sourceTree = "<group>";
 		};
+		D0F72B001E1499A900921FB9 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D0F72B041E1499AA00921FB9 /* FFMpegDecoder.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -245,6 +262,10 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
+					ProductGroup = D0F72B001E1499A900921FB9 /* Products */;
+					ProjectRef = D0F72AFF1E1499A900921FB9 /* FFMpegDecoder.xcodeproj */;
+				},
+				{
 					ProductGroup = D0940E391E038169001637A5 /* Products */;
 					ProjectRef = D0940E381E038169001637A5 /* FFMpegDemuxer.xcodeproj */;
 				},
@@ -273,6 +294,13 @@
 			fileType = wrapper.framework;
 			path = FFMpegDemuxer.framework;
 			remoteRef = D0940E3C1E038169001637A5 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		D0F72B041E1499AA00921FB9 /* FFMpegDecoder.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = FFMpegDecoder.framework;
+			remoteRef = D0F72B031E1499AA00921FB9 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */

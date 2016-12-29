@@ -8,7 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		D05860AE1E149D77001B72A8 /* FFMpegDecoder.m in Sources */ = {isa = PBXBuildFile; fileRef = D05860AD1E149D77001B72A8 /* FFMpegDecoder.m */; };
-		D0D30CCD1E14A57D00797FA5 /* FFMpegDecoderEnumerator.h in Headers */ = {isa = PBXBuildFile; fileRef = D0D30CCB1E14A57D00797FA5 /* FFMpegDecoderEnumerator.h */; };
+		D0978AA21E14B95B0000B004 /* FFMpegCommon.h in Headers */ = {isa = PBXBuildFile; fileRef = D0978AA01E14B95B0000B004 /* FFMpegCommon.h */; };
+		D0978AA31E14B95B0000B004 /* FFMpegCommon.m in Sources */ = {isa = PBXBuildFile; fileRef = D0978AA11E14B95B0000B004 /* FFMpegCommon.m */; };
+		D0978AA51E14BB830000B004 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = D0978AA41E14BB830000B004 /* libz.tbd */; };
+		D0D30CCD1E14A57D00797FA5 /* FFMpegDecoderEnumerator.h in Headers */ = {isa = PBXBuildFile; fileRef = D0D30CCB1E14A57D00797FA5 /* FFMpegDecoderEnumerator.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D0D30CCE1E14A57D00797FA5 /* FFMpegDecoderEnumerator.m in Sources */ = {isa = PBXBuildFile; fileRef = D0D30CCC1E14A57D00797FA5 /* FFMpegDecoderEnumerator.m */; };
 		D0D30D4B1E14B0E800797FA5 /* avcodec.h in Headers */ = {isa = PBXBuildFile; fileRef = D0D30CD41E14B0E800797FA5 /* avcodec.h */; };
 		D0D30D4C1E14B0E800797FA5 /* avdct.h in Headers */ = {isa = PBXBuildFile; fileRef = D0D30CD51E14B0E800797FA5 /* avdct.h */; };
@@ -128,6 +131,10 @@
 
 /* Begin PBXFileReference section */
 		D05860AD1E149D77001B72A8 /* FFMpegDecoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFMpegDecoder.m; sourceTree = "<group>"; };
+		D0978AA01E14B95B0000B004 /* FFMpegCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFMpegCommon.h; sourceTree = "<group>"; };
+		D0978AA11E14B95B0000B004 /* FFMpegCommon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFMpegCommon.m; sourceTree = "<group>"; };
+		D0978AA41E14BB830000B004 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		D0AA78851E14B67000F6516A /* VideoToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = VideoToolbox.framework; path = System/Library/Frameworks/VideoToolbox.framework; sourceTree = SDKROOT; };
 		D0D30CCB1E14A57D00797FA5 /* FFMpegDecoderEnumerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFMpegDecoderEnumerator.h; sourceTree = "<group>"; };
 		D0D30CCC1E14A57D00797FA5 /* FFMpegDecoderEnumerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFMpegDecoderEnumerator.m; sourceTree = "<group>"; };
 		D0D30CD41E14B0E800797FA5 /* avcodec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = avcodec.h; sourceTree = "<group>"; };
@@ -253,6 +260,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D0978AA51E14BB830000B004 /* libz.tbd in Frameworks */,
 				D0D30DBC1E14B0FF00797FA5 /* MediaBase.framework in Frameworks */,
 				D0D30DB81E14B0E800797FA5 /* libavutil.a in Frameworks */,
 				D0D30DBA1E14B0E800797FA5 /* libswscale.a in Frameworks */,
@@ -470,6 +478,8 @@
 		D0D30DBD1E14B12800797FA5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D0978AA41E14BB830000B004 /* libz.tbd */,
+				D0AA78851E14B67000F6516A /* VideoToolbox.framework */,
 				D0D30DBB1E14B0FF00797FA5 /* MediaBase.framework */,
 			);
 			name = Frameworks;
@@ -500,6 +510,8 @@
 				D05860AD1E149D77001B72A8 /* FFMpegDecoder.m */,
 				D0D30CCB1E14A57D00797FA5 /* FFMpegDecoderEnumerator.h */,
 				D0D30CCC1E14A57D00797FA5 /* FFMpegDecoderEnumerator.m */,
+				D0978AA01E14B95B0000B004 /* FFMpegCommon.h */,
+				D0978AA11E14B95B0000B004 /* FFMpegCommon.m */,
 				D0F72AF91E1499A900921FB9 /* Info.plist */,
 			);
 			path = FFMpegDecoder;
@@ -513,6 +525,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D0D30D681E14B0E800797FA5 /* aes_ctr.h in Headers */,
+				D0D30CCD1E14A57D00797FA5 /* FFMpegDecoderEnumerator.h in Headers */,
 				D0D30D7C1E14B0E800797FA5 /* display.h in Headers */,
 				D0D30D7B1E14B0E800797FA5 /* dict.h in Headers */,
 				D0D30D551E14B0E800797FA5 /* vaapi.h in Headers */,
@@ -523,7 +536,6 @@
 				D0D30D781E14B0E800797FA5 /* cpu.h in Headers */,
 				D0D30D831E14B0E800797FA5 /* frame.h in Headers */,
 				D0D30D621E14B0E800797FA5 /* version.h in Headers */,
-				D0D30CCD1E14A57D00797FA5 /* FFMpegDecoderEnumerator.h in Headers */,
 				D0D30D951E14B0E800797FA5 /* md5.h in Headers */,
 				D0D30D991E14B0E800797FA5 /* opt.h in Headers */,
 				D0D30D4B1E14B0E800797FA5 /* avcodec.h in Headers */,
@@ -558,6 +570,7 @@
 				D0D30D6B1E14B0E800797FA5 /* avassert.h in Headers */,
 				D0D30DAD1E14B0E800797FA5 /* twofish.h in Headers */,
 				D0D30DA21E14B0E800797FA5 /* ripemd.h in Headers */,
+				D0978AA21E14B95B0000B004 /* FFMpegCommon.h in Headers */,
 				D0D30D8D1E14B0E800797FA5 /* intfloat.h in Headers */,
 				D0D30D741E14B0E800797FA5 /* camellia.h in Headers */,
 				D0D30D701E14B0E800797FA5 /* blowfish.h in Headers */,
@@ -691,6 +704,7 @@
 			files = (
 				D05860AE1E149D77001B72A8 /* FFMpegDecoder.m in Sources */,
 				D0D30CCE1E14A57D00797FA5 /* FFMpegDecoderEnumerator.m in Sources */,
+				D0978AA31E14B95B0000B004 /* FFMpegCommon.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -794,11 +808,12 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				FRAMEWORK_SEARCH_PATHS = ../FFMpegLibrary/Decoder/lib;
+				FRAMEWORK_SEARCH_PATHS = "";
 				HEADER_SEARCH_PATHS = ../FFMpegLibrary/Decoder/include;
 				INFOPLIST_FILE = FFMpegDecoder/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = ../FFMpegLibrary/Decoder/lib;
 				PRODUCT_BUNDLE_IDENTIFIER = com.tbago.FFMpegDecoder;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -812,11 +827,12 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				FRAMEWORK_SEARCH_PATHS = ../FFMpegLibrary/Decoder/lib;
+				FRAMEWORK_SEARCH_PATHS = "";
 				HEADER_SEARCH_PATHS = ../FFMpegLibrary/Decoder/include;
 				INFOPLIST_FILE = FFMpegDecoder/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = ../FFMpegLibrary/Decoder/lib;
 				PRODUCT_BUNDLE_IDENTIFIER = com.tbago.FFMpegDecoder;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;

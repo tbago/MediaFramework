@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import <FFMpegDemuxer/FFMpegDemuxer.h>
+#import <FFMpegDecoder/FFMpegDecoderEnumerator.h>
 
 #import "rtmp.h"
 
@@ -39,6 +40,11 @@
         return;
     }
     
+    
+///< ffmpeg decoder test
+    FFMpegDecoderEnumerator *decoderEnumerator = [[FFMpegDecoderEnumerator alloc] init];
+    [decoderEnumerator initDecoderArray];
+    return;
 ///< rtmp live test
     if (self.compassedFrameArray == nil) {
         self.compassedFrameArray = [[NSMutableArray alloc] init];

@@ -10,11 +10,13 @@
 #import <MediaBase/ResuableCodecID.h>
 
 typedef NS_ENUM(NSInteger, FFMpegDecoderType) {
+    FFMpegUnknownDecoder,
     FFmpegVideoDecoder,
     FFMpegAudioDecoder,
+    FFMpegSubtitleDecoder,
 };
 
-@interface FFMpegCodecInfo
+@interface FFMpegCodecInfo : NSObject
 
 @property (nonatomic) FFMpegDecoderType     type;
 @property (nonatomic) ResuableCodecID       codecID;

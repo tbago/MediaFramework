@@ -32,7 +32,7 @@
             switch (mediaType)
             {
                 case AVMEDIA_TYPE_VIDEO:
-                    decoderType = FFmpegVideoDecoder;
+                    decoderType = FFMpegVideoDecoder;
                     break;
                 case AVMEDIA_TYPE_AUDIO:
                     decoderType = FFMpegAudioDecoder;
@@ -58,7 +58,12 @@
     } while(pAVCodec != NULL);
 }
 
-- (FFMpegDecoder *)CreateFFMpegDecoderByIndex:(uint32_t) index {
+- (FFMpegDecoder *)CreateFFMpegDecoderByCodecId:(ResuableCodecID) codecID {
+    for (FFMpegCodecInfo * codecInfo in self.innerCodecInfoArray) {
+        if (codecInfo.codecID == codecID) {
+            return [[FFMpegDecoder alloc] initWithCodecInfo:codecInfo];
+        }
+    }
     return NULL;
 }
 

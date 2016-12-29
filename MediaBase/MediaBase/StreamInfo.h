@@ -24,6 +24,9 @@
 @property (nonatomic, copy) NSString        *language;
 @property (nonatomic) int64_t               bitrate;    ///< The average bitrate of the encoded data (in bits per second)
 @property (nonatomic) int64_t               duration;   ///< stream duration in ms, -1 is unkonwn
+@property (nonatomic) uint32_t              codecTag;
+@property (nonatomic) int32_t               bitsPerCodedSample;
+
 ///< video param
 @property (nonatomic) int32_t               width;
 @property (nonatomic) int32_t               height;

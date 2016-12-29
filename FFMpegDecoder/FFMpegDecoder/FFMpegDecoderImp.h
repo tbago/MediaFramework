@@ -11,7 +11,7 @@
 
 typedef NS_ENUM(NSInteger, FFMpegDecoderType) {
     FFMpegUnknownDecoder,
-    FFmpegVideoDecoder,
+    FFMpegVideoDecoder,
     FFMpegAudioDecoder,
     FFMpegSubtitleDecoder,
 };
@@ -25,6 +25,3 @@ typedef NS_ENUM(NSInteger, FFMpegDecoderType) {
 
 @end
 
-@interface FFMpegDecoderImp : FFMpegDecoder
-
-@end

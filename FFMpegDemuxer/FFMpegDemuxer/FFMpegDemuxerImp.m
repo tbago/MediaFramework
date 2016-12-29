@@ -293,6 +293,9 @@ FFMpegDemuxer *createFFMpegDemuxer() {
                 streamInfo.pixelAspectRatioNumerator = codecParam->sample_aspect_ratio.num;
                 streamInfo.pixelAspectRatioNumerator = codecParam->sample_aspect_ratio.den;
             }
+            
+            streamInfo.codecTag = codecParam->codec_tag;
+            streamInfo.bitsPerCodedSample = codecParam->bits_per_coded_sample;
         }
         else if (codecParam->codec_type == AVMEDIA_TYPE_AUDIO) {
             streamInfo.streamType = AudioStream;

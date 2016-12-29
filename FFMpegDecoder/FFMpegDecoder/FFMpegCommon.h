@@ -25,6 +25,8 @@ extern const AVRational gGloabalTimeBase;
  */
 ResuableCodecID FFMpegCodecIDToMeidaCodecID(enum AVCodecID ffCodecID);
 
+enum AVCodecID MediaCodecIDToFFMpegCodecID(ResuableCodecID resuableCodecID);
+
 /**
  *  Convert ffmpeg pixel format to global resuable pixel format
  *

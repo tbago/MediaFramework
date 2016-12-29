@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <MediaBase/ResuableCodecID.h>
 
 @class FFMpegDecoder;
 
@@ -26,7 +27,7 @@
  *
  *  @return ffmpeg decoder
  */
-- (FFMpegDecoder *)CreateFFMpegDecoderByIndex:(uint32_t) index;
+- (FFMpegDecoder *)CreateFFMpegDecoderByCodecId:(ResuableCodecID) codecID;
 
 @property (strong, nonatomic, readonly) NSArray     *codecInfoArray;
 @end

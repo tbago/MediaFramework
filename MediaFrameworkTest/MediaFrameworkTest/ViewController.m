@@ -8,7 +8,7 @@
 
 #import "ViewController.h"
 #import <FFMpegDemuxer/FFMpegDemuxer.h>
-#import <FFMpegDecoder/FFMpegDecoderEnumerator.h>
+#import <FFMpegDecoder/FFMpegDecoder.h>
 
 #import "rtmp.h"
 
@@ -18,11 +18,13 @@
 {
     RTMP *_rtmpClient;
 }
-@property (strong, nonatomic) FFMpegDemuxer     *ffmpegDemuxer;
-@property (strong, atomic) NSMutableArray       *compassedFrameArray;
+@property (strong, nonatomic) FFMpegDemuxer             *ffmpegDemuxer;
+@property (strong, nonatomic) FFMpegDecoderEnumerator   *ffDecoderEnumerator;
+@property (strong, nonatomic) FFMpegDecoder             *ffDecoder;
+@property (strong, atomic) NSMutableArray               *compassedFrameArray;
 ///< rtmp live
-@property (nonatomic) int64_t                    startPts;
-@property (atomic)    BOOL                       stopLive;
+@property (nonatomic) int64_t                           startPts;
+@property (atomic)    BOOL                              stopLive;
 @end
 
 @implementation ViewController
@@ -34,17 +36,15 @@
 
 - (IBAction)testButtonClick:(UIButton *)sender {
 //    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"demo" ofType:@"mp4"];
-//    NSString *filePath = @"rtsp://192.168.42.1/live";
-//    BOOL openRet = [self.ffmpegDemuxer openFileByPath:filePath];
-//    if (!openRet) {
-//        return;
-//    }
+    NSString *filePath = @"rtsp://192.168.42.1/live";
+    BOOL openRet = [self.ffmpegDemuxer openFileByPath:filePath];
+    if (!openRet) {
+        return;
+    }
     
-    
-///< ffmpeg decoder test
-    FFMpegDecoderEnumerator *decoderEnumerator = [[FFMpegDecoderEnumerator alloc] init];
-    [decoderEnumerator initDecoderArray];
+    [self openDecoderForTest];
     return;
+    
 ///< rtmp live test
     if (self.compassedFrameArray == nil) {
         self.compassedFrameArray = [[NSMutableArray alloc] init];
@@ -107,6 +107,32 @@
     self.stopLive = YES;
 }
 
+- (void)openDecoderForTest {
+    MovieInfo *sourceMovieInfo = [self.ffmpegDemuxer getMovieInfoByIndex:0];
+    ///< ffmpeg decoder test
+    [self.ffDecoderEnumerator initDecoderArray];
+    StreamInfo *firstStreamInfo = sourceMovieInfo.streamArray[0];
+    self.ffDecoder = [self.ffDecoderEnumerator CreateFFMpegDecoderByCodecId:firstStreamInfo.codecID];
+    if (self.ffDecoder != NULL) {
+        AVCodecParam *codecParam = [[AVCodecParam alloc] init];
+        if (firstStreamInfo.streamType == VideoStream)
+        {
+            codecParam.width                = firstStreamInfo.width;
+            codecParam.height               = firstStreamInfo.height;
+            codecParam.codecTag             = firstStreamInfo.codecTag;
+            codecParam.bitsPerCodedSample   = firstStreamInfo.bitsPerCodedSample;
+            codecParam.numThreads           = 1;
+            codecParam.extraData            = firstStreamInfo.extraData;
+            
+            BOOL ret = [self.ffDecoder openCodec:codecParam];
+            if (!ret) {
+                return;
+            }
+        }
+    }
+//    [NSThread detachNewThreadSelector:@selector(loopReadStreamData) toTarget:self withObject:nil];
+}
+
 #pragma mark - get & set
 
 - (FFMpegDemuxer *)ffmpegDemuxer {
@@ -114,6 +140,13 @@
         _ffmpegDemuxer = createFFMpegDemuxer();
     }
     return _ffmpegDemuxer;
+}
+
+- (FFMpegDecoderEnumerator *)ffDecoderEnumerator {
+    if (_ffDecoderEnumerator == nil) {
+        _ffDecoderEnumerator = [[FFMpegDecoderEnumerator alloc] init];
+    }
+    return _ffDecoderEnumerator;
 }
 
 #pragma mark - librtmp method

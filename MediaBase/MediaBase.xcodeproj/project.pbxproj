@@ -10,6 +10,8 @@
 		D05031521E07AF7A002F6F6F /* ResuableCodecID.h in Headers */ = {isa = PBXBuildFile; fileRef = D050314F1E07ABDB002F6F6F /* ResuableCodecID.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D05031531E07AF7A002F6F6F /* ResuablePixelFormat.h in Headers */ = {isa = PBXBuildFile; fileRef = D05031511E07AE35002F6F6F /* ResuablePixelFormat.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D05031551E07B923002F6F6F /* ResuableSampleFormat.h in Headers */ = {isa = PBXBuildFile; fileRef = D05031541E07B7C4002F6F6F /* ResuableSampleFormat.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D05860B11E149DE0001B72A8 /* RawVideoFrame.h in Headers */ = {isa = PBXBuildFile; fileRef = D05860AF1E149DE0001B72A8 /* RawVideoFrame.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D05860B21E149DE0001B72A8 /* RawVideoFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = D05860B01E149DE0001B72A8 /* RawVideoFrame.m */; };
 		D0940E021E037F31001637A5 /* MediaBase.h in Headers */ = {isa = PBXBuildFile; fileRef = D0940E011E037F31001637A5 /* MediaBase.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D0940E401E038177001637A5 /* MovieInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = D0940E3E1E038177001637A5 /* MovieInfo.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D0940E411E038177001637A5 /* MovieInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = D0940E3F1E038177001637A5 /* MovieInfo.m */; };
@@ -24,6 +26,8 @@
 		D050314F1E07ABDB002F6F6F /* ResuableCodecID.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ResuableCodecID.h; sourceTree = "<group>"; };
 		D05031511E07AE35002F6F6F /* ResuablePixelFormat.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ResuablePixelFormat.h; sourceTree = "<group>"; };
 		D05031541E07B7C4002F6F6F /* ResuableSampleFormat.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ResuableSampleFormat.h; sourceTree = "<group>"; };
+		D05860AF1E149DE0001B72A8 /* RawVideoFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RawVideoFrame.h; sourceTree = "<group>"; };
+		D05860B01E149DE0001B72A8 /* RawVideoFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RawVideoFrame.m; sourceTree = "<group>"; };
 		D0940DFE1E037F31001637A5 /* MediaBase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MediaBase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0940E011E037F31001637A5 /* MediaBase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MediaBase.h; sourceTree = "<group>"; };
 		D0940E031E037F31001637A5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -74,6 +78,8 @@
 				D0940E441E038318001637A5 /* StreamInfo.m */,
 				D0940E471E038528001637A5 /* CompassedFrame.h */,
 				D0940E481E038528001637A5 /* CompassedFrame.m */,
+				D05860AF1E149DE0001B72A8 /* RawVideoFrame.h */,
+				D05860B01E149DE0001B72A8 /* RawVideoFrame.m */,
 				D050314F1E07ABDB002F6F6F /* ResuableCodecID.h */,
 				D05031511E07AE35002F6F6F /* ResuablePixelFormat.h */,
 				D05031541E07B7C4002F6F6F /* ResuableSampleFormat.h */,
@@ -96,6 +102,7 @@
 				D0940E4D1E038870001637A5 /* MediaConstant.h in Headers */,
 				D05031521E07AF7A002F6F6F /* ResuableCodecID.h in Headers */,
 				D05031531E07AF7A002F6F6F /* ResuablePixelFormat.h in Headers */,
+				D05860B11E149DE0001B72A8 /* RawVideoFrame.h in Headers */,
 				D05031551E07B923002F6F6F /* ResuableSampleFormat.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -169,6 +176,7 @@
 			files = (
 				D0940E411E038177001637A5 /* MovieInfo.m in Sources */,
 				D0940E461E038318001637A5 /* StreamInfo.m in Sources */,
+				D05860B21E149DE0001B72A8 /* RawVideoFrame.m in Sources */,
 				D0940E4A1E038528001637A5 /* CompassedFrame.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

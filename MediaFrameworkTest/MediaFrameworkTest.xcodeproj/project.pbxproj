@@ -23,6 +23,8 @@
 		D0A967871E136380004D4372 /* log.c in Sources */ = {isa = PBXBuildFile; fileRef = D0A9677F1E136380004D4372 /* log.c */; };
 		D0A967881E136380004D4372 /* parseurl.c in Sources */ = {isa = PBXBuildFile; fileRef = D0A967811E136380004D4372 /* parseurl.c */; };
 		D0A967891E136380004D4372 /* rtmp.c in Sources */ = {isa = PBXBuildFile; fileRef = D0A967831E136380004D4372 /* rtmp.c */; };
+		D0AA78811E14B23000F6516A /* FFMpegDecoder.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0F72B041E1499AA00921FB9 /* FFMpegDecoder.framework */; };
+		D0AA78821E14B23000F6516A /* FFMpegDecoder.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D0F72B041E1499AA00921FB9 /* FFMpegDecoder.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +56,13 @@
 			remoteGlobalIDString = D0940DFD1E037F31001637A5;
 			remoteInfo = MediaBase;
 		};
+		D0AA78831E14B23000F6516A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D0F72AFF1E1499A900921FB9 /* FFMpegDecoder.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D0F72AF31E1499A800921FB9;
+			remoteInfo = FFMpegDecoder;
+		};
 		D0F72B031E1499AA00921FB9 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D0F72AFF1E1499A900921FB9 /* FFMpegDecoder.xcodeproj */;
@@ -72,6 +81,7 @@
 			files = (
 				D0A967731E13621B004D4372 /* MediaBase.framework in Embed Frameworks */,
 				D0A9676E1E136217004D4372 /* FFMpegDemuxer.framework in Embed Frameworks */,
+				D0AA78821E14B23000F6516A /* FFMpegDecoder.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -116,6 +126,7 @@
 			files = (
 				D0A967721E13621B004D4372 /* MediaBase.framework in Frameworks */,
 				D0A9676D1E136217004D4372 /* FFMpegDemuxer.framework in Frameworks */,
+				D0AA78811E14B23000F6516A /* FFMpegDecoder.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -125,9 +136,9 @@
 		D0940E0F1E0380E7001637A5 = {
 			isa = PBXGroup;
 			children = (
-				D0F72AFF1E1499A900921FB9 /* FFMpegDecoder.xcodeproj */,
-				D0940E381E038169001637A5 /* FFMpegDemuxer.xcodeproj */,
 				D0940E321E038161001637A5 /* MediaBase.xcodeproj */,
+				D0940E381E038169001637A5 /* FFMpegDemuxer.xcodeproj */,
+				D0F72AFF1E1499A900921FB9 /* FFMpegDecoder.xcodeproj */,
 				D0940E1A1E0380E7001637A5 /* MediaFrameworkTest */,
 				D0940E191E0380E7001637A5 /* Products */,
 			);
@@ -229,6 +240,7 @@
 			dependencies = (
 				D0A967701E136217004D4372 /* PBXTargetDependency */,
 				D0A967751E13621B004D4372 /* PBXTargetDependency */,
+				D0AA78841E14B23000F6516A /* PBXTargetDependency */,
 			);
 			name = MediaFrameworkTest;
 			productName = MediaFrameworkTest;
@@ -347,6 +359,11 @@
 			isa = PBXTargetDependency;
 			name = MediaBase;
 			targetProxy = D0A967741E13621B004D4372 /* PBXContainerItemProxy */;
+		};
+		D0AA78841E14B23000F6516A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = FFMpegDecoder;
+			targetProxy = D0AA78831E14B23000F6516A /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 

@@ -24,8 +24,8 @@
 
 #pragma mark - public method
 
-- (void)addMetaDataToMovieInfo:(NSString *)key
-                         value:(NSString *)value {
+- (void)addMetaDataToStreamInfo:(NSString *)key
+                          value:(NSString *)value {
     self.innerMetaData[key] = value;
 }
 

@@ -114,6 +114,77 @@ static __inline bool sup_threads_dec_frame(int x)
     return YES;
 }
 
+- (RawVideoFrame *)decodeVideoFrame:(CompassedFrame *) compassedFrame {
+    if (compassedFrame == NULL) {   ///< flush decoder
+        if (_codecInfo.type == FFMpegVideoDecoder) {
+            return [self innerDecodeVideo:NULL];
+        }
+        else if (_codecInfo.type == FFMpegAudioDecoder) {
+            return NULL;
+//            return DecodeAudio(NULL);
+        }
+    }
+    if (_codecInfo.type == FFMpegVideoDecoder) {
+        return [self innerDecodeVideo:compassedFrame];
+    }
+    
+    return NULL;
+}
+
+- (RawVideoFrame *)innerDecodeVideo:(CompassedFrame *) compassedFrame {
+    ///<ICompressedFrame to AVPacket
+    uint32_t    size = 0;
+    uint8_t*    pData = NULL;
+    int64_t     dts = -1;
+    int64_t     pts = -1;
+    int         flags = 0;
+    int64_t     pos = -1;
+    
+    if (compassedFrame != NULL)
+    {
+        size = (uint32_t)compassedFrame.frameData.length;
+        if (size < 2) {
+            NSLog(@"frame size too small");
+            return NULL;
+        }
+        pData   = (uint8_t*)compassedFrame.frameData.bytes;
+        dts     = compassedFrame.decompassTimeStamp;
+        pts     = compassedFrame.presentTimeStamp;
+        flags   = compassedFrame.keyFrame;
+        pos     = compassedFrame.position;
+        
+    } else { //Flush decoder
+        
+    }
+    AVPacket avpkt;
+    memset(&avpkt, 0, sizeof(avpkt));
+    avpkt.data  = pData;
+    avpkt.size  = size;
+    avpkt.dts   = dts;
+    avpkt.pts   = pts;
+    avpkt.flags = flags;
+    avpkt.pos   = pos;
+    
+    int got_picture_ptr;
+    AVFrame *decodedVideoFrame = av_frame_alloc();
+    int ret = avcodec_decode_video2(&_ffAVCodecContext, decodedVideoFrame, &got_picture_ptr, &avpkt);
+    if (ret < 0) {
+        NSLog(@"cannot decoder video,%d", ret);
+        return NULL;
+    }
+    if (0 == got_picture_ptr) {
+        return NULL;
+    }
+    
+    RawVideoFrame *pRawVideoFrame = [[RawVideoFrame alloc] init];
+    pRawVideoFrame.width = decodedVideoFrame->width;
+    pRawVideoFrame.height = decodedVideoFrame->height;
+    
+    av_frame_free(&decodedVideoFrame);
+    
+    return pRawVideoFrame;
+}
+
 @end
 
 @implementation FFMpegCodecInfo : NSObject

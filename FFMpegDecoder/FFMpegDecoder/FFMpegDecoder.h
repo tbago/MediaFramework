@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import <FFMpegDecoder/FFMpegDecoderEnumerator.h>
+#import <MediaBase/RawVideoFrame.h>
+#import <MediaBase/CompassedFrame.h>
 
 @class FFMpegCodecInfo;
 
@@ -50,6 +52,8 @@
 - (instancetype)initWithCodecInfo:(FFMpegCodecInfo *) codecInfo;
 
 - (BOOL)openCodec:(AVCodecParam *) codecParam;
+
+- (RawVideoFrame *)decodeVideoFrame:(CompassedFrame *) compassedFrame;
 
 @end
 

@@ -22,6 +22,7 @@
 @property (strong, nonatomic) FFMpegDecoderEnumerator   *ffDecoderEnumerator;
 @property (strong, nonatomic) FFMpegDecoder             *ffDecoder;
 @property (strong, atomic) NSMutableArray               *compassedFrameArray;
+@property (nonatomic) BOOL                              stopDecoder;
 ///< rtmp live
 @property (nonatomic) int64_t                           startPts;
 @property (atomic)    BOOL                              stopLive;
@@ -130,7 +131,26 @@
             }
         }
     }
-//    [NSThread detachNewThreadSelector:@selector(loopReadStreamData) toTarget:self withObject:nil];
+    [NSThread detachNewThreadSelector:@selector(loopReadAndDecodeStreamData) toTarget:self withObject:nil];
+}
+
+- (void)loopReadAndDecodeStreamData {
+    while(!self.stopDecoder)
+    {
+        CompassedFrame *compassedFrame = [self.ffmpegDemuxer readFrame];
+        if (compassedFrame == nil) {
+            break;
+        }
+        else {
+            RawVideoFrame *videoFrame = [self.ffDecoder decodeVideoFrame:compassedFrame];
+            if (videoFrame == NULL) {
+                continue;
+            }
+            else {
+                NSLog(@"get video frame");
+            }
+        }
+    }
 }
 
 #pragma mark - get & set

@@ -165,21 +165,37 @@ static __inline bool sup_threads_dec_frame(int x)
     avpkt.flags = flags;
     avpkt.pos   = pos;
     
-    int got_picture_ptr;
     AVFrame *decodedVideoFrame = av_frame_alloc();
-    int ret = avcodec_decode_video2(&_ffAVCodecContext, decodedVideoFrame, &got_picture_ptr, &avpkt);
-    if (ret < 0) {
-        NSLog(@"cannot decoder video,%d", ret);
-        return NULL;
+    int ret = avcodec_send_packet(&_ffAVCodecContext, &avpkt);
+    if (ret != 0) {
+        NSLog(@"send packet failed");
     }
-    if (0 == got_picture_ptr) {
-        return NULL;
+    ret = avcodec_receive_frame(&_ffAVCodecContext, decodedVideoFrame);
+//    int ret = avcodec_decode_video2(&_ffAVCodecContext, decodedVideoFrame, &got_picture_ptr, &avpkt);
+    if (ret != 0) {
+        if (ret == AVERROR(EAGAIN)) {
+            NSLog(@"Buffer video frame");
+            return NULL;
+        }
+        else {
+            NSLog(@"cannot decoder video,%d", ret);
+            return NULL;
+        }
     }
     
-    RawVideoFrame *pRawVideoFrame = [[RawVideoFrame alloc] init];
-    pRawVideoFrame.width = decodedVideoFrame->width;
-    pRawVideoFrame.height = decodedVideoFrame->height;
+    RawVideoFrame *pRawVideoFrame = [[RawVideoFrame alloc] initWithPixFormat:FFMpegPixelFormatToMediaPixelFormat(_ffAVCodecContext.pix_fmt)
+                                                                       width:decodedVideoFrame->width
+                                                                      height:decodedVideoFrame->height];
     
+    for (uint32_t i = 0; i < AV_NUM_DATA_POINTERS; i++) {
+        if (decodedVideoFrame->linesize[i] > 0) {
+            [pRawVideoFrame pushFrameData:decodedVideoFrame->linesize[i]
+                                frameByte:decodedVideoFrame->data[i]];
+        }
+        else {
+            break;
+        }
+    }
     av_frame_free(&decodedVideoFrame);
     
     return pRawVideoFrame;

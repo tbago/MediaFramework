@@ -391,7 +391,7 @@ void ffmpeg_log(void* avcl, int level, const char *fmt, va_list vl)
         NSLog(@"ffmpeg demuxer fatal:%s", buffer);
     }
     else if (level == AV_LOG_TRACE) {
-        vsnprintf(buffer, 256, fmt, vl);
-        NSLog(@"ffmpeg demuxer trace:%s", buffer);
+//        vsnprintf(buffer, 256, fmt, vl);
+//        NSLog(@"ffmpeg demuxer trace:%s", buffer);
     }
 }

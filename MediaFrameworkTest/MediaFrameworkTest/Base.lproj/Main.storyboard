@@ -32,18 +32,30 @@
                                     <action selector="stopLiveButtonClick:" destination="BYZ-38-t0r" eventType="touchUpInside" id="OsI-N6-a8A"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZTy-mw-wrI" customClass="OpenGLView20">
+                                <rect key="frame" x="0.0" y="30" width="600" height="242"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="gyx-L6-Cjc" firstAttribute="top" secondItem="vaY-Qa-Oyn" secondAttribute="bottom" constant="61" id="FLu-6J-2Ay"/>
+                            <constraint firstItem="ZTy-mw-wrI" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="RDJ-aj-1pj"/>
                             <constraint firstItem="gyx-L6-Cjc" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="UDP-4q-3Yl"/>
+                            <constraint firstItem="ZTy-mw-wrI" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="10" id="huG-ni-1Np"/>
+                            <constraint firstAttribute="trailing" secondItem="ZTy-mw-wrI" secondAttribute="trailing" id="i8n-by-1hJ"/>
                             <constraint firstItem="vaY-Qa-Oyn" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="laQ-Nx-qxl"/>
+                            <constraint firstItem="vaY-Qa-Oyn" firstAttribute="top" secondItem="ZTy-mw-wrI" secondAttribute="bottom" constant="10" id="ogN-8J-lzq"/>
                             <constraint firstItem="vaY-Qa-Oyn" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="vxt-fA-Cfw"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="glView" destination="ZTy-mw-wrI" id="Upd-Fq-sSd"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="243" y="574"/>
         </scene>
     </scenes>
 </document>

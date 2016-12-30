@@ -25,6 +25,7 @@
 		D0A967891E136380004D4372 /* rtmp.c in Sources */ = {isa = PBXBuildFile; fileRef = D0A967831E136380004D4372 /* rtmp.c */; };
 		D0AA78811E14B23000F6516A /* FFMpegDecoder.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0F72B041E1499AA00921FB9 /* FFMpegDecoder.framework */; };
 		D0AA78821E14B23000F6516A /* FFMpegDecoder.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D0F72B041E1499AA00921FB9 /* FFMpegDecoder.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D0E221B71E15EA3400A98D17 /* OpenGLView20.m in Sources */ = {isa = PBXBuildFile; fileRef = D0E221B61E15EA3400A98D17 /* OpenGLView20.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -116,6 +117,8 @@
 		D0A967821E136380004D4372 /* rtmp_sys.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rtmp_sys.h; sourceTree = "<group>"; };
 		D0A967831E136380004D4372 /* rtmp.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = rtmp.c; sourceTree = "<group>"; };
 		D0A967841E136380004D4372 /* rtmp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rtmp.h; sourceTree = "<group>"; };
+		D0E221B51E15EA3400A98D17 /* OpenGLView20.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenGLView20.h; sourceTree = "<group>"; };
+		D0E221B61E15EA3400A98D17 /* OpenGLView20.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpenGLView20.m; sourceTree = "<group>"; };
 		D0F72AFF1E1499A900921FB9 /* FFMpegDecoder.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = FFMpegDecoder.xcodeproj; path = ../FFMpegDecoder/FFMpegDecoder.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -161,6 +164,8 @@
 				D0940E211E0380E7001637A5 /* ViewController.h */,
 				D0940E221E0380E7001637A5 /* ViewController.m */,
 				D0940FCF1E03B8C2001637A5 /* demo.mp4 */,
+				D0E221B51E15EA3400A98D17 /* OpenGLView20.h */,
+				D0E221B61E15EA3400A98D17 /* OpenGLView20.m */,
 				D0940E241E0380E7001637A5 /* Main.storyboard */,
 				D0940E271E0380E7001637A5 /* Assets.xcassets */,
 				D0940E291E0380E8001637A5 /* LaunchScreen.storyboard */,
@@ -340,6 +345,7 @@
 				D0940E231E0380E7001637A5 /* ViewController.m in Sources */,
 				D0A967891E136380004D4372 /* rtmp.c in Sources */,
 				D0A967861E136380004D4372 /* hashswf.c in Sources */,
+				D0E221B71E15EA3400A98D17 /* OpenGLView20.m in Sources */,
 				D0940E201E0380E7001637A5 /* AppDelegate.m in Sources */,
 				D0A967851E136380004D4372 /* amf.c in Sources */,
 				D0940E1D1E0380E7001637A5 /* main.m in Sources */,

@@ -10,6 +10,8 @@
 #import <FFMpegDemuxer/FFMpegDemuxer.h>
 #import <FFMpegDecoder/FFMpegDecoder.h>
 
+#import "OpenGLView20.h"
+
 #import "rtmp.h"
 
 #define RTMP_HEAD_SIZE   (sizeof(RTMPPacket)+RTMP_MAX_HEADER_SIZE)
@@ -23,6 +25,7 @@
 @property (strong, nonatomic) FFMpegDecoder             *ffDecoder;
 @property (strong, atomic) NSMutableArray               *compassedFrameArray;
 @property (nonatomic) BOOL                              stopDecoder;
+@property (weak, nonatomic) IBOutlet OpenGLView20       *glView;
 ///< rtmp live
 @property (nonatomic) int64_t                           startPts;
 @property (atomic)    BOOL                              stopLive;
@@ -147,10 +150,44 @@
                 continue;
             }
             else {
-                NSLog(@"get video frame");
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self renderVideoFrame:videoFrame];
+                });
             }
         }
     }
+}
+
+- (void)renderVideoFrame:(RawVideoFrame *) videoFrame {
+    uint32_t bufferSize = videoFrame.width * videoFrame.height * 3 / 2 + 1;
+    int8_t *buffer = (int8_t *)malloc(bufferSize);
+    uint32_t bufferIndex = 0;
+    
+    ///< copy y data
+    uint32_t lineSize0 = (uint32_t)[videoFrame.lineSizeArray[0] integerValue];
+    int8_t *yBuffer = (int8_t *)[videoFrame.frameDataArray[0] bytes];
+    for (uint32_t i = 0; i< videoFrame.height; i++) {
+        memcpy(buffer + bufferIndex, yBuffer + i * lineSize0, videoFrame.width);
+        bufferIndex += videoFrame.width;
+    }
+    
+    ///< copy u data
+    uint32_t lineSize1 = (uint32_t)[videoFrame.lineSizeArray[1] integerValue];
+    int8_t *uBuffer = (int8_t *)[videoFrame.frameDataArray[1] bytes];
+    for (uint32_t i = 0; i< videoFrame.height/2; i++) {
+        memcpy(buffer + bufferIndex, uBuffer + i * lineSize1, videoFrame.width/2);
+        bufferIndex += videoFrame.width/2;
+    }
+    ///< copy v data
+    uint32_t lineSize2 = (uint32_t)[videoFrame.lineSizeArray[2] integerValue];
+    int8_t *vBuffer = (int8_t *)[videoFrame.frameDataArray[2] bytes];
+    for (uint32_t i = 0; i< videoFrame.height/2; i++) {
+        memcpy(buffer + bufferIndex, vBuffer + i * lineSize2, videoFrame.width/2);
+        bufferIndex += videoFrame.width/2;
+    }
+    
+    [self.glView displayYUV420pData:buffer width:videoFrame.width height:videoFrame.height];
+    free(buffer);
 }
 
 #pragma mark - get & set

@@ -40,7 +40,7 @@
 
 - (IBAction)testButtonClick:(UIButton *)sender {
 //    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"demo" ofType:@"mp4"];
-    NSString *filePath = @"rtsp://192.168.42.1/live";
+    NSString *filePath = @"rtmp://192.168.0.104:1935/live/live1";
     BOOL openRet = [self.ffmpegDemuxer openFileByPath:filePath];
     if (!openRet) {
         return;
@@ -115,26 +115,33 @@
     MovieInfo *sourceMovieInfo = [self.ffmpegDemuxer getMovieInfoByIndex:0];
     ///< ffmpeg decoder test
     [self.ffDecoderEnumerator initDecoderArray];
-    StreamInfo *firstStreamInfo = sourceMovieInfo.streamArray[0];
-    self.ffDecoder = [self.ffDecoderEnumerator CreateFFMpegDecoderByCodecId:firstStreamInfo.codecID];
-    if (self.ffDecoder != NULL) {
-        AVCodecParam *codecParam = [[AVCodecParam alloc] init];
-        if (firstStreamInfo.streamType == VideoStream)
-        {
-            codecParam.width                = firstStreamInfo.width;
-            codecParam.height               = firstStreamInfo.height;
-            codecParam.codecTag             = firstStreamInfo.codecTag;
-            codecParam.bitsPerCodedSample   = firstStreamInfo.bitsPerCodedSample;
-            codecParam.numThreads           = 1;
-            codecParam.extraData            = firstStreamInfo.extraData;
-            
-            BOOL ret = [self.ffDecoder openCodec:codecParam];
-            if (!ret) {
-                return;
-            }
+
+    StreamInfo *videoStreamInfo = nil;
+    for (StreamInfo *streamInfo in sourceMovieInfo.streamArray) {
+        if (streamInfo.streamType == VideoStream) {
+            videoStreamInfo = streamInfo;
+            break;
         }
     }
-    [NSThread detachNewThreadSelector:@selector(loopReadAndDecodeStreamData) toTarget:self withObject:nil];
+    if (videoStreamInfo == nil) {
+        return;
+    }
+    self.ffDecoder = [self.ffDecoderEnumerator CreateFFMpegDecoderByCodecId:videoStreamInfo.codecID];
+    if (self.ffDecoder != NULL) {
+        AVCodecParam *codecParam = [[AVCodecParam alloc] init];
+        codecParam.width                = videoStreamInfo.width;
+        codecParam.height               = videoStreamInfo.height;
+        codecParam.codecTag             = videoStreamInfo.codecTag;
+        codecParam.bitsPerCodedSample   = videoStreamInfo.bitsPerCodedSample;
+        codecParam.numThreads           = 1;
+        codecParam.extraData            = videoStreamInfo.extraData;
+
+        BOOL ret = [self.ffDecoder openCodec:codecParam];
+        if (!ret) {
+            return;
+        }
+        [NSThread detachNewThreadSelector:@selector(loopReadAndDecodeStreamData) toTarget:self withObject:nil];
+    }
 }
 
 - (void)loopReadAndDecodeStreamData {
@@ -142,7 +149,7 @@
     {
         CompassedFrame *compassedFrame = [self.ffmpegDemuxer readFrame];
         if (compassedFrame == nil) {
-            break;
+            continue;
         }
         else {
             RawVideoFrame *videoFrame = [self.ffDecoder decodeVideoFrame:compassedFrame];

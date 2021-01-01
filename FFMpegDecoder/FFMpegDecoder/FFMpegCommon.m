@@ -18,7 +18,6 @@ ResuableCodecID FFMpegCodecIDToMeidaCodecID(enum AVCodecID ffCodecID)
         /* video case CODEC */
         case AV_CODEC_ID_MPEG1VIDEO:               return R_CODEC_ID_MPEG1VIDEO;
         case AV_CODEC_ID_MPEG2VIDEO:               return R_CODEC_ID_MPEG2VIDEO;
-        case AV_CODEC_ID_MPEG2VIDEO_XVMC:          return R_CODEC_ID_MPEG2VIDEO_XVMC;
         case AV_CODEC_ID_H261:                     return R_CODEC_ID_H261;
         case AV_CODEC_ID_H263:                     return R_CODEC_ID_H263;
         case AV_CODEC_ID_RV10:                     return R_CODEC_ID_RV10;
@@ -277,7 +276,6 @@ ResuableCodecID FFMpegCodecIDToMeidaCodecID(enum AVCodecID ffCodecID)
         case AV_CODEC_ID_ADPCM_IMA_ISS:            return R_CODEC_ID_ADPCM_IMA_ISS;
         case AV_CODEC_ID_ADPCM_G722:               return R_CODEC_ID_ADPCM_G722;
         case AV_CODEC_ID_ADPCM_IMA_APC:            return R_CODEC_ID_ADPCM_IMA_APC;
-        case AV_CODEC_ID_VIMA:                     return R_CODEC_ID_VIMA;
         case AV_CODEC_ID_ADPCM_AFC:                return R_CODEC_ID_ADPCM_AFC;
         case AV_CODEC_ID_ADPCM_IMA_OKI:            return R_CODEC_ID_ADPCM_IMA_OKI;
         case AV_CODEC_ID_ADPCM_DTK:                return R_CODEC_ID_ADPCM_DTK;
@@ -330,8 +328,6 @@ ResuableCodecID FFMpegCodecIDToMeidaCodecID(enum AVCodecID ffCodecID)
         case AV_CODEC_ID_MLP:                      return R_CODEC_ID_MLP;
         case AV_CODEC_ID_GSM_MS:                   return R_CODEC_ID_GSM_MS;
         case AV_CODEC_ID_ATRAC3:                   return R_CODEC_ID_ATRAC3;
-        case AV_CODEC_ID_VOXWARE:                  return R_CODEC_ID_VOXWARE;
-        case AV_CODEC_ID_APE:                      return R_CODEC_ID_APE;
         case AV_CODEC_ID_NELLYMOSER:               return R_CODEC_ID_NELLYMOSER;
         case AV_CODEC_ID_MUSEPACK8:                return R_CODEC_ID_MUSEPACK8;
         case AV_CODEC_ID_SPEEX:                    return R_CODEC_ID_SPEEX;
@@ -418,7 +414,6 @@ enum AVCodecID MediaCodecIDToFFMpegCodecID(ResuableCodecID resuableCodecID)
             /* video case CODEC */
         case R_CODEC_ID_MPEG1VIDEO:               return AV_CODEC_ID_MPEG1VIDEO;
         case R_CODEC_ID_MPEG2VIDEO:               return AV_CODEC_ID_MPEG2VIDEO;
-        case R_CODEC_ID_MPEG2VIDEO_XVMC:          return AV_CODEC_ID_MPEG2VIDEO_XVMC;
         case R_CODEC_ID_H261:                     return AV_CODEC_ID_H261;
         case R_CODEC_ID_H263:                     return AV_CODEC_ID_H263;
         case R_CODEC_ID_RV10:                     return AV_CODEC_ID_RV10;
@@ -677,7 +672,6 @@ enum AVCodecID MediaCodecIDToFFMpegCodecID(ResuableCodecID resuableCodecID)
         case R_CODEC_ID_ADPCM_IMA_ISS:            return AV_CODEC_ID_ADPCM_IMA_ISS;
         case R_CODEC_ID_ADPCM_G722:               return AV_CODEC_ID_ADPCM_G722;
         case R_CODEC_ID_ADPCM_IMA_APC:            return AV_CODEC_ID_ADPCM_IMA_APC;
-        case R_CODEC_ID_VIMA:                     return AV_CODEC_ID_VIMA;
         case R_CODEC_ID_ADPCM_AFC:                return AV_CODEC_ID_ADPCM_AFC;
         case R_CODEC_ID_ADPCM_IMA_OKI:            return AV_CODEC_ID_ADPCM_IMA_OKI;
         case R_CODEC_ID_ADPCM_DTK:                return AV_CODEC_ID_ADPCM_DTK;
@@ -730,7 +724,6 @@ enum AVCodecID MediaCodecIDToFFMpegCodecID(ResuableCodecID resuableCodecID)
         case R_CODEC_ID_MLP:                      return AV_CODEC_ID_MLP;
         case R_CODEC_ID_GSM_MS:                   return AV_CODEC_ID_GSM_MS;
         case R_CODEC_ID_ATRAC3:                   return AV_CODEC_ID_ATRAC3;
-        case R_CODEC_ID_VOXWARE:                  return AV_CODEC_ID_VOXWARE;
         case R_CODEC_ID_APE:                      return AV_CODEC_ID_APE;
         case R_CODEC_ID_NELLYMOSER:               return AV_CODEC_ID_NELLYMOSER;
         case R_CODEC_ID_MUSEPACK8:                return AV_CODEC_ID_MUSEPACK8;
@@ -830,10 +823,6 @@ ResuablePixelFormat FFMpegPixelFormatToMediaPixelFormat(enum AVPixelFormat ffPix
         case AV_PIX_FMT_YUVJ420P:              return R_PIX_FMT_YUVJ420P;
         case AV_PIX_FMT_YUVJ422P:              return R_PIX_FMT_YUVJ422P;
         case AV_PIX_FMT_YUVJ444P:              return R_PIX_FMT_YUVJ444P;
-        case AV_PIX_FMT_XVMC_MPEG2_MC:         return R_PIX_FMT_XVMC_MPEG2_MC;
-        case AV_PIX_FMT_XVMC_MPEG2_IDCT:       return R_PIX_FMT_XVMC_MPEG2_IDCT;
-        case AV_PIX_FMT_UYVY422:               return R_PIX_FMT_UYVY422;
-        case AV_PIX_FMT_UYYVYY411:             return R_PIX_FMT_UYYVYY411;
         case AV_PIX_FMT_BGR8:                  return R_PIX_FMT_BGR8;
         case AV_PIX_FMT_BGR4:                  return R_PIX_FMT_BGR4;
         case AV_PIX_FMT_BGR4_BYTE:             return R_PIX_FMT_BGR4_BYTE;
@@ -851,11 +840,6 @@ ResuablePixelFormat FFMpegPixelFormatToMediaPixelFormat(enum AVPixelFormat ffPix
         case AV_PIX_FMT_YUV440P:               return R_PIX_FMT_YUV440P;
         case AV_PIX_FMT_YUVJ440P:              return R_PIX_FMT_YUVJ440P;
         case AV_PIX_FMT_YUVA420P:              return R_PIX_FMT_YUVA420P;
-        case AV_PIX_FMT_VDPAU_H264:            return R_PIX_FMT_VDPAU_H264;
-        case AV_PIX_FMT_VDPAU_MPEG1:           return R_PIX_FMT_VDPAU_MPEG1;
-        case AV_PIX_FMT_VDPAU_MPEG2:           return R_PIX_FMT_VDPAU_MPEG2;
-        case AV_PIX_FMT_VDPAU_WMV3:            return R_PIX_FMT_VDPAU_WMV3;
-        case AV_PIX_FMT_VDPAU_VC1:             return R_PIX_FMT_VDPAU_VC1;
         case AV_PIX_FMT_RGB48BE:               return R_PIX_FMT_RGB48BE;
         case AV_PIX_FMT_RGB48LE:               return R_PIX_FMT_RGB48LE;
         case AV_PIX_FMT_RGB565BE:              return R_PIX_FMT_RGB565BE;
@@ -888,7 +872,6 @@ ResuablePixelFormat FFMpegPixelFormatToMediaPixelFormat(enum AVPixelFormat ffPix
         case AV_PIX_FMT_YUV444P10LE:           return R_PIX_FMT_YUV444P10LE;
         case AV_PIX_FMT_YUV422P9BE:            return R_PIX_FMT_YUV422P9BE;
         case AV_PIX_FMT_YUV422P9LE:            return R_PIX_FMT_YUV422P9LE;
-        case AV_PIX_FMT_VDA_VLD:               return R_PIX_FMT_VDA_VLD;
         case AV_PIX_FMT_GBRP:                  return R_PIX_FMT_GBRP;
         case AV_PIX_FMT_GBRP9BE:               return R_PIX_FMT_GBRP9BE;
         case AV_PIX_FMT_GBRP9LE:               return R_PIX_FMT_GBRP9LE;
@@ -904,7 +887,6 @@ ResuablePixelFormat FFMpegPixelFormatToMediaPixelFormat(enum AVPixelFormat ffPix
         case AV_PIX_FMT_RGB0:                  return R_PIX_FMT_RGB0;
         case AV_PIX_FMT_0BGR:                  return R_PIX_FMT_0BGR;
         case AV_PIX_FMT_BGR0:                  return R_PIX_FMT_BGR0;
-        case AV_PIX_FMT_YUVA444P:              return R_PIX_FMT_YUVA444P;
         default:                                return R_PIX_FMT_NONE;
     }
 }

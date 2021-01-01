@@ -13,7 +13,6 @@
 		D0940E261E0380E7001637A5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D0940E241E0380E7001637A5 /* Main.storyboard */; };
 		D0940E281E0380E7001637A5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D0940E271E0380E7001637A5 /* Assets.xcassets */; };
 		D0940E2B1E0380E8001637A5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D0940E291E0380E8001637A5 /* LaunchScreen.storyboard */; };
-		D0940FD01E03B8CF001637A5 /* demo.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = D0940FCF1E03B8C2001637A5 /* demo.mp4 */; };
 		D0A9676D1E136217004D4372 /* FFMpegDemuxer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0940E3D1E038169001637A5 /* FFMpegDemuxer.framework */; };
 		D0A9676E1E136217004D4372 /* FFMpegDemuxer.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D0940E3D1E038169001637A5 /* FFMpegDemuxer.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D0A967721E13621B004D4372 /* MediaBase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0940E371E038161001637A5 /* MediaBase.framework */; };
@@ -102,7 +101,6 @@
 		D0940E2C1E0380E8001637A5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D0940E321E038161001637A5 /* MediaBase.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = MediaBase.xcodeproj; path = ../MediaBase/MediaBase.xcodeproj; sourceTree = "<group>"; };
 		D0940E381E038169001637A5 /* FFMpegDemuxer.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = FFMpegDemuxer.xcodeproj; path = ../FFMpegDemuxer/FFMpegDemuxer.xcodeproj; sourceTree = "<group>"; };
-		D0940FCF1E03B8C2001637A5 /* demo.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = demo.mp4; sourceTree = "<group>"; };
 		D0A967771E136380004D4372 /* amf.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = amf.c; sourceTree = "<group>"; };
 		D0A967781E136380004D4372 /* amf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = amf.h; sourceTree = "<group>"; };
 		D0A967791E136380004D4372 /* bytes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = bytes.h; sourceTree = "<group>"; };
@@ -163,7 +161,6 @@
 				D0940E1F1E0380E7001637A5 /* AppDelegate.m */,
 				D0940E211E0380E7001637A5 /* ViewController.h */,
 				D0940E221E0380E7001637A5 /* ViewController.m */,
-				D0940FCF1E03B8C2001637A5 /* demo.mp4 */,
 				D0E221B51E15EA3400A98D17 /* OpenGLView20.h */,
 				D0E221B61E15EA3400A98D17 /* OpenGLView20.m */,
 				D0940E241E0380E7001637A5 /* Main.storyboard */,
@@ -263,6 +260,7 @@
 				TargetAttributes = {
 					D0940E171E0380E7001637A5 = {
 						CreatedOnToolsVersion = 7.3;
+						DevelopmentTeam = F2W8C3LQRP;
 					};
 				};
 			};
@@ -271,6 +269,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
@@ -327,7 +326,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D0940FD01E03B8CF001637A5 /* demo.mp4 in Resources */,
 				D0940E2B1E0380E8001637A5 /* LaunchScreen.storyboard in Resources */,
 				D0940E281E0380E7001637A5 /* Assets.xcassets in Resources */,
 				D0940E261E0380E7001637A5 /* Main.storyboard in Resources */,
@@ -481,6 +479,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = F2W8C3LQRP;
 				INFOPLIST_FILE = MediaFrameworkTest/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.tbago.MediaFrameworkTest;
@@ -492,6 +491,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = F2W8C3LQRP;
 				INFOPLIST_FILE = MediaFrameworkTest/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.tbago.MediaFrameworkTest;

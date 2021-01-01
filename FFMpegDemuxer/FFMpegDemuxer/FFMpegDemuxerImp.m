@@ -48,6 +48,9 @@ FFMpegDemuxer *createFFMpegDemuxer() {
     if ([filePath hasPrefix:@"rtsp://"]) {
         format = av_find_input_format("rtsp");
     }
+    else if ([filePath hasPrefix:@"rtmp://"]) {
+        format = av_find_input_format("live_flv");
+    }
     
     ///< check file format by probe data
     if (format == NULL)
@@ -217,7 +220,6 @@ FFMpegDemuxer *createFFMpegDemuxer() {
 #pragma mark - private method
 
 - (void)innerInitFFMpeg {
-    av_register_all();
     avformat_network_init();
 }
 
@@ -390,8 +392,12 @@ void ffmpeg_log(void* avcl, int level, const char *fmt, va_list vl)
         vsnprintf(buffer, 256, fmt, vl);
         NSLog(@"ffmpeg demuxer fatal:%s", buffer);
     }
-    else if (level == AV_LOG_TRACE) {
+//    else if (level == AV_LOG_TRACE) {
 //        vsnprintf(buffer, 256, fmt, vl);
 //        NSLog(@"ffmpeg demuxer trace:%s", buffer);
-    }
+//    }
+//    else if (level == AV_LOG_DEBUG) {
+//        vsnprintf(buffer, 256, fmt, vl);
+//        NSLog(@"ffmpeg demuxer debug:%s", buffer);
+//    }
 }

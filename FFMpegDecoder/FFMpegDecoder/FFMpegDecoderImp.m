@@ -98,10 +98,7 @@ static __inline bool sup_threads_dec_frame(int x)
             _ffAVCodecContext.has_b_frames = 1;
         }
         _ffAVCodecContext.codec_tag = codecParam.codecTag;
-        
-        if (codecId == AV_CODEC_ID_MJPEG) {
-            _ffAVCodecContext.flags |= CODEC_FLAG_TRUNCATED;
-        }
+
     }
     else if (self.codecInfo.type == FFMpegAudioDecoder) {
         return NO;
@@ -169,9 +166,9 @@ static __inline bool sup_threads_dec_frame(int x)
     int ret = avcodec_send_packet(&_ffAVCodecContext, &avpkt);
     if (ret != 0) {
         NSLog(@"send packet failed");
+        return NULL;
     }
     ret = avcodec_receive_frame(&_ffAVCodecContext, decodedVideoFrame);
-//    int ret = avcodec_decode_video2(&_ffAVCodecContext, decodedVideoFrame, &got_picture_ptr, &avpkt);
     if (ret != 0) {
         if (ret == AVERROR(EAGAIN)) {
             NSLog(@"Buffer video frame");

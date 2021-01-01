@@ -9,14 +9,14 @@ SCRATCH="../FFMpegOutput/ScratchDemuxer"
 THIN=`pwd`/"ThinDemuxer"
 
 CONFIGURE_FLAGS="--enable-cross-compile --disable-debug --disable-programs \
-                 --disable-doc --enable-pic --disable-encoders --disable-muxers --disable-decoders --enable-network --disable-protocols --disable-devices --disable-filters --disable-bsfs --disable-ffplay --disable-ffprobe --disable-ffserver --disable-ffmpeg --disable-iconv"
+                 --disable-doc --enable-pic --disable-encoders --disable-muxers --disable-decoders --enable-network --enable-protocols --disable-devices --disable-filters --disable-bsfs --disable-ffplay --disable-ffprobe --disable-ffmpeg --disable-iconv"
 
-ARCHS="arm64 armv7 x86_64 i386"
+ARCHS="arm64"
 
 COMPILE="y"
 LIPO="y"
 
-DEPLOYMENT_TARGET="7.0"
+DEPLOYMENT_TARGET="10.0"
 
 if [ "$*" ]
 then

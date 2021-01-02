@@ -679,6 +679,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 			);
 			mainGroup = D0F72AEA1E1499A800921FB9;
@@ -816,11 +817,13 @@
 				HEADER_SEARCH_PATHS = ../FFMpegLibrary/Decoder/include;
 				INFOPLIST_FILE = FFMpegDecoder/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = ../FFMpegLibrary/Decoder/lib;
 				PRODUCT_BUNDLE_IDENTIFIER = com.tbago.FFMpegDecoder;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SUPPORTS_MACCATALYST = NO;
 			};
 			name = Debug;
 		};
@@ -835,11 +838,13 @@
 				HEADER_SEARCH_PATHS = ../FFMpegLibrary/Decoder/include;
 				INFOPLIST_FILE = FFMpegDecoder/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = ../FFMpegLibrary/Decoder/lib;
 				PRODUCT_BUNDLE_IDENTIFIER = com.tbago.FFMpegDecoder;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SUPPORTS_MACCATALYST = NO;
 			};
 			name = Release;
 		};

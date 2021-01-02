@@ -3,40 +3,56 @@
 //  MediaBase
 //
 //  Created by tbago on 16/12/29.
-//  Copyright © 2016年 tbago. All rights reserved.
+//  Copyright © 2021 tbago. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-#import "ResuablePixelFormat.h"
+#ifndef MEDIA_BASE_RAW_VIDEO_FRAME_H_
+#define MEDIA_BASE_RAW_VIDEO_FRAME_H_
 
+#include <vector>
+#include "ResuablePixelFormat.h"
+
+namespace media_base {
+
+struct RawVideoFrameBuffer {
+    int8_t      *frameData;     // frame data with length lineSize * lineCount
+    int32_t     lineSize;       // line byte count
+    int32_t     lineCount;      // number of lines
+};
 /**
- *  Decoder readable video frame
+ *  decoded raw video frame
  */
-@interface RawVideoFrame : NSObject
+struct RawVideoFrame
+{
+    ResuablePixelFormat       pixelFormat;
+    uint32_t                width;
+    uint32_t                height;
+    uint64_t                timeStamp;
+    uint32_t                duration;
 
-/**
- *  must use this method to init object, the default init method will only return nil
- *
- *  @param pixelFormat video pixel format
- *  @param width       video width
- *  @param height      video height
- *
- *  @return new raw video frame instance
- */
-- (instancetype)initWithPixFormat:(ResuablePixelFormat) pixelFormat
-                            width:(uint32_t) width
-                           height:(uint32_t) height;
+    std::vector<RawVideoFrameBuffer *> frameBufferVector;
+public:
+    /**
+    *  must use this method to init object,
+    *
+    *  @param pixelFormat video pixel format
+    *  @param width       video width
+    *  @param height      video height
+    *
+    *  @return new raw video frame instance
+    */
+    RawVideoFrame(ResuablePixelFormat pixelFormat, uint32_t width, uint32_t height);
+    RawVideoFrame(const RawVideoFrame &videoFrame);
+    RawVideoFrame & operator=(const RawVideoFrame &videoFrame);
+    ~RawVideoFrame();
+public:
+    void PushFrameData(uint32_t lineSize, int8_t * frameData);
+private:
+    void CopyInfo(const RawVideoFrame &videoFrame);
+    void FreeFrameBuffer();
 
-@property (nonatomic, readonly) ResuablePixelFormat     pixelFormat;
-@property (nonatomic, readonly) uint32_t                width;
-@property (nonatomic, readonly) uint32_t                height;
-@property (nonatomic) uint64_t                          timeStamp;
-@property (nonatomic) uint32_t                          duration;
+};
 
-@property (strong, nonatomic, readonly) NSArray         *lineSizeArray;
-@property (strong, nonatomic, readonly) NSArray         *frameDataArray;
+}   //namespace media_base
+#endif  // MEDIA_BASE_RAW_VIDEO_FRAME_H_
 
-- (void)pushFrameData:(uint32_t) lineSize
-            frameByte:(uint8_t *) frameByte;
-
-@end

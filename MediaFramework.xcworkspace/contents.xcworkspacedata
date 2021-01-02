@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workspace
+   version = "1.0">
+   <FileRef
+      location = "group:Base/Base.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:MediaBase/MediaBase.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:FFMpegDemuxer/FFMpegDemuxer.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:FFMpegDecoder/FFMpegDecoder.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:MediaFrameworkTest/MediaFrameworkTest.xcodeproj">
+   </FileRef>
+</Workspace>

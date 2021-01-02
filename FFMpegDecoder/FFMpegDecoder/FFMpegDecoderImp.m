@@ -117,12 +117,14 @@ static __inline bool sup_threads_dec_frame(int x)
             return [self innerDecodeVideo:NULL];
         }
         else if (_codecInfo.type == FFMpegAudioDecoder) {
-            return NULL;
-//            return DecodeAudio(NULL);
+            return [self innerDecodeAudio:NULL];
         }
     }
     if (_codecInfo.type == FFMpegVideoDecoder) {
         return [self innerDecodeVideo:compassedFrame];
+    }
+    else if (_codecInfo.type == FFMpegAudioDecoder) {
+        return [self innerDecodeAudio:compassedFrame];
     }
     
     return NULL;
@@ -196,6 +198,10 @@ static __inline bool sup_threads_dec_frame(int x)
     av_frame_free(&decodedVideoFrame);
     
     return pRawVideoFrame;
+}
+
+- (void)innerDecodeAudio:(CompassedFrame *) compassedFrame {
+
 }
 
 @end

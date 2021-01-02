@@ -3,19 +3,17 @@
 //  MediaBase
 //
 //  Created by tbago on 16/12/16.
-//  Copyright © 2016年 tbago. All rights reserved.
-//
+//  Copyright © 2021 tbago. All rights reserved.
 
-#import <UIKit/UIKit.h>
+#ifndef MEDIA_BASE_MEDIA_BASE_H_
+#define MEDIA_BASE_MEDIA_BASE_H_
 
-//! Project version number for MediaBase.
-FOUNDATION_EXPORT double MediaBaseVersionNumber;
+#import <MediaBase/MediaConstant.h>
+#import <MediaBase/StreamInfo.h>
+#import <MediaBase/MovieInfo.h>
+#import <MediaBase/CompassedFrame.h>
+#import <MediaBase/RawVideoFrame.h>
+#import <MediaBase/RawAudioFrame.h>
 
-//! Project version string for MediaBase.
-FOUNDATION_EXPORT const unsigned char MediaBaseVersionString[];
+#endif  // MEDIA_BASE_MEDIA_BASE_H_
 
-#import <Mediabase/MediaConstant.h>
-#import <Mediabase/StreamInfo.h>
-#import <Mediabase/MovieInfo.h>
-#import <Mediabase/CompassedFrame.h>
-#import <Mediabase/RawVideoFrame.h>

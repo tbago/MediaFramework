@@ -3,13 +3,15 @@
 //  MediaBase
 //
 //  Created by tbago on 16/12/19.
-//  Copyright © 2016年 tbago. All rights reserved.
+//  Copyright © 2021 tbago. All rights reserved.
 //
 
-#ifndef ResuablePixfmt_h
-#define ResuablePixfmt_h
+#ifndef MEDIA_BASE_RESUABLE_PIX_FORMAT_H_
+#define MEDIA_BASE_RESUABLE_PIX_FORMAT_H_
 
-typedef NS_ENUM(NSInteger, ResuablePixelFormat) {
+namespace media_base {
+
+typedef enum {
     R_PIX_FMT_NONE = -1,
     R_PIX_FMT_YUV420P,   ///< planar YUV 4:2:0, 12bpp, (1 Cr & Cb sample per 2x2 Y samples)
     R_PIX_FMT_YUYV422,   ///< packed YUV 4:2:2, 16bpp, Y0 Cb Y1 Cr
@@ -156,9 +158,9 @@ typedef NS_ENUM(NSInteger, ResuablePixelFormat) {
     R_PIX_FMT_RGBA64LE,     ///< packed RGBA 16:16:16:16, 64bpp, 16R, 16G, 16B, 16A, the 2-byte value for each R/G/B/A component is stored as little-endian
     R_PIX_FMT_BGRA64BE,     ///< packed RGBA 16:16:16:16, 64bpp, 16B, 16G, 16R, 16A, the 2-byte value for each R/G/B/A component is stored as big-endian
     R_PIX_FMT_BGRA64LE,     ///< packed RGBA 16:16:16:16, 64bpp, 16B, 16G, 16R, 16A, the 2-byte value for each R/G/B/A component is stored as little-endian
-    
+
     R_PIX_FMT_YVYU422,   ///< packed YUV 4:2:2, 16bpp, Y0 Cr Y1 Cb
-    
+
     R_PIX_FMT_VDA,          ///< HW acceleration through VDA, data[3] contains a CVPixelBufferRef
     
     R_PIX_FMT_YA16BE,       ///< 16 bits gray, 16 bits alpha (big-endian)
@@ -242,5 +244,8 @@ typedef NS_ENUM(NSInteger, ResuablePixelFormat) {
     R_PIX_FMT_MEDIACODEC, ///< hardware decoding through MediaCodec
     
     R_PIX_FMT_NB         ///< number of pixel formats, DO NOT USE THIS if you want to link with shared libav* because the number of formats might differ between versions
-};
-#endif /* ResuablePixfmt_h */
+} ResuablePixelFormat;
+
+}   //namespace media_base
+#endif  // MEDIA_BASE_RESUABLE_PIX_FORMAT_H_
+

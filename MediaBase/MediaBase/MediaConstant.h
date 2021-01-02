@@ -3,20 +3,33 @@
 //  MediaBase
 //
 //  Created by tbago on 16/12/16.
-//  Copyright © 2016年 tbago. All rights reserved.
-//
+//  Copyright © 2021 tbago. All rights reserved.
 
-#ifndef MediaConstant_h
-#define MediaConstant_h
+#ifndef MEDIA_BASE_MEDIA_CONSTANT_H_
+#define MEDIA_BASE_MEDIA_CONSTANT_H_
+
+#include <stdint.h>
+
+namespace media_base {
 
 /**
  *  Stream type enumeration
  */
-typedef NS_ENUM(NSInteger, StreamType) {
+typedef enum {
     UnknownStream,          ///< unknown stream type
     VideoStream,            ///< video stream
     AudioStream,            ///< audio stream
     SubtitleStream,         ///< subtitle stream
+} StreamType;
+
+/**
+ * Media rational type
+ */
+struct MediaRational {
+    int32_t numerator;
+    int32_t denominator;
 };
 
-#endif /* MediaConstant_h */
+}   //namespace media_base
+#endif // MEDIA_BASE_MEDIA_CONSTANT_H_
+

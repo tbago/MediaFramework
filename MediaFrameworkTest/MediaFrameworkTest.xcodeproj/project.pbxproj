@@ -13,64 +13,13 @@
 		D0940E261E0380E7001637A5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D0940E241E0380E7001637A5 /* Main.storyboard */; };
 		D0940E281E0380E7001637A5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D0940E271E0380E7001637A5 /* Assets.xcassets */; };
 		D0940E2B1E0380E8001637A5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D0940E291E0380E8001637A5 /* LaunchScreen.storyboard */; };
-		D0A9676D1E136217004D4372 /* FFMpegDemuxer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0940E3D1E038169001637A5 /* FFMpegDemuxer.framework */; };
-		D0A9676E1E136217004D4372 /* FFMpegDemuxer.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D0940E3D1E038169001637A5 /* FFMpegDemuxer.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		D0A967721E13621B004D4372 /* MediaBase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0940E371E038161001637A5 /* MediaBase.framework */; };
-		D0A967731E13621B004D4372 /* MediaBase.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D0940E371E038161001637A5 /* MediaBase.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D0A967851E136380004D4372 /* amf.c in Sources */ = {isa = PBXBuildFile; fileRef = D0A967771E136380004D4372 /* amf.c */; };
 		D0A967861E136380004D4372 /* hashswf.c in Sources */ = {isa = PBXBuildFile; fileRef = D0A9677D1E136380004D4372 /* hashswf.c */; };
 		D0A967871E136380004D4372 /* log.c in Sources */ = {isa = PBXBuildFile; fileRef = D0A9677F1E136380004D4372 /* log.c */; };
 		D0A967881E136380004D4372 /* parseurl.c in Sources */ = {isa = PBXBuildFile; fileRef = D0A967811E136380004D4372 /* parseurl.c */; };
 		D0A967891E136380004D4372 /* rtmp.c in Sources */ = {isa = PBXBuildFile; fileRef = D0A967831E136380004D4372 /* rtmp.c */; };
-		D0AA78811E14B23000F6516A /* FFMpegDecoder.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0F72B041E1499AA00921FB9 /* FFMpegDecoder.framework */; };
-		D0AA78821E14B23000F6516A /* FFMpegDecoder.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D0F72B041E1499AA00921FB9 /* FFMpegDecoder.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D0E221B71E15EA3400A98D17 /* OpenGLView20.m in Sources */ = {isa = PBXBuildFile; fileRef = D0E221B61E15EA3400A98D17 /* OpenGLView20.m */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		D0940E361E038161001637A5 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D0940E321E038161001637A5 /* MediaBase.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = D0940DFE1E037F31001637A5;
-			remoteInfo = MediaBase;
-		};
-		D0940E3C1E038169001637A5 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D0940E381E038169001637A5 /* FFMpegDemuxer.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = D0940DAD1E0377A6001637A5;
-			remoteInfo = FFMpegDemuxer;
-		};
-		D0A9676F1E136217004D4372 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D0940E381E038169001637A5 /* FFMpegDemuxer.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = D0940DAC1E0377A6001637A5;
-			remoteInfo = FFMpegDemuxer;
-		};
-		D0A967741E13621B004D4372 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D0940E321E038161001637A5 /* MediaBase.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = D0940DFD1E037F31001637A5;
-			remoteInfo = MediaBase;
-		};
-		D0AA78831E14B23000F6516A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D0F72AFF1E1499A900921FB9 /* FFMpegDecoder.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = D0F72AF31E1499A800921FB9;
-			remoteInfo = FFMpegDecoder;
-		};
-		D0F72B031E1499AA00921FB9 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D0F72AFF1E1499A900921FB9 /* FFMpegDecoder.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = D0F72AF41E1499A800921FB9;
-			remoteInfo = FFMpegDecoder;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		D0A967711E136217004D4372 /* Embed Frameworks */ = {
@@ -79,9 +28,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				D0A967731E13621B004D4372 /* MediaBase.framework in Embed Frameworks */,
-				D0A9676E1E136217004D4372 /* FFMpegDemuxer.framework in Embed Frameworks */,
-				D0AA78821E14B23000F6516A /* FFMpegDecoder.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -99,8 +45,6 @@
 		D0940E271E0380E7001637A5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D0940E2A1E0380E8001637A5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D0940E2C1E0380E8001637A5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D0940E321E038161001637A5 /* MediaBase.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = MediaBase.xcodeproj; path = ../MediaBase/MediaBase.xcodeproj; sourceTree = "<group>"; };
-		D0940E381E038169001637A5 /* FFMpegDemuxer.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = FFMpegDemuxer.xcodeproj; path = ../FFMpegDemuxer/FFMpegDemuxer.xcodeproj; sourceTree = "<group>"; };
 		D0A967771E136380004D4372 /* amf.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = amf.c; sourceTree = "<group>"; };
 		D0A967781E136380004D4372 /* amf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = amf.h; sourceTree = "<group>"; };
 		D0A967791E136380004D4372 /* bytes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = bytes.h; sourceTree = "<group>"; };
@@ -117,7 +61,6 @@
 		D0A967841E136380004D4372 /* rtmp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rtmp.h; sourceTree = "<group>"; };
 		D0E221B51E15EA3400A98D17 /* OpenGLView20.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenGLView20.h; sourceTree = "<group>"; };
 		D0E221B61E15EA3400A98D17 /* OpenGLView20.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpenGLView20.m; sourceTree = "<group>"; };
-		D0F72AFF1E1499A900921FB9 /* FFMpegDecoder.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = FFMpegDecoder.xcodeproj; path = ../FFMpegDecoder/FFMpegDecoder.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,9 +68,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D0A967721E13621B004D4372 /* MediaBase.framework in Frameworks */,
-				D0A9676D1E136217004D4372 /* FFMpegDemuxer.framework in Frameworks */,
-				D0AA78811E14B23000F6516A /* FFMpegDecoder.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -137,9 +77,6 @@
 		D0940E0F1E0380E7001637A5 = {
 			isa = PBXGroup;
 			children = (
-				D0940E321E038161001637A5 /* MediaBase.xcodeproj */,
-				D0940E381E038169001637A5 /* FFMpegDemuxer.xcodeproj */,
-				D0F72AFF1E1499A900921FB9 /* FFMpegDecoder.xcodeproj */,
 				D0940E1A1E0380E7001637A5 /* MediaFrameworkTest */,
 				D0940E191E0380E7001637A5 /* Products */,
 			);
@@ -180,22 +117,6 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		D0940E331E038161001637A5 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				D0940E371E038161001637A5 /* MediaBase.framework */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		D0940E391E038169001637A5 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				D0940E3D1E038169001637A5 /* FFMpegDemuxer.framework */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		D0A967761E136357004D4372 /* librtmp */ = {
 			isa = PBXGroup;
 			children = (
@@ -217,14 +138,6 @@
 			path = librtmp;
 			sourceTree = "<group>";
 		};
-		D0F72B001E1499A900921FB9 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				D0F72B041E1499AA00921FB9 /* FFMpegDecoder.framework */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -240,9 +153,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				D0A967701E136217004D4372 /* PBXTargetDependency */,
-				D0A967751E13621B004D4372 /* PBXTargetDependency */,
-				D0AA78841E14B23000F6516A /* PBXTargetDependency */,
 			);
 			name = MediaFrameworkTest;
 			productName = MediaFrameworkTest;
@@ -276,50 +186,12 @@
 			mainGroup = D0940E0F1E0380E7001637A5;
 			productRefGroup = D0940E191E0380E7001637A5 /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = D0F72B001E1499A900921FB9 /* Products */;
-					ProjectRef = D0F72AFF1E1499A900921FB9 /* FFMpegDecoder.xcodeproj */;
-				},
-				{
-					ProductGroup = D0940E391E038169001637A5 /* Products */;
-					ProjectRef = D0940E381E038169001637A5 /* FFMpegDemuxer.xcodeproj */;
-				},
-				{
-					ProductGroup = D0940E331E038161001637A5 /* Products */;
-					ProjectRef = D0940E321E038161001637A5 /* MediaBase.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				D0940E171E0380E7001637A5 /* MediaFrameworkTest */,
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXReferenceProxy section */
-		D0940E371E038161001637A5 /* MediaBase.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = MediaBase.framework;
-			remoteRef = D0940E361E038161001637A5 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		D0940E3D1E038169001637A5 /* FFMpegDemuxer.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = FFMpegDemuxer.framework;
-			remoteRef = D0940E3C1E038169001637A5 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		D0F72B041E1499AA00921FB9 /* FFMpegDecoder.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = FFMpegDecoder.framework;
-			remoteRef = D0F72B031E1499AA00921FB9 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		D0940E161E0380E7001637A5 /* Resources */ = {
@@ -352,24 +224,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		D0A967701E136217004D4372 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = FFMpegDemuxer;
-			targetProxy = D0A9676F1E136217004D4372 /* PBXContainerItemProxy */;
-		};
-		D0A967751E13621B004D4372 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = MediaBase;
-			targetProxy = D0A967741E13621B004D4372 /* PBXContainerItemProxy */;
-		};
-		D0AA78841E14B23000F6516A /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = FFMpegDecoder;
-			targetProxy = D0AA78831E14B23000F6516A /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		D0940E241E0380E7001637A5 /* Main.storyboard */ = {
@@ -481,6 +335,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = F2W8C3LQRP;
 				INFOPLIST_FILE = MediaFrameworkTest/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.tbago.MediaFrameworkTest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -493,6 +348,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = F2W8C3LQRP;
 				INFOPLIST_FILE = MediaFrameworkTest/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.tbago.MediaFrameworkTest;
 				PRODUCT_NAME = "$(TARGET_NAME)";

@@ -8,8 +8,11 @@
 
 #import "FFMpegCommon.h"
 
-const AVRational gGloabalTimeBase = {1, AV_TIME_BASE};
+using namespace media_base;
 
+namespace media_demuxer {
+
+const AVRational gGloabalTimeBase = {1, AV_TIME_BASE};
 
 ResuableCodecID FFMpegCodecIDToMeidaCodecID(enum AVCodecID ffCodecID)
 {
@@ -526,3 +529,6 @@ ResuableSampleFormat FFMpegSampleFormatToMediaSampleFormat(enum AVSampleFormat s
             break;
     }
 }
+
+}   //namespace media_demuxer
+

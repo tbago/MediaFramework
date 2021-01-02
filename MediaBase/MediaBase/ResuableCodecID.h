@@ -3,22 +3,23 @@
 //  MediaBase
 //
 //  Created by tbago on 16/12/19.
-//  Copyright © 2016年 tbago. All rights reserved.
+//  Copyright © 2021 tbago. All rights reserved.
 //
 
-#ifndef CodecID_h
-#define CodecID_h
+#ifndef MEDIA_BASE_RESUABLE_CODEC_ID_H_
+#define MEDIA_BASE_RESUABLE_CODEC_ID_H_
 
+namespace media_base {
 
 #define MKBETAG(a,b,c,d) ((d) | ((c) << 8) | ((b) << 16) | ((unsigned)(a) << 24))
 
 /*
  * resuable codec ID for global usage
 */
-typedef NS_ENUM(NSInteger, ResuableCodecID)
+typedef enum
 {
     R_CODEC_ID_NONE,
-    
+
     /* video codecs */
     R_CODEC_ID_MPEG1VIDEO,
     R_CODEC_ID_MPEG2VIDEO,      ///< preferred ID for MPEG-1/2 video decoding
@@ -409,8 +410,7 @@ typedef NS_ENUM(NSInteger, ResuableCodecID)
     R_CODEC_ID_OTF        = MKBETAG( 0 ,'O','T','F'),
     R_CODEC_ID_SMPTE_KLV  = MKBETAG('K','L','V','A'),
     R_CODEC_ID_DVD_NAV    = MKBETAG('D','N','A','V'),
-    
-    
+
     R_CODEC_ID_PROBE = 0x19000, ///< codec_id is not known (like R_CODEC_ID_NONE) but lavf should attempt to identify it
     
     R_CODEC_ID_MPEG2TS = 0x20000, /**< _FAKE_ codec to indicate a raw MPEG-2 TS
@@ -418,6 +418,8 @@ typedef NS_ENUM(NSInteger, ResuableCodecID)
     R_CODEC_ID_MPEG4SYSTEMS = 0x20001, /**< _FAKE_ codec to indicate a MPEG-4 Systems
                                         * stream (only used by libavformat) */
     R_CODEC_ID_FFMETADATA = 0x21000,   ///< Dummy codec for streams containing only metadata information.
-};
+} ResuableCodecID;
 
-#endif /* CodecID_h */
+}   //namespace media_base
+#endif  //MEDIA_BASE_RESUABLE_CODEC_ID_H_
+

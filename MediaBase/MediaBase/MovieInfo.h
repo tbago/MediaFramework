@@ -3,33 +3,35 @@
 //  MediaBase
 //
 //  Created by tbago on 16/12/16.
-//  Copyright © 2016年 tbago. All rights reserved.
+//  Copyright © 2021 tbago. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#ifndef MEDIA_BASE_MOVIE_INFO_H_
+#define MEDIA_BASE_MOVIE_INFO_H_
 
-#import "StreamInfo.h"
+#include "StreamInfo.h"
+#include <vector>
 
-@interface MovieInfo : NSObject
-/**
- *  Add stream info to movie info
- *
- *  @param streamInfo
- */
-- (void)addStreamInfoToMovieInfo:(StreamInfo *) streamInfo;
+namespace media_base {
 
 /**
- *  Add metadata to movie info
- *
- *  @param key   metadata key
- *  @param value metadata value
+ * Movie Info
  */
-- (void)addMetaDataToMovieInfo:(NSString *) key
-                         value:(NSString *) value;
+struct MovieInfo {
+    int32_t                     id;         // movie id -1 for unknown
+    std::string                 name;      // movie name
+    std::string                 format;    // movie format e.g. mov mp4 mxf mts
+    std::vector<StreamInfo *>    streams;
+    std::map<std::string, std::string> metaData;
+public:
+    MovieInfo();
+    MovieInfo(const MovieInfo &movieInfo);
+    MovieInfo & operator=(const MovieInfo &moveInfo);
+    ~MovieInfo();
+private:
+    void CopyInfo(const MovieInfo &movieInfo);
+};
 
-@property (nonatomic) int32_t                                                   identify;
-@property (nonatomic, copy) NSString                                            *name;
-@property (nonatomic, copy) NSString                                            *format;            ///< media format
-@property (strong, nonatomic, readonly) NSArray<StreamInfo *>                   *streamArray;       ///< stream info array
-@property (strong, nonatomic, readonly) NSDictionary<NSString *, NSString *>    *metaData;          ///< movie metadata
-@end
+}   // namespace media_base
+#endif  // MEDIA_BASE_MOVIE_INFO_H_
+

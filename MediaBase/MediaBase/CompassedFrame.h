@@ -3,22 +3,36 @@
 //  MediaBase
 //
 //  Created by tbago on 16/12/16.
-//  Copyright © 2016年 tbago. All rights reserved.
+//  Copyright © 2021 tbago. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-#import "MediaConstant.h"
-#import "ResuableCodecID.h"
+#ifndef MEDIA_BASE_COMPASS_FRAME_H_
+#define MEDIA_BASE_COMPASS_FRAME_H_
 
-@interface CompassedFrame : NSObject
+#include "MediaConstant.h"
+#include "ResuableCodecID.h"
 
-@property (nonatomic) StreamType        streamType;
-@property (nonatomic) ResuableCodecID   codecID;
-@property (nonatomic) BOOL              keyFrame;                   ///< weather is key frame
-@property (nonatomic) int64_t           decompassTimeStamp;         ///< dts value
-@property (nonatomic) int64_t           presentTimeStamp;           ///< pts value
-@property (nonatomic) int64_t           duration;                   ///< frame duration
-@property (nonatomic) int64_t           position;                   ///< frame position
-@property (copy, nonatomic) NSData      *frameData;                 ///< frame memory data
+namespace media_base {
 
-@end
+struct CompassedFrame
+{
+    StreamType        streamType;
+    ResuableCodecID    codecID;
+    bool              keyFrame;                   ///<  weather is key frame
+    int64_t           decompassTimeStamp;          ///<  dts value
+    int64_t           presentTimeStamp;           ///<  pts value
+    int64_t           duration;                  ///<  frame duration
+    int64_t           position;                  ///<  frame position
+    int8_t            *frameData;                ///<  frame  data in memory
+    int32_t           frameDataSize;              ///< frame data size
+public:
+    CompassedFrame();
+    CompassedFrame(const CompassedFrame & compassedFrame);
+    CompassedFrame & operator=(const CompassedFrame &compassedFrame);
+    ~CompassedFrame();
+private:
+    void CopyInfo(const CompassedFrame & compassedFrame);
+};
+
+}   //namespace media_base
+#endif  // MEDIA_BASE_COMPASS_FRAME_H_

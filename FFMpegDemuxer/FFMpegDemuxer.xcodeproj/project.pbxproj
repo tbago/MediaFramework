@@ -8,11 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		D040599E1E078C6600BEC12E /* FFMpegCommon.h in Headers */ = {isa = PBXBuildFile; fileRef = D040599C1E078C6600BEC12E /* FFMpegCommon.h */; };
-		D040599F1E078C6600BEC12E /* FFMpegCommon.m in Sources */ = {isa = PBXBuildFile; fileRef = D040599D1E078C6600BEC12E /* FFMpegCommon.m */; };
+		D040599F1E078C6600BEC12E /* FFMpegCommon.cc in Sources */ = {isa = PBXBuildFile; fileRef = D040599D1E078C6600BEC12E /* FFMpegCommon.cc */; };
 		D0940DB11E0377A7001637A5 /* FFMpegDemuxer.h in Headers */ = {isa = PBXBuildFile; fileRef = D0940DB01E0377A7001637A5 /* FFMpegDemuxer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D0940DE31E037807001637A5 /* FFMpegDemuxerImp.h in Headers */ = {isa = PBXBuildFile; fileRef = D0940DE11E037807001637A5 /* FFMpegDemuxerImp.h */; };
-		D0940DE41E037807001637A5 /* FFMpegDemuxerImp.m in Sources */ = {isa = PBXBuildFile; fileRef = D0940DE21E037807001637A5 /* FFMpegDemuxerImp.m */; };
-		D0940DE91E03799D001637A5 /* FFMpegDemuxer.m in Sources */ = {isa = PBXBuildFile; fileRef = D0940DE81E03799D001637A5 /* FFMpegDemuxer.m */; };
+		D0940DE41E037807001637A5 /* FFMpegDemuxerImp.cc in Sources */ = {isa = PBXBuildFile; fileRef = D0940DE21E037807001637A5 /* FFMpegDemuxerImp.cc */; };
 		D0940EC91E0392CB001637A5 /* avcodec.h in Headers */ = {isa = PBXBuildFile; fileRef = D0940E521E0392CB001637A5 /* avcodec.h */; };
 		D0940ECA1E0392CB001637A5 /* avdct.h in Headers */ = {isa = PBXBuildFile; fileRef = D0940E531E0392CB001637A5 /* avdct.h */; };
 		D0940ECB1E0392CB001637A5 /* avfft.h in Headers */ = {isa = PBXBuildFile; fileRef = D0940E541E0392CB001637A5 /* avfft.h */; };
@@ -118,29 +117,25 @@
 		D0940F2F1E0392CB001637A5 /* version.h in Headers */ = {isa = PBXBuildFile; fileRef = D0940EBD1E0392CB001637A5 /* version.h */; };
 		D0940F301E0392CB001637A5 /* swscale.h in Headers */ = {isa = PBXBuildFile; fileRef = D0940EBF1E0392CB001637A5 /* swscale.h */; };
 		D0940F311E0392CB001637A5 /* version.h in Headers */ = {isa = PBXBuildFile; fileRef = D0940EC01E0392CB001637A5 /* version.h */; };
-		D0940F3A1E03954C001637A5 /* MediaBase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0940F391E03954B001637A5 /* MediaBase.framework */; };
-		D0940FBF1E0396F1001637A5 /* libavcodec.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D0940EC21E0392CB001637A5 /* libavcodec.a */; };
-		D0940FC01E0396F2001637A5 /* libavdevice.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D0940EC31E0392CB001637A5 /* libavdevice.a */; };
-		D0940FC11E0396F2001637A5 /* libavfilter.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D0940EC41E0392CB001637A5 /* libavfilter.a */; };
-		D0940FC21E0396F2001637A5 /* libavformat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D0940EC51E0392CB001637A5 /* libavformat.a */; };
-		D0940FC31E0396F2001637A5 /* libavutil.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D0940EC61E0392CB001637A5 /* libavutil.a */; settings = {ATTRIBUTES = (Required, ); }; };
-		D0940FC41E0396F2001637A5 /* libswresample.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D0940EC71E0392CB001637A5 /* libswresample.a */; };
-		D0940FC51E0396F2001637A5 /* libswscale.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D0940EC81E0392CB001637A5 /* libswscale.a */; };
-		D0940FC71E039990001637A5 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = D0940F3C1E039613001637A5 /* libz.tbd */; };
-		D0940FC91E039A40001637A5 /* libbz2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = D0940FC81E039A40001637A5 /* libbz2.tbd */; };
-		D0940FCB1E039A4E001637A5 /* VideoToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0940FCA1E039A4E001637A5 /* VideoToolbox.framework */; };
-		D0940FCD1E039A59001637A5 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0940FCC1E039A59001637A5 /* CoreMedia.framework */; };
+		D0DDA17A25A0A0D3009508E5 /* Base.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0DDA17925A0A0D3009508E5 /* Base.framework */; };
+		D0DDA17E25A0A985009508E5 /* MediaBase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0DDA17D25A0A985009508E5 /* MediaBase.framework */; };
+		D0DDA18125A0BE95009508E5 /* libavcodec.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D0940EC21E0392CB001637A5 /* libavcodec.a */; };
+		D0DDA18225A0BE95009508E5 /* libavdevice.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D0940EC31E0392CB001637A5 /* libavdevice.a */; };
+		D0DDA18325A0BE95009508E5 /* libavfilter.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D0940EC41E0392CB001637A5 /* libavfilter.a */; };
+		D0DDA18425A0BE95009508E5 /* libavformat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D0940EC51E0392CB001637A5 /* libavformat.a */; };
+		D0DDA18525A0BE95009508E5 /* libavutil.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D0940EC61E0392CB001637A5 /* libavutil.a */; };
+		D0DDA18625A0BE95009508E5 /* libswresample.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D0940EC71E0392CB001637A5 /* libswresample.a */; };
+		D0DDA18725A0BE95009508E5 /* libswscale.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D0940EC81E0392CB001637A5 /* libswscale.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		D040599C1E078C6600BEC12E /* FFMpegCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFMpegCommon.h; sourceTree = "<group>"; };
-		D040599D1E078C6600BEC12E /* FFMpegCommon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFMpegCommon.m; sourceTree = "<group>"; };
+		D040599C1E078C6600BEC12E /* FFMpegCommon.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; path = FFMpegCommon.h; sourceTree = "<group>"; };
+		D040599D1E078C6600BEC12E /* FFMpegCommon.cc */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; path = FFMpegCommon.cc; sourceTree = "<group>"; };
 		D0940DAD1E0377A6001637A5 /* FFMpegDemuxer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FFMpegDemuxer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		D0940DB01E0377A7001637A5 /* FFMpegDemuxer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FFMpegDemuxer.h; sourceTree = "<group>"; };
+		D0940DB01E0377A7001637A5 /* FFMpegDemuxer.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; path = FFMpegDemuxer.h; sourceTree = "<group>"; };
 		D0940DB21E0377A7001637A5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D0940DE11E037807001637A5 /* FFMpegDemuxerImp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFMpegDemuxerImp.h; sourceTree = "<group>"; };
-		D0940DE21E037807001637A5 /* FFMpegDemuxerImp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFMpegDemuxerImp.m; sourceTree = "<group>"; };
-		D0940DE81E03799D001637A5 /* FFMpegDemuxer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFMpegDemuxer.m; sourceTree = "<group>"; };
+		D0940DE11E037807001637A5 /* FFMpegDemuxerImp.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; path = FFMpegDemuxerImp.h; sourceTree = "<group>"; };
+		D0940DE21E037807001637A5 /* FFMpegDemuxerImp.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FFMpegDemuxerImp.cc; sourceTree = "<group>"; };
 		D0940E521E0392CB001637A5 /* avcodec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = avcodec.h; sourceTree = "<group>"; };
 		D0940E531E0392CB001637A5 /* avdct.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = avdct.h; sourceTree = "<group>"; };
 		D0940E541E0392CB001637A5 /* avfft.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = avfft.h; sourceTree = "<group>"; };
@@ -253,11 +248,11 @@
 		D0940EC61E0392CB001637A5 /* libavutil.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libavutil.a; sourceTree = "<group>"; };
 		D0940EC71E0392CB001637A5 /* libswresample.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libswresample.a; sourceTree = "<group>"; };
 		D0940EC81E0392CB001637A5 /* libswscale.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libswscale.a; sourceTree = "<group>"; };
-		D0940F391E03954B001637A5 /* MediaBase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaBase.framework; path = "../../MediaFrameworkTest/Build/Products/Debug-iphonesimulator/MediaBase.framework"; sourceTree = "<group>"; };
-		D0940F3C1E039613001637A5 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
-		D0940FC81E039A40001637A5 /* libbz2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libbz2.tbd; path = usr/lib/libbz2.tbd; sourceTree = SDKROOT; };
-		D0940FCA1E039A4E001637A5 /* VideoToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = VideoToolbox.framework; path = System/Library/Frameworks/VideoToolbox.framework; sourceTree = SDKROOT; };
-		D0940FCC1E039A59001637A5 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		D0DDA17925A0A0D3009508E5 /* Base.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Base.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D0DDA17D25A0A985009508E5 /* MediaBase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = MediaBase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D0DDA18825A0BFEB009508E5 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		D0DDA18A25A0BFFA009508E5 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		D0DDA18C25A0C003009508E5 /* VideoToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = VideoToolbox.framework; path = System/Library/Frameworks/VideoToolbox.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -265,18 +260,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D0940FCD1E039A59001637A5 /* CoreMedia.framework in Frameworks */,
-				D0940FCB1E039A4E001637A5 /* VideoToolbox.framework in Frameworks */,
-				D0940FC91E039A40001637A5 /* libbz2.tbd in Frameworks */,
-				D0940FC71E039990001637A5 /* libz.tbd in Frameworks */,
-				D0940F3A1E03954C001637A5 /* MediaBase.framework in Frameworks */,
-				D0940FC31E0396F2001637A5 /* libavutil.a in Frameworks */,
-				D0940FBF1E0396F1001637A5 /* libavcodec.a in Frameworks */,
-				D0940FC01E0396F2001637A5 /* libavdevice.a in Frameworks */,
-				D0940FC11E0396F2001637A5 /* libavfilter.a in Frameworks */,
-				D0940FC21E0396F2001637A5 /* libavformat.a in Frameworks */,
-				D0940FC41E0396F2001637A5 /* libswresample.a in Frameworks */,
-				D0940FC51E0396F2001637A5 /* libswscale.a in Frameworks */,
+				D0DDA18625A0BE95009508E5 /* libswresample.a in Frameworks */,
+				D0DDA17E25A0A985009508E5 /* MediaBase.framework in Frameworks */,
+				D0DDA18325A0BE95009508E5 /* libavfilter.a in Frameworks */,
+				D0DDA17A25A0A0D3009508E5 /* Base.framework in Frameworks */,
+				D0DDA18425A0BE95009508E5 /* libavformat.a in Frameworks */,
+				D0DDA18525A0BE95009508E5 /* libavutil.a in Frameworks */,
+				D0DDA18725A0BE95009508E5 /* libswscale.a in Frameworks */,
+				D0DDA18225A0BE95009508E5 /* libavdevice.a in Frameworks */,
+				D0DDA18125A0BE95009508E5 /* libavcodec.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -305,11 +297,10 @@
 			isa = PBXGroup;
 			children = (
 				D0940DB01E0377A7001637A5 /* FFMpegDemuxer.h */,
-				D0940DE81E03799D001637A5 /* FFMpegDemuxer.m */,
 				D0940DE11E037807001637A5 /* FFMpegDemuxerImp.h */,
-				D0940DE21E037807001637A5 /* FFMpegDemuxerImp.m */,
+				D0940DE21E037807001637A5 /* FFMpegDemuxerImp.cc */,
 				D040599C1E078C6600BEC12E /* FFMpegCommon.h */,
-				D040599D1E078C6600BEC12E /* FFMpegCommon.m */,
+				D040599D1E078C6600BEC12E /* FFMpegCommon.cc */,
 				D0940DB21E0377A7001637A5 /* Info.plist */,
 			);
 			path = FFMpegDemuxer;
@@ -518,11 +509,11 @@
 		D0940F3B1E039553001637A5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				D0940FCC1E039A59001637A5 /* CoreMedia.framework */,
-				D0940FCA1E039A4E001637A5 /* VideoToolbox.framework */,
-				D0940FC81E039A40001637A5 /* libbz2.tbd */,
-				D0940F3C1E039613001637A5 /* libz.tbd */,
-				D0940F391E03954B001637A5 /* MediaBase.framework */,
+				D0DDA18C25A0C003009508E5 /* VideoToolbox.framework */,
+				D0DDA18A25A0BFFA009508E5 /* CoreMedia.framework */,
+				D0DDA18825A0BFEB009508E5 /* libz.tbd */,
+				D0DDA17D25A0A985009508E5 /* MediaBase.framework */,
+				D0DDA17925A0A0D3009508E5 /* Base.framework */,
 			);
 			name = Frameworks;
 			path = FFMpegDemuxer;
@@ -686,6 +677,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 			);
 			mainGroup = D0940DA31E0377A6001637A5;
@@ -713,9 +705,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D0940DE41E037807001637A5 /* FFMpegDemuxerImp.m in Sources */,
-				D0940DE91E03799D001637A5 /* FFMpegDemuxer.m in Sources */,
-				D040599F1E078C6600BEC12E /* FFMpegCommon.m in Sources */,
+				D0940DE41E037807001637A5 /* FFMpegDemuxerImp.cc in Sources */,
+				D040599F1E078C6600BEC12E /* FFMpegCommon.cc in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -822,11 +813,13 @@
 				HEADER_SEARCH_PATHS = ../FFMpegLibrary/Demuxer/include;
 				INFOPLIST_FILE = FFMpegDemuxer/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = ../FFMpegLibrary/Demuxer/lib;
 				PRODUCT_BUNDLE_IDENTIFIER = com.tbago.FFMpegDemuxer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SUPPORTS_MACCATALYST = NO;
 			};
 			name = Debug;
 		};
@@ -840,11 +833,13 @@
 				HEADER_SEARCH_PATHS = ../FFMpegLibrary/Demuxer/include;
 				INFOPLIST_FILE = FFMpegDemuxer/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = ../FFMpegLibrary/Demuxer/lib;
 				PRODUCT_BUNDLE_IDENTIFIER = com.tbago.FFMpegDemuxer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SUPPORTS_MACCATALYST = NO;
 			};
 			name = Release;
 		};

@@ -3,15 +3,17 @@
 //  FFMpegDemuxer
 //
 //  Created by tbago on 16/12/19.
-//  Copyright © 2016年 tbago. All rights reserved.
+//  Copyright © 2021 tbago. All rights reserved.
 //
 
-#import "FFMpegCommon.h"
+#include "FFMpegCommon.h"
+
+using namespace media_base;
+namespace media_decoder {
 
 const AVRational gGloabalTimeBase = {1, AV_TIME_BASE};
 
-
-ResuableCodecID FFMpegCodecIDToMeidaCodecID(enum AVCodecID ffCodecID)
+media_base::ResuableCodecID FFMpegCodecIDToMeidaCodecID(enum AVCodecID ffCodecID)
 {
     switch(ffCodecID)
     {
@@ -407,7 +409,7 @@ ResuableCodecID FFMpegCodecIDToMeidaCodecID(enum AVCodecID ffCodecID)
     }
 }
 
-enum AVCodecID MediaCodecIDToFFMpegCodecID(ResuableCodecID resuableCodecID)
+enum AVCodecID MediaCodecIDToFFMpegCodecID(media_base::ResuableCodecID resuableCodecID)
 {
     switch (resuableCodecID)
     {
@@ -804,7 +806,7 @@ enum AVCodecID MediaCodecIDToFFMpegCodecID(ResuableCodecID resuableCodecID)
     }
 }
 
-ResuablePixelFormat FFMpegPixelFormatToMediaPixelFormat(enum AVPixelFormat ffPixelFormat)
+media_base::ResuablePixelFormat FFMpegPixelFormatToMediaPixelFormat(enum AVPixelFormat ffPixelFormat)
 {
     switch (ffPixelFormat)
     {
@@ -891,7 +893,7 @@ ResuablePixelFormat FFMpegPixelFormatToMediaPixelFormat(enum AVPixelFormat ffPix
     }
 }
 
-ResuableSampleFormat FFMpegSampleFormatToMediaSampleFormat(enum AVSampleFormat sample_fmt)
+media_base::ResuableSampleFormat FFMpegSampleFormatToMediaSampleFormat(enum AVSampleFormat sample_fmt)
 {
     switch(sample_fmt)
     {
@@ -929,3 +931,5 @@ ResuableSampleFormat FFMpegSampleFormatToMediaSampleFormat(enum AVSampleFormat s
             break;
     }
 }
+
+}   // namespace media_codec

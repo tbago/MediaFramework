@@ -3,25 +3,35 @@
 //  FFMpegDecoder
 //
 //  Created by tbago on 16/12/29.
-//  Copyright © 2016年 tbago. All rights reserved.
+//  Copyright © 2021 tbago. All rights reserved.
 //
 
-#import <FFMpegDecoder/FFMpegDecoder.h>
-#import <MediaBase/ResuableCodecID.h>
+#ifndef FFMPEG_DECODER_FFMPEG_DECODER_IMP_H_
+#define FFMPEG_DECODER_FFMPEG_DECODER_IMP_H_
 
-typedef NS_ENUM(NSInteger, FFMpegDecoderType) {
-    FFMpegUnknownDecoder,
-    FFMpegVideoDecoder,
-    FFMpegAudioDecoder,
-    FFMpegSubtitleDecoder,
+#include "FFMpegDecoder.h"
+#include "FFMpegCommon.h"
+
+namespace media_decoder {
+
+class FFMpegDecoderImp : public FFMpegDecoder
+{
+public:
+    virtual bool OpenCodec(AVCodecParam * codecParam);
+    virtual media_base::RawVideoFrame * DecodeVideoFrame(media_base::CompassedFrame * compassedFrame);
+public:
+    FFMpegDecoderImp(FFMpegCodecInfo * codecInfo);
+private:
+    media_base::RawVideoFrame * InnerDecodeVideoFrame(media_base::CompassedFrame *compassedFrame);
+    void InnerDecodeAudioFrame(media_base::CompassedFrame *compassedFrame);
+private:
+    FFMpegCodecInfo         _codecInfo;
+    AVCodec                *_avcodec;
+    AVCodecContext          _avcodecContext;
+    uint8_t                *_innerExtraData;
+    int32_t                _innerExtraDataSize;
 };
 
-@interface FFMpegCodecInfo : NSObject
-
-@property (nonatomic) FFMpegDecoderType     type;
-@property (nonatomic) ResuableCodecID       codecID;
-@property (nonatomic, copy) NSString        *name;
-@property (nonatomic) uint32_t              score;
-
-@end
+}   // namespace media_decoder
+#endif // FFMPEG_DECODER_FFMPEG_DECODER_IMP_H_
 

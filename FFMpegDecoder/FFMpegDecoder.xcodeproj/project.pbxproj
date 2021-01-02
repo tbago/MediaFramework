@@ -8,12 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		D0840F271E14BD4E002A2AB9 /* FFMpegDecoderImp.h in Headers */ = {isa = PBXBuildFile; fileRef = D0840F251E14BD4E002A2AB9 /* FFMpegDecoderImp.h */; };
-		D0840F281E14BD4E002A2AB9 /* FFMpegDecoderImp.m in Sources */ = {isa = PBXBuildFile; fileRef = D0840F261E14BD4E002A2AB9 /* FFMpegDecoderImp.m */; };
+		D0840F281E14BD4E002A2AB9 /* FFMpegDecoderImp.cc in Sources */ = {isa = PBXBuildFile; fileRef = D0840F261E14BD4E002A2AB9 /* FFMpegDecoderImp.cc */; };
 		D0978AA21E14B95B0000B004 /* FFMpegCommon.h in Headers */ = {isa = PBXBuildFile; fileRef = D0978AA01E14B95B0000B004 /* FFMpegCommon.h */; };
-		D0978AA31E14B95B0000B004 /* FFMpegCommon.m in Sources */ = {isa = PBXBuildFile; fileRef = D0978AA11E14B95B0000B004 /* FFMpegCommon.m */; };
+		D0978AA31E14B95B0000B004 /* FFMpegCommon.cc in Sources */ = {isa = PBXBuildFile; fileRef = D0978AA11E14B95B0000B004 /* FFMpegCommon.cc */; };
 		D0978AA51E14BB830000B004 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = D0978AA41E14BB830000B004 /* libz.tbd */; };
 		D0D30CCD1E14A57D00797FA5 /* FFMpegDecoderEnumerator.h in Headers */ = {isa = PBXBuildFile; fileRef = D0D30CCB1E14A57D00797FA5 /* FFMpegDecoderEnumerator.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		D0D30CCE1E14A57D00797FA5 /* FFMpegDecoderEnumerator.m in Sources */ = {isa = PBXBuildFile; fileRef = D0D30CCC1E14A57D00797FA5 /* FFMpegDecoderEnumerator.m */; };
+		D0D30CCE1E14A57D00797FA5 /* FFMpegDecoderEnumerator.cc in Sources */ = {isa = PBXBuildFile; fileRef = D0D30CCC1E14A57D00797FA5 /* FFMpegDecoderEnumerator.cc */; };
 		D0D30D4B1E14B0E800797FA5 /* avcodec.h in Headers */ = {isa = PBXBuildFile; fileRef = D0D30CD41E14B0E800797FA5 /* avcodec.h */; };
 		D0D30D4C1E14B0E800797FA5 /* avdct.h in Headers */ = {isa = PBXBuildFile; fileRef = D0D30CD51E14B0E800797FA5 /* avdct.h */; };
 		D0D30D4D1E14B0E800797FA5 /* avfft.h in Headers */ = {isa = PBXBuildFile; fileRef = D0D30CD61E14B0E800797FA5 /* avfft.h */; };
@@ -126,19 +126,19 @@
 		D0D30DB81E14B0E800797FA5 /* libavutil.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D0D30D481E14B0E800797FA5 /* libavutil.a */; };
 		D0D30DB91E14B0E800797FA5 /* libswresample.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D0D30D491E14B0E800797FA5 /* libswresample.a */; };
 		D0D30DBA1E14B0E800797FA5 /* libswscale.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D0D30D4A1E14B0E800797FA5 /* libswscale.a */; };
-		D0D30DBC1E14B0FF00797FA5 /* MediaBase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0D30DBB1E14B0FF00797FA5 /* MediaBase.framework */; };
+		D0DDA1A725A0C73F009508E5 /* MediaBase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0DDA1A625A0C73F009508E5 /* MediaBase.framework */; };
 		D0F72AF81E1499A900921FB9 /* FFMpegDecoder.h in Headers */ = {isa = PBXBuildFile; fileRef = D0F72AF71E1499A900921FB9 /* FFMpegDecoder.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		D0840F251E14BD4E002A2AB9 /* FFMpegDecoderImp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFMpegDecoderImp.h; sourceTree = "<group>"; };
-		D0840F261E14BD4E002A2AB9 /* FFMpegDecoderImp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFMpegDecoderImp.m; sourceTree = "<group>"; };
-		D0978AA01E14B95B0000B004 /* FFMpegCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFMpegCommon.h; sourceTree = "<group>"; };
-		D0978AA11E14B95B0000B004 /* FFMpegCommon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFMpegCommon.m; sourceTree = "<group>"; };
+		D0840F251E14BD4E002A2AB9 /* FFMpegDecoderImp.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; path = FFMpegDecoderImp.h; sourceTree = "<group>"; };
+		D0840F261E14BD4E002A2AB9 /* FFMpegDecoderImp.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FFMpegDecoderImp.cc; sourceTree = "<group>"; };
+		D0978AA01E14B95B0000B004 /* FFMpegCommon.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; path = FFMpegCommon.h; sourceTree = "<group>"; };
+		D0978AA11E14B95B0000B004 /* FFMpegCommon.cc */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; path = FFMpegCommon.cc; sourceTree = "<group>"; };
 		D0978AA41E14BB830000B004 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		D0AA78851E14B67000F6516A /* VideoToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = VideoToolbox.framework; path = System/Library/Frameworks/VideoToolbox.framework; sourceTree = SDKROOT; };
-		D0D30CCB1E14A57D00797FA5 /* FFMpegDecoderEnumerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFMpegDecoderEnumerator.h; sourceTree = "<group>"; };
-		D0D30CCC1E14A57D00797FA5 /* FFMpegDecoderEnumerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFMpegDecoderEnumerator.m; sourceTree = "<group>"; };
+		D0D30CCB1E14A57D00797FA5 /* FFMpegDecoderEnumerator.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; path = FFMpegDecoderEnumerator.h; sourceTree = "<group>"; };
+		D0D30CCC1E14A57D00797FA5 /* FFMpegDecoderEnumerator.cc */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; path = FFMpegDecoderEnumerator.cc; sourceTree = "<group>"; };
 		D0D30CD41E14B0E800797FA5 /* avcodec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = avcodec.h; sourceTree = "<group>"; };
 		D0D30CD51E14B0E800797FA5 /* avdct.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = avdct.h; sourceTree = "<group>"; };
 		D0D30CD61E14B0E800797FA5 /* avfft.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = avfft.h; sourceTree = "<group>"; };
@@ -251,9 +251,9 @@
 		D0D30D481E14B0E800797FA5 /* libavutil.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libavutil.a; sourceTree = "<group>"; };
 		D0D30D491E14B0E800797FA5 /* libswresample.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libswresample.a; sourceTree = "<group>"; };
 		D0D30D4A1E14B0E800797FA5 /* libswscale.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libswscale.a; sourceTree = "<group>"; };
-		D0D30DBB1E14B0FF00797FA5 /* MediaBase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaBase.framework; path = "../MediaFrameworkTest/Build/Products/Debug-iphoneos/MediaBase.framework"; sourceTree = "<group>"; };
+		D0DDA1A625A0C73F009508E5 /* MediaBase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = MediaBase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0F72AF41E1499A800921FB9 /* FFMpegDecoder.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FFMpegDecoder.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		D0F72AF71E1499A900921FB9 /* FFMpegDecoder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FFMpegDecoder.h; sourceTree = "<group>"; };
+		D0F72AF71E1499A900921FB9 /* FFMpegDecoder.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; path = FFMpegDecoder.h; sourceTree = "<group>"; };
 		D0F72AF91E1499A900921FB9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -263,9 +263,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				D0978AA51E14BB830000B004 /* libz.tbd in Frameworks */,
-				D0D30DBC1E14B0FF00797FA5 /* MediaBase.framework in Frameworks */,
 				D0D30DB81E14B0E800797FA5 /* libavutil.a in Frameworks */,
 				D0D30DBA1E14B0E800797FA5 /* libswscale.a in Frameworks */,
+				D0DDA1A725A0C73F009508E5 /* MediaBase.framework in Frameworks */,
 				D0D30DB61E14B0E800797FA5 /* libavfilter.a in Frameworks */,
 				D0D30DB51E14B0E800797FA5 /* libavdevice.a in Frameworks */,
 				D0D30DB41E14B0E800797FA5 /* libavcodec.a in Frameworks */,
@@ -480,9 +480,9 @@
 		D0D30DBD1E14B12800797FA5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D0DDA1A625A0C73F009508E5 /* MediaBase.framework */,
 				D0978AA41E14BB830000B004 /* libz.tbd */,
 				D0AA78851E14B67000F6516A /* VideoToolbox.framework */,
-				D0D30DBB1E14B0FF00797FA5 /* MediaBase.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -510,11 +510,11 @@
 			children = (
 				D0F72AF71E1499A900921FB9 /* FFMpegDecoder.h */,
 				D0D30CCB1E14A57D00797FA5 /* FFMpegDecoderEnumerator.h */,
-				D0D30CCC1E14A57D00797FA5 /* FFMpegDecoderEnumerator.m */,
-				D0978AA01E14B95B0000B004 /* FFMpegCommon.h */,
-				D0978AA11E14B95B0000B004 /* FFMpegCommon.m */,
+				D0D30CCC1E14A57D00797FA5 /* FFMpegDecoderEnumerator.cc */,
 				D0840F251E14BD4E002A2AB9 /* FFMpegDecoderImp.h */,
-				D0840F261E14BD4E002A2AB9 /* FFMpegDecoderImp.m */,
+				D0840F261E14BD4E002A2AB9 /* FFMpegDecoderImp.cc */,
+				D0978AA01E14B95B0000B004 /* FFMpegCommon.h */,
+				D0978AA11E14B95B0000B004 /* FFMpegCommon.cc */,
 				D0F72AF91E1499A900921FB9 /* Info.plist */,
 			);
 			path = FFMpegDecoder;
@@ -707,9 +707,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D0D30CCE1E14A57D00797FA5 /* FFMpegDecoderEnumerator.m in Sources */,
-				D0840F281E14BD4E002A2AB9 /* FFMpegDecoderImp.m in Sources */,
-				D0978AA31E14B95B0000B004 /* FFMpegCommon.m in Sources */,
+				D0D30CCE1E14A57D00797FA5 /* FFMpegDecoderEnumerator.cc in Sources */,
+				D0840F281E14BD4E002A2AB9 /* FFMpegDecoderImp.cc in Sources */,
+				D0978AA31E14B95B0000B004 /* FFMpegCommon.cc in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -820,6 +820,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = ../FFMpegLibrary/Decoder/lib;
+				MARKETING_VERSION = 0.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.tbago.FFMpegDecoder;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -841,6 +842,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = ../FFMpegLibrary/Decoder/lib;
+				MARKETING_VERSION = 0.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.tbago.FFMpegDecoder;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;

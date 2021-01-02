@@ -3,16 +3,19 @@
 //  FFMpegDemuxer
 //
 //  Created by tbago on 16/12/19.
-//  Copyright © 2016年 tbago. All rights reserved.
+//  Copyright © 2021 tbago. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-#import <MediaBase/ResuableCodecID.h>
-#import <MediaBase/ResuablePixelformat.h>
-#import <MediaBase/ResuableSampleFormat.h>
+#include <MediaBase/ResuableCodecID.h>
+#include <MediaBase/ResuablePixelformat.h>
+#include <MediaBase/ResuableSampleFormat.h>
 
-#include "libavformat/avformat.h"
-#include "libavcodec/avcodec.h"
+extern "C" {
+    #include "libavformat/avformat.h"
+    #include "libavcodec/avcodec.h"
+}
+
+namespace media_decoder {
 
 extern const AVRational gGloabalTimeBase;
 
@@ -23,9 +26,9 @@ extern const AVRational gGloabalTimeBase;
  *
  *  @return global codec id
  */
-ResuableCodecID FFMpegCodecIDToMeidaCodecID(enum AVCodecID ffCodecID);
+media_base::ResuableCodecID FFMpegCodecIDToMeidaCodecID(enum AVCodecID ffCodecID);
 
-enum AVCodecID MediaCodecIDToFFMpegCodecID(ResuableCodecID resuableCodecID);
+enum AVCodecID MediaCodecIDToFFMpegCodecID(media_base::ResuableCodecID resuableCodecID);
 
 /**
  *  Convert ffmpeg pixel format to global resuable pixel format
@@ -34,7 +37,7 @@ enum AVCodecID MediaCodecIDToFFMpegCodecID(ResuableCodecID resuableCodecID);
  *
  *  @return global pixel format
  */
-ResuablePixelFormat FFMpegPixelFormatToMediaPixelFormat(enum AVPixelFormat ffPixelFormat);
+media_base::ResuablePixelFormat FFMpegPixelFormatToMediaPixelFormat(enum AVPixelFormat ffPixelFormat);
 
 /**
  *  Convert ffmpeg sample format to global resuable sample format
@@ -43,4 +46,7 @@ ResuablePixelFormat FFMpegPixelFormatToMediaPixelFormat(enum AVPixelFormat ffPix
  *
  *  @return global sample format
  */
-ResuableSampleFormat FFMpegSampleFormatToMediaSampleFormat(enum AVSampleFormat sample_fmt);
+media_base::ResuableSampleFormat FFMpegSampleFormatToMediaSampleFormat(enum AVSampleFormat sample_fmt);
+
+}   // namespace media_decoder
+

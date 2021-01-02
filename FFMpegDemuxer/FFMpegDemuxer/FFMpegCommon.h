@@ -10,8 +10,10 @@
 #include <MediaBase/ResuablePixelformat.h>
 #include <MediaBase/ResuableSampleFormat.h>
 
+extern "C" {
 #include "libavformat/avformat.h"
 #include "libavcodec/avcodec.h"
+}
 
 namespace media_demuxer {
 

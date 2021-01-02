@@ -126,6 +126,13 @@
 		D0DDA18525A0BE95009508E5 /* libavutil.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D0940EC61E0392CB001637A5 /* libavutil.a */; };
 		D0DDA18625A0BE95009508E5 /* libswresample.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D0940EC71E0392CB001637A5 /* libswresample.a */; };
 		D0DDA18725A0BE95009508E5 /* libswscale.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D0940EC81E0392CB001637A5 /* libswscale.a */; };
+		D0DDA19B25A0C23E009508E5 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0DDA18A25A0BFFA009508E5 /* CoreMedia.framework */; };
+		D0DDA19C25A0C24D009508E5 /* VideoToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0DDA18C25A0C003009508E5 /* VideoToolbox.framework */; };
+		D0DDA19D25A0C259009508E5 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = D0DDA18825A0BFEB009508E5 /* libz.tbd */; };
+		D0DDA1A025A0C273009508E5 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0DDA19F25A0C273009508E5 /* CoreVideo.framework */; };
+		D0DDA1A225A0C28D009508E5 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0DDA1A125A0C28D009508E5 /* CoreFoundation.framework */; };
+		D0DDA1A325A0C29E009508E5 /* libbz2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = D0DDA19E25A0C266009508E5 /* libbz2.tbd */; };
+		D0DDA1A525A0C2F7009508E5 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0DDA1A425A0C2F7009508E5 /* Security.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -253,6 +260,10 @@
 		D0DDA18825A0BFEB009508E5 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		D0DDA18A25A0BFFA009508E5 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		D0DDA18C25A0C003009508E5 /* VideoToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = VideoToolbox.framework; path = System/Library/Frameworks/VideoToolbox.framework; sourceTree = SDKROOT; };
+		D0DDA19E25A0C266009508E5 /* libbz2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libbz2.tbd; path = usr/lib/libbz2.tbd; sourceTree = SDKROOT; };
+		D0DDA19F25A0C273009508E5 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
+		D0DDA1A125A0C28D009508E5 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
+		D0DDA1A425A0C2F7009508E5 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -261,11 +272,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				D0DDA18625A0BE95009508E5 /* libswresample.a in Frameworks */,
+				D0DDA19D25A0C259009508E5 /* libz.tbd in Frameworks */,
 				D0DDA17E25A0A985009508E5 /* MediaBase.framework in Frameworks */,
 				D0DDA18325A0BE95009508E5 /* libavfilter.a in Frameworks */,
+				D0DDA1A025A0C273009508E5 /* CoreVideo.framework in Frameworks */,
+				D0DDA19C25A0C24D009508E5 /* VideoToolbox.framework in Frameworks */,
+				D0DDA1A525A0C2F7009508E5 /* Security.framework in Frameworks */,
+				D0DDA1A325A0C29E009508E5 /* libbz2.tbd in Frameworks */,
 				D0DDA17A25A0A0D3009508E5 /* Base.framework in Frameworks */,
+				D0DDA19B25A0C23E009508E5 /* CoreMedia.framework in Frameworks */,
 				D0DDA18425A0BE95009508E5 /* libavformat.a in Frameworks */,
 				D0DDA18525A0BE95009508E5 /* libavutil.a in Frameworks */,
+				D0DDA1A225A0C28D009508E5 /* CoreFoundation.framework in Frameworks */,
 				D0DDA18725A0BE95009508E5 /* libswscale.a in Frameworks */,
 				D0DDA18225A0BE95009508E5 /* libavdevice.a in Frameworks */,
 				D0DDA18125A0BE95009508E5 /* libavcodec.a in Frameworks */,
@@ -509,6 +527,10 @@
 		D0940F3B1E039553001637A5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D0DDA1A425A0C2F7009508E5 /* Security.framework */,
+				D0DDA1A125A0C28D009508E5 /* CoreFoundation.framework */,
+				D0DDA19F25A0C273009508E5 /* CoreVideo.framework */,
+				D0DDA19E25A0C266009508E5 /* libbz2.tbd */,
 				D0DDA18C25A0C003009508E5 /* VideoToolbox.framework */,
 				D0DDA18A25A0BFFA009508E5 /* CoreMedia.framework */,
 				D0DDA18825A0BFEB009508E5 /* libz.tbd */,

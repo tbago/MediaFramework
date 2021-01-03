@@ -1,5 +1,5 @@
 //
-//  StreamInfo.m
+//  StreamInfo.cc
 //  MediaBase
 //
 //  Created by tbago on 16/12/16.

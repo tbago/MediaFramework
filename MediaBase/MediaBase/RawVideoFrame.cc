@@ -1,5 +1,5 @@
 //
-//  RawVideoFrame.m
+//  RawVideoFrame.cc
 //  MediaBase
 //
 //  Created by tbago on 16/12/29.
@@ -15,8 +15,8 @@ RawVideoFrame::RawVideoFrame(ResuablePixelFormat pixelFormat, uint32_t width, ui
 width(width),
 height(height)
 {
-    timeStamp = 0;
-    duration = 0;
+    timeStamp = -1;
+    duration = -1;
 }
 
 RawVideoFrame::RawVideoFrame(const RawVideoFrame &videoFrame)

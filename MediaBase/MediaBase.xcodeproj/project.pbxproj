@@ -40,8 +40,8 @@
 		D0940E441E038318001637A5 /* StreamInfo.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = StreamInfo.cc; sourceTree = "<group>"; };
 		D0940E471E038528001637A5 /* CompassedFrame.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; path = CompassedFrame.h; sourceTree = "<group>"; };
 		D0940E481E038528001637A5 /* CompassedFrame.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CompassedFrame.cc; sourceTree = "<group>"; };
-		D0D67CF0259ED52600A8C0D8 /* RawAudioFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RawAudioFrame.h; sourceTree = "<group>"; };
-		D0D67CF1259ED52600A8C0D8 /* RawAudioFrame.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RawAudioFrame.cc; sourceTree = "<group>"; };
+		D0D67CF0259ED52600A8C0D8 /* RawAudioFrame.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; path = RawAudioFrame.h; sourceTree = "<group>"; };
+		D0D67CF1259ED52600A8C0D8 /* RawAudioFrame.cc */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; path = RawAudioFrame.cc; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */

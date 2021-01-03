@@ -28,6 +28,6 @@ typedef enum {
     R_SAMPLE_FMT_NB           ///< Number of sample formats. DO NOT USE if linking dynamically
 } ResuableSampleFormat;
 
-}   //namespace media base
+}   //namespace media_base
 #endif // MEDIA_BASE_RESUABLE_SAMPLE_FORMAT_H_
 

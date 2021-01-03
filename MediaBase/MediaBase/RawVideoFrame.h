@@ -10,7 +10,7 @@
 #define MEDIA_BASE_RAW_VIDEO_FRAME_H_
 
 #include <vector>
-#include "ResuablePixelFormat.h"
+#include <MediaBase/ResuablePixelformat.h>
 
 namespace media_base {
 
@@ -27,8 +27,8 @@ struct RawVideoFrame
     ResuablePixelFormat       pixelFormat;
     uint32_t                width;
     uint32_t                height;
-    uint64_t                timeStamp;
-    uint32_t                duration;
+    int64_t                 timeStamp;
+    int32_t                 duration;
 
     std::vector<RawVideoFrameBuffer *> frameBufferVector;
 public:
@@ -44,7 +44,7 @@ public:
     RawVideoFrame(ResuablePixelFormat pixelFormat, uint32_t width, uint32_t height);
     RawVideoFrame(const RawVideoFrame &videoFrame);
     RawVideoFrame & operator=(const RawVideoFrame &videoFrame);
-    ~RawVideoFrame();
+    virtual ~RawVideoFrame();
 public:
     void PushFrameData(uint32_t lineSize, int8_t * frameData);
 private:

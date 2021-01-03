@@ -152,7 +152,10 @@
             continue;
         }
         else {
-            media_base::RawVideoFrame *videoFrame = _ffDecoder->DecodeVideoFrame(compassedFrame);
+            media_base::RawVideoFrame *videoFrame = NULL;
+            if (compassedFrame->streamType == media_base::VideoStream) {
+                videoFrame = _ffDecoder->DecodeVideoFrame(compassedFrame);
+            }
             delete compassedFrame;
             if (videoFrame == NULL) {
                 continue;

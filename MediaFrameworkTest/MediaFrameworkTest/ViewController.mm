@@ -20,8 +20,8 @@
 {
     media_demuxer::FFMpegDemuxer             *_ffmpegDemuxer;
     media_decoder::FFMpegDecoderEnumerator    *_ffDecoderEnumerator;
-    media_decoder::FFMpegDecoder             *_ffDecoder;
-
+    media_decoder::FFMpegDecoder             *_ffVideoDecoder;
+    media_decoder::FFMpegDecoder             *_ffAudioDecoder;
     RTMP                                  *_rtmpClient;
     std::vector<media_base::CompassedFrame *> compassedFrameVector;
 }
@@ -116,17 +116,20 @@
     _ffDecoderEnumerator->InitDecoderArray();
 
     media_base::StreamInfo *videoStreamInfo = nil;
+    media_base::StreamInfo *audioStreamInfo = nil;
     for (media_base::StreamInfo *streamInfo : sourceMovieInfo->streams) {
         if (streamInfo->streamType == media_base::VideoStream) {
             videoStreamInfo = streamInfo;
-            break;
+        }
+        else if (streamInfo->streamType == media_base::AudioStream) {
+            audioStreamInfo = streamInfo;
         }
     }
     if (videoStreamInfo == nil) {
         return;
     }
-    _ffDecoder = _ffDecoderEnumerator->CreateFFMpegDecoderByCodecId(videoStreamInfo->codecID);
-    if (_ffDecoder != NULL) {
+    _ffVideoDecoder = _ffDecoderEnumerator->CreateFFMpegDecoderByCodecId(videoStreamInfo->codecID);
+    if (_ffVideoDecoder != NULL) {
         media_decoder::AVCodecParam codecParam;
         codecParam.width                = videoStreamInfo->width;
         codecParam.height               = videoStreamInfo->height;
@@ -136,12 +139,24 @@
         codecParam.extraData            = videoStreamInfo->extraData;
         codecParam.extraDataSize         = videoStreamInfo->extraDataSize;
 
-        BOOL ret = _ffDecoder->OpenCodec(&codecParam);
+        bool ret = _ffVideoDecoder->OpenCodec(&codecParam);
         if (!ret) {
             return;
         }
-        [NSThread detachNewThreadSelector:@selector(loopReadAndDecodeStreamData) toTarget:self withObject:nil];
     }
+    _ffAudioDecoder = _ffDecoderEnumerator->CreateFFMpegDecoderByCodecId(audioStreamInfo->codecID);
+    if (_ffAudioDecoder != NULL) {
+        media_decoder::AVCodecParam codecParam;
+        codecParam.sampleFormat = audioStreamInfo->sampleFormat;
+        codecParam.sampleRate   = audioStreamInfo->samplerate;
+        codecParam.channels    = audioStreamInfo->channels;
+
+        bool ret = _ffAudioDecoder->OpenCodec(&codecParam);
+        if (!ret) {
+            return;
+        }
+    }
+    [NSThread detachNewThreadSelector:@selector(loopReadAndDecodeStreamData) toTarget:self withObject:nil];
 }
 
 - (void)loopReadAndDecodeStreamData {
@@ -154,17 +169,21 @@
         else {
             media_base::RawVideoFrame *videoFrame = NULL;
             if (compassedFrame->streamType == media_base::VideoStream) {
-                videoFrame = _ffDecoder->DecodeVideoFrame(compassedFrame);
+                videoFrame = _ffVideoDecoder->DecodeVideoFrame(compassedFrame);
+            }
+            media_base::RawAudioFrame *audioFrame = NULL;
+            if (compassedFrame->streamType == media_base::AudioStream) {
+                audioFrame = _ffAudioDecoder->DecodeAudioFrame(compassedFrame);
             }
             delete compassedFrame;
-            if (videoFrame == NULL) {
-                continue;
-            }
-            else {
+            if (videoFrame != NULL){
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [self renderVideoFrame:videoFrame];
                     delete videoFrame;
                 });
+            }
+            else if (audioFrame != NULL) {
+                
             }
         }
     }

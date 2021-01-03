@@ -9,9 +9,11 @@
 #ifndef FFMPEG_DECODER_FFMPEG_DECODER_H_
 #define FFMPEG_DECODER_FFMPEG_DECODER_H_
 
-#include <FFMpegDecoder/FFMpegDecoderEnumerator.h>
-#include <MediaBase/RawVideoFrame.h>
 #include <MediaBase/CompassedFrame.h>
+#include <MediaBase/RawVideoFrame.h>
+#include <MediaBase/RawAudioFrame.h>
+#include <MediaBase/ResuableSampleFormat.h>
+#include <FFMpegDecoder/FFMpegDecoderEnumerator.h>
 
 namespace media_decoder {
 
@@ -22,8 +24,6 @@ struct AVCodecParam
     uint32_t      numThreads;
     uint32_t      width;
     uint32_t      height;
-    uint32_t      channels;
-    uint32_t      sampleRate;
     uint8_t       *extraData;
     uint32_t      extraDataSize;
     /**
@@ -46,6 +46,10 @@ struct AVCodecParam
      * - decoding: Set by user.
      */
     int32_t       bitsPerCodedSample;
+
+    media_base::ResuableSampleFormat sampleFormat;
+    uint32_t      channels;
+    uint32_t      sampleRate;
 };
 
 /**
@@ -57,6 +61,8 @@ public:
     virtual bool OpenCodec(AVCodecParam * codecParam) = 0;
 
     virtual media_base::RawVideoFrame * DecodeVideoFrame(media_base::CompassedFrame * compassedFrame) = 0;
+
+    virtual media_base::RawAudioFrame * DecodeAudioFrame(media_base::CompassedFrame * compassedFrame) = 0;
 };
 
 }   // namespace media_decoder

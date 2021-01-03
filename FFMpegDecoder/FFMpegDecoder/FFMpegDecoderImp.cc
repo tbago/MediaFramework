@@ -90,7 +90,9 @@ bool FFMpegDecoderImp::OpenCodec(AVCodecParam * codecParam)
 
     }
     else if (_codecInfo.type == FFMpegAudioDecoder) {
-        return false;   // not implement
+        _avcodecContext.sample_fmt = MediaSampleFormatToFFMpegSampleFormat(codecParam->sampleFormat);
+        _avcodecContext.sample_rate = codecParam->sampleRate;
+        _avcodecContext.channels = codecParam->channels;
     }
 
     int ret = avcodec_open2(&_avcodecContext, _avcodec, NULL);
@@ -102,22 +104,14 @@ bool FFMpegDecoderImp::OpenCodec(AVCodecParam * codecParam)
 
 media_base::RawVideoFrame * FFMpegDecoderImp::DecodeVideoFrame(media_base::CompassedFrame *compassedFrame)
 {
-    if (compassedFrame == NULL) {   ///< flush decoder
-        if (_codecInfo.type == FFMpegVideoDecoder) {
-            return InnerDecodeVideoFrame(NULL);
-        }
-        else if (_codecInfo.type == FFMpegAudioDecoder) {
-//            return InnerDecodeAudio(NULL);
-        }
-    }
-    if (_codecInfo.type == FFMpegVideoDecoder) {
-        return InnerDecodeVideoFrame(compassedFrame);
-    }
-    else if (_codecInfo.type == FFMpegAudioDecoder) {
-//        return InnerDecodeAudio(compassedFrame);
-    }
+    assert(_codecInfo.type == FFMpegVideoDecoder);
+    return InnerDecodeVideoFrame(compassedFrame);
+}
 
-    return NULL;
+media_base::RawAudioFrame * FFMpegDecoderImp::DecodeAudioFrame(media_base::CompassedFrame * compassedFrame)
+{
+    assert(_codecInfo.type == FFMpegAudioDecoder);
+    return InnerDecodeAudioFrame(compassedFrame);
 }
 
 media_base::RawVideoFrame * FFMpegDecoderImp::InnerDecodeVideoFrame(media_base::CompassedFrame * compassedFrame)
@@ -157,14 +151,13 @@ media_base::RawVideoFrame * FFMpegDecoderImp::InnerDecodeVideoFrame(media_base::
     AVFrame *decodedVideoFrame = av_frame_alloc();
     int ret = avcodec_send_packet(&_avcodecContext, &avpkt);
     if (ret != 0) {
-        printf("send packet failed");
+        printf("send video packet failed");
         av_frame_unref(decodedVideoFrame);
         return NULL;
     }
     ret = avcodec_receive_frame(&_avcodecContext, decodedVideoFrame);
     if (ret != 0) {
         if (ret == AVERROR(EAGAIN)) {
-            printf("Buffer video frame");
             av_frame_unref(decodedVideoFrame);
             return NULL;
         }
@@ -192,8 +185,69 @@ media_base::RawVideoFrame * FFMpegDecoderImp::InnerDecodeVideoFrame(media_base::
     return pRawVideoFrame;
 }
 
-void InnerDecodeAudio(media_base::CompassedFrame * compassedFrame) {
+media_base::RawAudioFrame * FFMpegDecoderImp::InnerDecodeAudioFrame(media_base::CompassedFrame * compassedFrame) {
+    uint32_t    size = 0;
+    uint8_t*    pData = NULL;
+    int64_t     dts = -1;
+    int64_t     pts = -1;
+    int         flags = 0;
+    int64_t     pos = -1;
 
+    if (compassedFrame != NULL)
+    {
+        size     = compassedFrame->frameDataSize;
+        pData   = (uint8_t*)compassedFrame->frameData;
+        dts     = compassedFrame->decompassTimeStamp;
+        pts     = compassedFrame->presentTimeStamp;
+        flags   = compassedFrame->keyFrame;
+        pos     = compassedFrame->position;
+
+    } else { //Flush decoder
+    }
+
+    AVPacket avpkt;
+    memset(&avpkt, 0, sizeof(avpkt));
+    avpkt.data  = pData;
+    avpkt.size  = size;
+    avpkt.dts   = dts;
+    avpkt.pts   = pts;
+    avpkt.flags = flags;
+    avpkt.pos   = pos;
+
+    AVFrame *decodedAudioFrame = av_frame_alloc();
+    int ret = avcodec_send_packet(&_avcodecContext, &avpkt);
+    if (ret != 0) {
+        printf("send video packet failed");
+        av_frame_unref(decodedAudioFrame);
+        return NULL;
+    }
+
+    ret = avcodec_receive_frame(&_avcodecContext, decodedAudioFrame);
+    if (ret != 0) {
+        if (ret == AVERROR(EAGAIN)) {
+            av_frame_unref(decodedAudioFrame);
+            return NULL;
+        }
+        else {
+            printf("cannot decoder auido,%d", ret);
+            av_frame_unref(decodedAudioFrame);
+            return NULL;
+        }
+    }
+
+    media_base::RawAudioFrame *audioFrame = new media_base::RawAudioFrame(FFMpegSampleFormatToMediaSampleFormat(_avcodecContext.sample_fmt),
+                                                                          _avcodecContext.sample_rate,
+                                                                          _avcodecContext.channels);
+    for (uint32_t i = 0; i < AV_NUM_DATA_POINTERS; i++) {
+        if (decodedAudioFrame->linesize[i] > 0) {
+            audioFrame->PushFrameData((int8_t *)decodedAudioFrame->data[i], decodedAudioFrame->linesize[i]);
+        }
+        else {
+            break;
+        }
+    }
+    av_frame_free(&decodedAudioFrame);
+    return audioFrame;
 }
 
 }   // namespace media_decoder

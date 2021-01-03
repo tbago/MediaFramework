@@ -893,9 +893,9 @@ media_base::ResuablePixelFormat FFMpegPixelFormatToMediaPixelFormat(enum AVPixel
     }
 }
 
-media_base::ResuableSampleFormat FFMpegSampleFormatToMediaSampleFormat(enum AVSampleFormat sample_fmt)
+media_base::ResuableSampleFormat FFMpegSampleFormatToMediaSampleFormat(enum AVSampleFormat sampleFormat)
 {
-    switch(sample_fmt)
+    switch(sampleFormat)
     {
         case AV_SAMPLE_FMT_U8:
             return R_SAMPLE_FMT_U8;
@@ -932,4 +932,44 @@ media_base::ResuableSampleFormat FFMpegSampleFormatToMediaSampleFormat(enum AVSa
     }
 }
 
+enum AVSampleFormat MediaSampleFormatToFFMpegSampleFormat(media_base::ResuableSampleFormat sampleFormat)
+{
+    switch(sampleFormat)
+    {
+        case R_SAMPLE_FMT_U8:
+            return AV_SAMPLE_FMT_U8;
+            break;
+        case R_SAMPLE_FMT_U8P:
+            return AV_SAMPLE_FMT_U8P;
+            break;
+        case R_SAMPLE_FMT_S16:
+            return AV_SAMPLE_FMT_S16;
+            break;
+        case R_SAMPLE_FMT_S16P:
+            return AV_SAMPLE_FMT_S16P;
+            break;
+        case R_SAMPLE_FMT_S32:
+            return AV_SAMPLE_FMT_S32;
+            break;
+        case R_SAMPLE_FMT_S32P:
+            return AV_SAMPLE_FMT_S32P;
+        case R_SAMPLE_FMT_FLT:
+            return AV_SAMPLE_FMT_FLT;
+            break;
+        case R_SAMPLE_FMT_FLTP:
+            return AV_SAMPLE_FMT_FLTP;
+            break;
+        case R_SAMPLE_FMT_DBL:
+            return AV_SAMPLE_FMT_DBL;
+            break;
+        case R_SAMPLE_FMT_DBLP:
+            return AV_SAMPLE_FMT_DBLP;
+            break;
+        default:
+            return AV_SAMPLE_FMT_NONE;
+            break;
+    }
+}
+
 }   // namespace media_codec
+

@@ -19,11 +19,12 @@ class FFMpegDecoderImp : public FFMpegDecoder
 public:
     virtual bool OpenCodec(AVCodecParam * codecParam);
     virtual media_base::RawVideoFrame * DecodeVideoFrame(media_base::CompassedFrame * compassedFrame);
+    virtual media_base::RawAudioFrame * DecodeAudioFrame(media_base::CompassedFrame * compassedFrame);
 public:
     FFMpegDecoderImp(FFMpegCodecInfo * codecInfo);
 private:
     media_base::RawVideoFrame * InnerDecodeVideoFrame(media_base::CompassedFrame *compassedFrame);
-    void InnerDecodeAudioFrame(media_base::CompassedFrame *compassedFrame);
+    media_base::RawAudioFrame * InnerDecodeAudioFrame(media_base::CompassedFrame *compassedFrame);
 private:
     FFMpegCodecInfo         _codecInfo;
     AVCodec                *_avcodec;

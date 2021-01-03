@@ -40,13 +40,22 @@ enum AVCodecID MediaCodecIDToFFMpegCodecID(media_base::ResuableCodecID resuableC
 media_base::ResuablePixelFormat FFMpegPixelFormatToMediaPixelFormat(enum AVPixelFormat ffPixelFormat);
 
 /**
- *  Convert ffmpeg sample format to global resuable sample format
+ *  Convert ffmpeg sample format to  resuable sample format
  *
- *  @param sample_fmt ffmpeg sample format
+ *  @param sampleFormat ffmpeg sample format
  *
- *  @return global sample format
+ *  @return resuable sample format
  */
-media_base::ResuableSampleFormat FFMpegSampleFormatToMediaSampleFormat(enum AVSampleFormat sample_fmt);
+media_base::ResuableSampleFormat FFMpegSampleFormatToMediaSampleFormat(enum AVSampleFormat sampleFormat);
+
+/**
+*  Convert resuable sample format to ffmpeg sample format
+*
+*  @param sampleFormat resuable sample format
+*
+*  @return ffmpeg sample format
+*/
+enum AVSampleFormat MediaSampleFormatToFFMpegSampleFormat(media_base::ResuableSampleFormat sampleFormat);
 
 }   // namespace media_decoder
 

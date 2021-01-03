@@ -41,7 +41,7 @@ bool FFMpegDemuxerImp::OpenFileByPath(const std::string &filePath)
     else if (filePath.find("rtmp://") == 0) {
         format = av_find_input_format("live_flv");
     }
-    
+
     ///< check file format by probe data
     if (format == NULL)
     {
@@ -108,7 +108,7 @@ bool FFMpegDemuxerImp::OpenFileByPath(const std::string &filePath)
             format = av_find_input_format("mxf");
         }
     }
-    
+
     if (format == NULL) {
         printf("Cannot find input stream format");
         return false;
@@ -144,7 +144,7 @@ media_base::CompassedFrame * FFMpegDemuxerImp::ReadFrame() {
     int ret = 0;
     bool bHasPkt = false;
     media_base::StreamType readStramType = media_base::UnknownStream;
-    
+
     do{
         ret = av_read_frame(_formatContext, &pkt);
         if (ret < 0)
@@ -176,7 +176,7 @@ media_base::CompassedFrame * FFMpegDemuxerImp::ReadFrame() {
             }
         }
     } while(true);
-    
+
     if (bHasPkt && readStramType != media_base::UnknownStream)
     {
         media_base::CompassedFrame *compassedFrame    = new media_base::CompassedFrame();
@@ -213,7 +213,7 @@ void FFMpegDemuxerImp::BuildMovieInfo(const std::string &filePath)
 {
     _movieInfo.name = extract_file_name(filePath);
     _movieInfo.format = _formatContext->iformat->name;
-    
+
     ///< store movie meta data
     if (_formatContext->metadata != NULL) {
         AVDictionaryEntry *t = NULL;
@@ -227,7 +227,7 @@ void FFMpegDemuxerImp::BuildMovieInfo(const std::string &filePath)
             t = av_dict_get(_formatContext->metadata, "", t, AV_DICT_IGNORE_SUFFIX);
         }
     }
-    
+
     ///< build stream info
     for (uint32_t i = 0; i < _formatContext->nb_streams; i++) {
         AVStream* avStream = _formatContext->streams[i];
@@ -248,7 +248,7 @@ void FFMpegDemuxerImp::BuildMovieInfo(const std::string &filePath)
                 streamInfo->duration = duration/1000;
             }
         }
-        
+
         AVCodecParameters *codecParam = avStream->codecpar;
         if (codecParam == NULL) {
             streamInfo->streamType = media_base::UnknownStream;
@@ -256,13 +256,13 @@ void FFMpegDemuxerImp::BuildMovieInfo(const std::string &filePath)
             _movieInfo.streams.push_back(streamInfo);
             continue;
         }
-        
+
         else if (codecParam->codec_type == AVMEDIA_TYPE_VIDEO) {
             streamInfo->streamType  = media_base::VideoStream;
             streamInfo->width       = codecParam->width;
             streamInfo->height      = codecParam->height;
             streamInfo->pixelFormat = FFMpegPixelFormatToMediaPixelFormat((AVPixelFormat)codecParam->format);
-            
+
             ///< get video frame rate
             streamInfo->framerate.numerator = avStream->time_base.num;
             streamInfo->framerate.denominator = avStream->time_base.den;
@@ -271,7 +271,7 @@ void FFMpegDemuxerImp::BuildMovieInfo(const std::string &filePath)
                 streamInfo->framerate.numerator = 30;
                 streamInfo->framerate.denominator = 1;
             }
-            
+
             if (codecParam->sample_aspect_ratio.num == 0) {
                 streamInfo->pixelAspect.numerator = 1;
                 streamInfo->pixelAspect.denominator = 1;
@@ -280,7 +280,7 @@ void FFMpegDemuxerImp::BuildMovieInfo(const std::string &filePath)
                 streamInfo->pixelAspect.numerator = codecParam->sample_aspect_ratio.num;
                 streamInfo->pixelAspect.denominator = codecParam->sample_aspect_ratio.den;
             }
-            
+
             streamInfo->codecTag = codecParam->codec_tag;
             streamInfo->bitsPerCodedSample = codecParam->bits_per_coded_sample;
         }
@@ -297,7 +297,7 @@ void FFMpegDemuxerImp::BuildMovieInfo(const std::string &filePath)
         else {
             streamInfo->streamType = media_base::UnknownStream;
         }
-        
+
         ///< common set media value
         streamInfo->bitrate = codecParam->bit_rate;
         if (codecParam->codec_id != AV_CODEC_ID_NONE && codecParam->codec_id != AV_CODEC_ID_PROBE) {
@@ -309,7 +309,7 @@ void FFMpegDemuxerImp::BuildMovieInfo(const std::string &filePath)
         else {
             streamInfo->streamType = media_base::UnknownStream;
         }
-        
+
         ///< stream metadata
         if (avStream->metadata != NULL) {
             AVDictionaryEntry *t = NULL;
@@ -323,7 +323,7 @@ void FFMpegDemuxerImp::BuildMovieInfo(const std::string &filePath)
                 t = av_dict_get(avStream->metadata, "", t, AV_DICT_IGNORE_SUFFIX);
             }
         }
-        
+
         ///< stream extra data
         if (codecParam->extradata != NULL && codecParam->extradata_size > 0) {
             streamInfo->extraDataSize = codecParam->extradata_size;

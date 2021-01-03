@@ -54,12 +54,12 @@ bool FFMpegDecoderImp::OpenCodec(AVCodecParam * codecParam)
         _avcodecContext.extradata = NULL;
         _avcodecContext.extradata_size = 0;
     }
-    
+
     if (_codecInfo.type == FFMpegVideoDecoder)
     {
         _avcodecContext.width                 = codecParam->width;
         _avcodecContext.height                = codecParam->height;
-        _avcodecContext.bits_per_coded_sample = codecParam->bitsPerCodedSample;
+        _avcodecContext.bits_per_coded_sample   = codecParam->bitsPerCodedSample;
         
         uint32_t    numThreads = 1;
         int         threadType = 0;

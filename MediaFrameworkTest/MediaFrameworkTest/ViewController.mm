@@ -43,7 +43,7 @@
 
 - (IBAction)testButtonClick:(UIButton *)sender {
 //    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"demo" ofType:@"mp4"];
-    NSString *filePath = @"rtmp://192.168.0.104:1935/live/live1";
+    NSString *filePath = @"rtmp://192.168.0.103:1935/live/live1";
     bool openRet = _ffmpegDemuxer->OpenFileByPath(filePath.UTF8String);
     if (!openRet) {
         return;
@@ -133,7 +133,8 @@
         codecParam.codecTag             = videoStreamInfo->codecTag;
         codecParam.bitsPerCodedSample    = videoStreamInfo->bitsPerCodedSample;
         codecParam.numThreads           = 1;
-        codecParam.extraData           = videoStreamInfo->extraData;
+        codecParam.extraData            = videoStreamInfo->extraData;
+        codecParam.extraDataSize         = videoStreamInfo->extraDataSize;
 
         BOOL ret = _ffDecoder->OpenCodec(&codecParam);
         if (!ret) {

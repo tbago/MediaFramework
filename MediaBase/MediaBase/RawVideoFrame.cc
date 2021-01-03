@@ -61,8 +61,8 @@ void RawVideoFrame::PushFrameData(uint32_t lineSize, int8_t *frameData) {
     }
 
     uint32_t frameDataLength = frameBuffer->lineSize * frameBuffer->lineCount;
-    int8_t *data = (int8_t *)malloc(frameDataLength);
-    memcpy(data, frameData, frameDataLength);
+    frameBuffer->frameData = (int8_t *)malloc(frameDataLength);
+    memcpy(frameBuffer->frameData, frameData, frameDataLength);
     frameBufferVector.push_back(frameBuffer);
 }
 

@@ -60,28 +60,28 @@ bool FFMpegDecoderImp::OpenCodec(AVCodecParam * codecParam)
         _avcodecContext.width                 = codecParam->width;
         _avcodecContext.height                = codecParam->height;
         _avcodecContext.bits_per_coded_sample   = codecParam->bitsPerCodedSample;
-        
+
         uint32_t    numThreads = 1;
         int         threadType = 0;
         if (codecParam->numThreads > 0) {
             numThreads = codecParam->numThreads;
         }
-        
+
         if (numThreads > 1 && sup_threads_dec_frame(codecId)) {
             threadType = FF_THREAD_FRAME;
         } else if (numThreads > 1 && sup_threads_dec_slice(codecId)) {
             threadType = FF_THREAD_SLICE;
         }
-        
+
         if (numThreads > 1 && threadType != 0) {
             numThreads = numThreads;
         } else {
             numThreads = 1;
         }
-        
+
         _avcodecContext.thread_type = threadType;
         _avcodecContext.thread_count = numThreads;
-        
+
         if (_avcodec->id == AV_CODEC_ID_H264) {
             // If we do not set this, first B-frames before the IDR pictures are dropped.
             _avcodecContext.has_b_frames = 1;
@@ -92,7 +92,7 @@ bool FFMpegDecoderImp::OpenCodec(AVCodecParam * codecParam)
     else if (_codecInfo.type == FFMpegAudioDecoder) {
         return false;   // not implement
     }
-    
+
     int ret = avcodec_open2(&_avcodecContext, _avcodec, NULL);
     if (ret < 0) {
         return false;
@@ -129,7 +129,7 @@ media_base::RawVideoFrame * FFMpegDecoderImp::InnerDecodeVideoFrame(media_base::
     int64_t     pts = -1;
     int         flags = 0;
     int64_t     pos = -1;
-    
+
     if (compassedFrame != NULL)
     {
         size = compassedFrame->frameDataSize;
@@ -144,7 +144,6 @@ media_base::RawVideoFrame * FFMpegDecoderImp::InnerDecodeVideoFrame(media_base::
         pos     = compassedFrame->position;
         
     } else { //Flush decoder
-        
     }
     AVPacket avpkt;
     memset(&avpkt, 0, sizeof(avpkt));
@@ -154,29 +153,32 @@ media_base::RawVideoFrame * FFMpegDecoderImp::InnerDecodeVideoFrame(media_base::
     avpkt.pts   = pts;
     avpkt.flags = flags;
     avpkt.pos   = pos;
-    
+
     AVFrame *decodedVideoFrame = av_frame_alloc();
     int ret = avcodec_send_packet(&_avcodecContext, &avpkt);
     if (ret != 0) {
         printf("send packet failed");
+        av_frame_unref(decodedVideoFrame);
         return NULL;
     }
     ret = avcodec_receive_frame(&_avcodecContext, decodedVideoFrame);
     if (ret != 0) {
         if (ret == AVERROR(EAGAIN)) {
             printf("Buffer video frame");
+            av_frame_unref(decodedVideoFrame);
             return NULL;
         }
         else {
             printf("cannot decoder video,%d", ret);
+            av_frame_unref(decodedVideoFrame);
             return NULL;
         }
     }
-    
+
     media_base::RawVideoFrame *pRawVideoFrame = new media_base::RawVideoFrame(FFMpegPixelFormatToMediaPixelFormat(_avcodecContext.pix_fmt)
                                                                        ,decodedVideoFrame->width
                                                                        ,decodedVideoFrame->height);
-    
+
     for (uint32_t i = 0; i < AV_NUM_DATA_POINTERS; i++) {
         if (decodedVideoFrame->linesize[i] > 0) {
             pRawVideoFrame->PushFrameData(decodedVideoFrame->linesize[i], (int8_t *)decodedVideoFrame->data[i]);

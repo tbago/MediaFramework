@@ -15,6 +15,7 @@
 		D08C325225A1655000435903 /* FFMpegDemuxer.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D08C325025A1655000435903 /* FFMpegDemuxer.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D08C325425A1655500435903 /* MediaBase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D08C325325A1655500435903 /* MediaBase.framework */; };
 		D08C325525A1655500435903 /* MediaBase.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D08C325325A1655500435903 /* MediaBase.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D08C326025A1A21600435903 /* 1.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = D08C325F25A1A1F900435903 /* 1.mp4 */; };
 		D0940E1D1E0380E7001637A5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D0940E1C1E0380E7001637A5 /* main.m */; };
 		D0940E201E0380E7001637A5 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D0940E1F1E0380E7001637A5 /* AppDelegate.m */; };
 		D0940E231E0380E7001637A5 /* ViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = D0940E221E0380E7001637A5 /* ViewController.mm */; };
@@ -51,6 +52,7 @@
 		D08C324D25A1654C00435903 /* FFMpegDecoder.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FFMpegDecoder.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D08C325025A1655000435903 /* FFMpegDemuxer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FFMpegDemuxer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D08C325325A1655500435903 /* MediaBase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = MediaBase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D08C325F25A1A1F900435903 /* 1.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = 1.mp4; sourceTree = "<group>"; };
 		D0940E181E0380E7001637A5 /* MediaFrameworkTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MediaFrameworkTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0940E1C1E0380E7001637A5 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		D0940E1E1E0380E7001637A5 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -134,6 +136,7 @@
 				D0E221B61E15EA3400A98D17 /* OpenGLView20.m */,
 				D0940E241E0380E7001637A5 /* Main.storyboard */,
 				D0940E271E0380E7001637A5 /* Assets.xcassets */,
+				D08C325F25A1A1F900435903 /* 1.mp4 */,
 				D0940E291E0380E8001637A5 /* LaunchScreen.storyboard */,
 				D0940E2C1E0380E8001637A5 /* Info.plist */,
 				D0940E1B1E0380E7001637A5 /* Supporting Files */,
@@ -230,6 +233,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D0940E2B1E0380E8001637A5 /* LaunchScreen.storyboard in Resources */,
+				D08C326025A1A21600435903 /* 1.mp4 in Resources */,
 				D0940E281E0380E7001637A5 /* Assets.xcassets in Resources */,
 				D0940E261E0380E7001637A5 /* Main.storyboard in Resources */,
 			);

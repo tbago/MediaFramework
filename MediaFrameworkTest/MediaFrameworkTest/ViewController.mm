@@ -42,8 +42,8 @@
 }
 
 - (IBAction)testButtonClick:(UIButton *)sender {
-//    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"demo" ofType:@"mp4"];
-    NSString *filePath = @"rtmp://192.168.0.103:1935/live/live1";
+    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"1" ofType:@"mp4"];
+//    NSString *filePath = @"rtmp://192.168.0.103:1935/live/live1";
     bool openRet = _ffmpegDemuxer->OpenFileByPath(filePath.UTF8String);
     if (!openRet) {
         return;

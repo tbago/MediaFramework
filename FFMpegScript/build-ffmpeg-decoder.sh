@@ -8,6 +8,7 @@ SCRATCH="../FFMpegOutput/ScratchDecoder"
 # must be an absolute path
 THIN=`pwd`/"ThinDecoder"
 
+# debug option --enable-debug=3 --disable-stripping --disable-optimizations
 CONFIGURE_FLAGS="--enable-cross-compile --disable-debug --disable-programs \
                  --disable-doc --enable-pic --disable-encoders --disable-muxers --disable-demuxers --disable-videotoolbox --disable-audiotoolbox --disable-protocols --disable-devices --disable-filters --disable-bsfs --disable-ffplay --disable-ffprobe --disable-ffmpeg --disable-iconv"
 

@@ -55,9 +55,10 @@ bool FFMpegDemuxerImp::OpenFileByPath(const std::string &filePath)
             return false;
         }
         uint8_t *buffer = (uint8_t *)malloc(bufferSize);
-        size_t readSize = fread(buffer, bufferSize, 0, file);
+        size_t readSize = fread(buffer, 1, bufferSize, file);
         if (readSize < bufferSize) {
             printf("file or stream is not have enough data");
+            free(buffer);
             return false;
         }
         
@@ -188,7 +189,7 @@ media_base::CompassedFrame * FFMpegDemuxerImp::ReadFrame() {
         compassedFrame->duration           = pkt.duration;
         compassedFrame->frameDataSize       = pkt.size;
         compassedFrame->frameData           = (int8_t *)malloc(pkt.size);
-        memcpy(compassedFrame->frameData, pkt.buf, pkt.size);
+        memcpy(compassedFrame->frameData, pkt.data, pkt.size);
         av_packet_unref(&pkt);
 
         return compassedFrame;

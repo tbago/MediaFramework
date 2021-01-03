@@ -7,8 +7,8 @@
 //
 
 #import "ViewController.h"
-#import <FFMpegDemuxer/FFMpegDemuxer.h>
-#import <FFMpegDecoder/FFMpegDecoder.h>
+#include <FFMpegDemuxer/FFMpegDemuxer.h>
+#include <FFMpegDecoder/FFMpegDecoder.h>
 
 #import "OpenGLView20.h"
 
@@ -18,30 +18,33 @@
 
 @interface ViewController ()
 {
-    RTMP *_rtmpClient;
+    media_demuxer::FFMpegDemuxer             *_ffmpegDemuxer;
+    media_decoder::FFMpegDecoderEnumerator    *_ffDecoderEnumerator;
+    media_decoder::FFMpegDecoder             *_ffDecoder;
+
+    RTMP                                  *_rtmpClient;
+    std::vector<media_base::CompassedFrame *> compassedFrameVector;
 }
-@property (strong, nonatomic) FFMpegDemuxer             *ffmpegDemuxer;
-@property (strong, nonatomic) FFMpegDecoderEnumerator   *ffDecoderEnumerator;
-@property (strong, nonatomic) FFMpegDecoder             *ffDecoder;
-@property (strong, atomic) NSMutableArray               *compassedFrameArray;
-@property (nonatomic) BOOL                              stopDecoder;
-@property (weak, nonatomic) IBOutlet OpenGLView20       *glView;
+
+@property (nonatomic) BOOL                            stopDecoder;
+@property (weak, nonatomic) IBOutlet OpenGLView20        *glView;
 ///< rtmp live
 @property (nonatomic) int64_t                           startPts;
-@property (atomic)    BOOL                              stopLive;
+@property (atomic)    BOOL                             stopLive;
 @end
 
 @implementation ViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
+    _ffmpegDemuxer = media_demuxer::CreateFFMpegDemuxer();
+    _ffDecoderEnumerator = new media_decoder::FFMpegDecoderEnumerator();
 }
 
 - (IBAction)testButtonClick:(UIButton *)sender {
 //    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"demo" ofType:@"mp4"];
     NSString *filePath = @"rtmp://192.168.0.104:1935/live/live1";
-    BOOL openRet = [self.ffmpegDemuxer openFileByPath:filePath];
+    bool openRet = _ffmpegDemuxer->OpenFileByPath(filePath.UTF8String);
     if (!openRet) {
         return;
     }
@@ -50,19 +53,15 @@
     return;
     
 ///< rtmp live test
-    if (self.compassedFrameArray == nil) {
-        self.compassedFrameArray = [[NSMutableArray alloc] init];
-    }
-    [self.compassedFrameArray removeAllObjects];
-    
-    MovieInfo *movieInfo = [self.ffmpegDemuxer getMovieInfoByIndex:0];
-    StreamInfo *videoStreamInfo = movieInfo.streamArray[0];     ///only for test
-    
-    NSAssert(videoStreamInfo.streamType == VideoStream, @"only for video test");
-    
+
+    media_base::MovieInfo *movieInfo = _ffmpegDemuxer->GetMovieInfo();
+    media_base::StreamInfo *videoStreamInfo = movieInfo->streams[0];     ///only for test
+
+    NSAssert(videoStreamInfo->streamType == media_base::VideoStream, @"only for video test");
+
     self.startPts          = 0;
     self.stopLive          = NO;
-    
+
     [self closeRtmpServer];
 //    [self connectRtmpServer:@"rtmp://192.168.42.12:1935/anxs/room"];
     [self connectRtmpServer:@"rtmp://send3.douyu.com/live/1257373rX0RkXHys?wsSecret=ac06c9be0eade5d8a3673871a8c95ef4&wsTime=586335ff"];
@@ -76,20 +75,20 @@
     uint32_t ppsLength       = 0;
     BOOL findSps             = NO;
     BOOL findPps             = NO;
-    uint8_t *extraDataByte   = (uint8_t *)[videoStreamInfo.extraData bytes];
+    uint8_t *extraData       = videoStreamInfo->extraData;
     do {
-        nal_unit_length = [self GetOneNalUnit:&nal_unit_type pBuffer:extraDataByte+cursor bufferSize:videoStreamInfo.extraData.length-cursor];
+        nal_unit_length = [self GetOneNalUnit:&nal_unit_type pBuffer:extraData+cursor bufferSize:videoStreamInfo->extraDataSize-cursor];
         switch (nal_unit_type)
         {
             case 9:     ///< aud
                 break;
             case 7:     ///< sps
-                spsIndex = extraDataByte+cursor;
+                spsIndex = extraData+cursor;
                 spsLength = (uint32_t)nal_unit_length;
                 findSps = YES;
                 break;
             case 8:     ///< pps
-                ppsIndex = extraDataByte+cursor;
+                ppsIndex = extraData+cursor;
                 ppsLength = (uint32_t)nal_unit_length;
                 findPps = YES;
                 break;
@@ -97,7 +96,7 @@
                 break;
         }
         cursor += nal_unit_length;
-    } while (cursor < videoStreamInfo.extraData.length);
+    } while (cursor < videoStreamInfo->extraDataSize);
     if (findSps && findPps) {
         [self rtmpWriteVideoHeader:ppsIndex ppsLen:ppsLength sps:spsIndex spsLen:spsLength];
     }
@@ -112,13 +111,13 @@
 }
 
 - (void)openDecoderForTest {
-    MovieInfo *sourceMovieInfo = [self.ffmpegDemuxer getMovieInfoByIndex:0];
+    media_base::MovieInfo *sourceMovieInfo = _ffmpegDemuxer->GetMovieInfo();
     ///< ffmpeg decoder test
-    [self.ffDecoderEnumerator initDecoderArray];
+    _ffDecoderEnumerator->InitDecoderArray();
 
-    StreamInfo *videoStreamInfo = nil;
-    for (StreamInfo *streamInfo in sourceMovieInfo.streamArray) {
-        if (streamInfo.streamType == VideoStream) {
+    media_base::StreamInfo *videoStreamInfo = nil;
+    for (media_base::StreamInfo *streamInfo : sourceMovieInfo->streams) {
+        if (streamInfo->streamType == media_base::VideoStream) {
             videoStreamInfo = streamInfo;
             break;
         }
@@ -126,17 +125,17 @@
     if (videoStreamInfo == nil) {
         return;
     }
-    self.ffDecoder = [self.ffDecoderEnumerator CreateFFMpegDecoderByCodecId:videoStreamInfo.codecID];
-    if (self.ffDecoder != NULL) {
-        AVCodecParam *codecParam = [[AVCodecParam alloc] init];
-        codecParam.width                = videoStreamInfo.width;
-        codecParam.height               = videoStreamInfo.height;
-        codecParam.codecTag             = videoStreamInfo.codecTag;
-        codecParam.bitsPerCodedSample   = videoStreamInfo.bitsPerCodedSample;
+    _ffDecoder = _ffDecoderEnumerator->CreateFFMpegDecoderByCodecId(videoStreamInfo->codecID);
+    if (_ffDecoder != NULL) {
+        media_decoder::AVCodecParam codecParam;
+        codecParam.width                = videoStreamInfo->width;
+        codecParam.height               = videoStreamInfo->height;
+        codecParam.codecTag             = videoStreamInfo->codecTag;
+        codecParam.bitsPerCodedSample    = videoStreamInfo->bitsPerCodedSample;
         codecParam.numThreads           = 1;
-        codecParam.extraData            = videoStreamInfo.extraData;
+        codecParam.extraData           = videoStreamInfo->extraData;
 
-        BOOL ret = [self.ffDecoder openCodec:codecParam];
+        BOOL ret = _ffDecoder->OpenCodec(&codecParam);
         if (!ret) {
             return;
         }
@@ -147,71 +146,62 @@
 - (void)loopReadAndDecodeStreamData {
     while(!self.stopDecoder)
     {
-        CompassedFrame *compassedFrame = [self.ffmpegDemuxer readFrame];
+        media_base::CompassedFrame *compassedFrame = _ffmpegDemuxer->ReadFrame();
         if (compassedFrame == nil) {
             continue;
         }
         else {
-            RawVideoFrame *videoFrame = [self.ffDecoder decodeVideoFrame:compassedFrame];
+            media_base::RawVideoFrame *videoFrame = _ffDecoder->DecodeVideoFrame(compassedFrame);
+            delete compassedFrame;
             if (videoFrame == NULL) {
                 continue;
             }
             else {
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [self renderVideoFrame:videoFrame];
+                    delete videoFrame;
                 });
             }
         }
     }
 }
 
-- (void)renderVideoFrame:(RawVideoFrame *) videoFrame {
-    uint32_t bufferSize = videoFrame.width * videoFrame.height * 3 / 2 + 1;
+- (void)renderVideoFrame:(media_base::RawVideoFrame *) videoFrame {
+    uint32_t bufferSize = videoFrame->width * videoFrame->height * 3 / 2 + 1;
     int8_t *buffer = (int8_t *)malloc(bufferSize);
     uint32_t bufferIndex = 0;
-    
+
     ///< copy y data
-    uint32_t lineSize0 = (uint32_t)[videoFrame.lineSizeArray[0] integerValue];
-    int8_t *yBuffer = (int8_t *)[videoFrame.frameDataArray[0] bytes];
-    for (uint32_t i = 0; i< videoFrame.height; i++) {
-        memcpy(buffer + bufferIndex, yBuffer + i * lineSize0, videoFrame.width);
-        bufferIndex += videoFrame.width;
+    media_base::RawVideoFrameBuffer *yFrameBuffer = videoFrame->frameBufferVector[0];
+    uint32_t lineSizeY = yFrameBuffer->lineSize;
+    int8_t *yBuffer = yFrameBuffer->frameData;
+    for (uint32_t i = 0; i< videoFrame->height; i++) {
+        memcpy(buffer + bufferIndex, yBuffer + i * lineSizeY, videoFrame->width);
+        bufferIndex += videoFrame->width;
     }
     
     ///< copy u data
-    uint32_t lineSize1 = (uint32_t)[videoFrame.lineSizeArray[1] integerValue];
-    int8_t *uBuffer = (int8_t *)[videoFrame.frameDataArray[1] bytes];
-    for (uint32_t i = 0; i< videoFrame.height/2; i++) {
-        memcpy(buffer + bufferIndex, uBuffer + i * lineSize1, videoFrame.width/2);
-        bufferIndex += videoFrame.width/2;
+    media_base::RawVideoFrameBuffer *uFrameBuffer = videoFrame->frameBufferVector[1];
+    uint32_t lineSizeU = uFrameBuffer->lineSize;
+    int8_t *uBuffer = uFrameBuffer->frameData;
+    for (uint32_t i = 0; i< videoFrame->height/2; i++) {
+        memcpy(buffer + bufferIndex, uBuffer + i * lineSizeU, videoFrame->width/2);
+        bufferIndex += videoFrame->width/2;
     }
     ///< copy v data
-    uint32_t lineSize2 = (uint32_t)[videoFrame.lineSizeArray[2] integerValue];
-    int8_t *vBuffer = (int8_t *)[videoFrame.frameDataArray[2] bytes];
-    for (uint32_t i = 0; i< videoFrame.height/2; i++) {
-        memcpy(buffer + bufferIndex, vBuffer + i * lineSize2, videoFrame.width/2);
-        bufferIndex += videoFrame.width/2;
+    media_base::RawVideoFrameBuffer *vFrameBuffer = videoFrame->frameBufferVector[2];
+    uint32_t lineSizeV = vFrameBuffer->lineSize;
+    int8_t *vBuffer = vFrameBuffer->frameData;
+    for (uint32_t i = 0; i< videoFrame->height/2; i++) {
+        memcpy(buffer + bufferIndex, vBuffer + i * lineSizeV, videoFrame->width/2);
+        bufferIndex += videoFrame->width/2;
     }
     
-    [self.glView displayYUV420pData:buffer width:videoFrame.width height:videoFrame.height];
+    [self.glView displayYUV420pData:buffer width:videoFrame->width height:videoFrame->height];
     free(buffer);
 }
 
 #pragma mark - get & set
-
-- (FFMpegDemuxer *)ffmpegDemuxer {
-    if (_ffmpegDemuxer == nil) {
-        _ffmpegDemuxer = createFFMpegDemuxer();
-    }
-    return _ffmpegDemuxer;
-}
-
-- (FFMpegDecoderEnumerator *)ffDecoderEnumerator {
-    if (_ffDecoderEnumerator == nil) {
-        _ffDecoderEnumerator = [[FFMpegDecoderEnumerator alloc] init];
-    }
-    return _ffDecoderEnumerator;
-}
 
 #pragma mark - librtmp method
 
@@ -246,14 +236,14 @@
 {
     while(!self.stopLive)
     {
-        CompassedFrame *compassedFrame = [self.ffmpegDemuxer readFrame];
+        media_base::CompassedFrame *compassedFrame = _ffmpegDemuxer->ReadFrame();
         if (compassedFrame == nil) {
             break;
         }
         else {
             ///< max cache 20 frame
-            if (self.compassedFrameArray.count < 20) {
-                [self.compassedFrameArray addObject:compassedFrame];
+            if (compassedFrameVector.size() < 20) {
+                compassedFrameVector.push_back(compassedFrame);
             }
         }
     }
@@ -262,16 +252,17 @@
 - (void)loopSendStreamData {
     while (!self.stopLive)
     {
-        if (self.compassedFrameArray.count > 0) {
-            CompassedFrame *compassedFrame = [self.compassedFrameArray firstObject];
-            
-            int64_t convertPts = compassedFrame.presentTimeStamp * 1000 / 90000;
-            [self.compassedFrameArray removeObject:compassedFrame];
+        if (compassedFrameVector.size() > 0) {
+            media_base::CompassedFrame *compassedFrame = compassedFrameVector[0];
+
+            int64_t convertPts = compassedFrame->presentTimeStamp * 1000 / 90000;
+            compassedFrameVector.erase(compassedFrameVector.begin());
             [self sendPacket:RTMP_PACKET_TYPE_VIDEO
-                    keyFrame:compassedFrame.keyFrame
-                        data:compassedFrame.frameData.bytes
-                        size:compassedFrame.frameData.length
+                    keyFrame:compassedFrame->keyFrame
+                        data:compassedFrame->frameData
+                        size:compassedFrame->frameDataSize
                   nTimeStamp:convertPts];
+            delete compassedFrame;
         }
         else {
             sleep(0.1);
@@ -280,12 +271,12 @@
 }
 
 - (BOOL)connectRtmpServer:(NSString *) rtmpURL {
-    /*分配与初始化*/
+    /*alloc and init */
     _rtmpClient = RTMP_Alloc();
     RTMP_Init(_rtmpClient);
     
     /*设置URL*/
-    if (RTMP_SetupURL(_rtmpClient, [rtmpURL UTF8String]) == FALSE) {
+    if (RTMP_SetupURL(_rtmpClient, (char *)rtmpURL.UTF8String) == FALSE) {
         NSLog(@"RTMP_SetupURL() failed!");
         RTMP_Free(_rtmpClient);
         _rtmpClient = nil;
@@ -435,7 +426,7 @@
 
 - (BOOL)sendPacket:(uint32_t) nPacketType
           keyFrame:(BOOL) keyFrame
-              data:(uint8_t *) data
+              data:(int8_t *) data
               size:(uint32_t) size
         nTimeStamp:(uint64_t) nTimestamp
 {

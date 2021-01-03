@@ -59,13 +59,6 @@ public:
     virtual media_base::RawVideoFrame * DecodeVideoFrame(media_base::CompassedFrame * compassedFrame) = 0;
 };
 
-/**
- *  Create Decoder instance
- *
- *  @return decoder instance
- */
-FFMpegDecoder *createFFmpegDecoder();
-
 }   // namespace media_decoder
 #endif // FFMPEG_DECODER_FFMPEG_DECODER_H_
 

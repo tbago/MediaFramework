@@ -47,7 +47,7 @@ struct StreamInfo
     int32_t                channels;
 
     std::map<std::string, std::string>  metaData;       // stream metata map
-    int8_t                           *extraData;     // stream extra data
+    uint8_t                          *extraData;     // stream extra data
     int32_t                          extraDataSize;  // stream extra data size
 public:
     StreamInfo();

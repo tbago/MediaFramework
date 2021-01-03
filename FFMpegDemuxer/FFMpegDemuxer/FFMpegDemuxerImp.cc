@@ -17,7 +17,7 @@ namespace media_demuxer {
 void ffmpeg_log(void* avcl, int level, const char *fmt, va_list vl);
 
 
-FFMpegDemuxer *createFFMpegDemuxer() {
+FFMpegDemuxer *CreateFFMpegDemuxer() {
     FFMpegDemuxerImp *demuxer = new FFMpegDemuxerImp();
     return demuxer;
 }
@@ -327,7 +327,7 @@ void FFMpegDemuxerImp::BuildMovieInfo(const std::string &filePath)
         ///< stream extra data
         if (codecParam->extradata != NULL && codecParam->extradata_size > 0) {
             streamInfo->extraDataSize = codecParam->extradata_size;
-            streamInfo->extraData = (int8_t *)malloc(codecParam->extradata_size);
+            streamInfo->extraData = (uint8_t *)malloc(codecParam->extradata_size);
             memcpy(streamInfo->extraData, codecParam->extradata, codecParam->extradata_size);
         }
 

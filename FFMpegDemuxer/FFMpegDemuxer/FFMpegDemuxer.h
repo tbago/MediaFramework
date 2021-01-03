@@ -12,7 +12,7 @@ namespace media_demuxer {
 /**
  *  Demuxer media file by ffmpeg
  *  This is only interface object,all method are implement by subclass
- *  Please call 'createFFMpegDemuxer' function to create instance.
+ *  Please call 'CreateFFMpegDemuxer' function to create instance.
  */
 class FFMpegDemuxer
 {
@@ -47,7 +47,7 @@ public:
  *
  *  @return demuxer instance
  */
-FFMpegDemuxer *createFFMpegDemuxer();
+FFMpegDemuxer *CreateFFMpegDemuxer();
 
 }   //namespace media_demuxer
 

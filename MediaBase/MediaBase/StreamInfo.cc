@@ -82,7 +82,7 @@ void StreamInfo::CopyStreamInfo(const StreamInfo &streamInfo) {
 
     if (streamInfo.extraDataSize > 0 && streamInfo.extraData != NULL) {
         extraDataSize = streamInfo.extraDataSize;
-        extraData = (int8_t *)malloc(extraDataSize);
+        extraData = (uint8_t *)malloc(extraDataSize);
         memcpy(extraData, streamInfo.extraData, extraDataSize);
     }
 }

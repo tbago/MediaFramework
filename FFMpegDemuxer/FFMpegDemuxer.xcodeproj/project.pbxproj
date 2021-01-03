@@ -139,7 +139,7 @@
 		D040599C1E078C6600BEC12E /* FFMpegCommon.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; path = FFMpegCommon.h; sourceTree = "<group>"; };
 		D040599D1E078C6600BEC12E /* FFMpegCommon.cc */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; path = FFMpegCommon.cc; sourceTree = "<group>"; };
 		D0940DAD1E0377A6001637A5 /* FFMpegDemuxer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FFMpegDemuxer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		D0940DB01E0377A7001637A5 /* FFMpegDemuxer.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; path = FFMpegDemuxer.h; sourceTree = "<group>"; };
+		D0940DB01E0377A7001637A5 /* FFMpegDemuxer.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; path = FFMpegDemuxer.h; sourceTree = "<group>"; };
 		D0940DB21E0377A7001637A5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D0940DE11E037807001637A5 /* FFMpegDemuxerImp.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; path = FFMpegDemuxerImp.h; sourceTree = "<group>"; };
 		D0940DE21E037807001637A5 /* FFMpegDemuxerImp.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FFMpegDemuxerImp.cc; sourceTree = "<group>"; };

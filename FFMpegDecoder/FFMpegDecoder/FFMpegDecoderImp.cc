@@ -151,7 +151,7 @@ media_base::RawVideoFrame * FFMpegDecoderImp::InnerDecodeVideoFrame(media_base::
     AVFrame *decodedVideoFrame = av_frame_alloc();
     int ret = avcodec_send_packet(&_avcodecContext, &avpkt);
     if (ret != 0) {
-        printf("send video packet failed");
+        printf("send video packet failed\n");
         av_frame_unref(decodedVideoFrame);
         return NULL;
     }

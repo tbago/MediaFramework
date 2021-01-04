@@ -14,6 +14,9 @@
       location = "group:FFMpegDecoder/FFMpegDecoder.xcodeproj">
    </FileRef>
    <FileRef
+      location = "group:MediaPlayer/MediaPlayer.xcodeproj">
+   </FileRef>
+   <FileRef
       location = "group:MediaFrameworkTest/MediaFrameworkTest.xcodeproj">
    </FileRef>
 </Workspace>

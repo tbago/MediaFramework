@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D00117F025A36488004BBB98 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D00117EF25A36488004BBB98 /* MediaPlayer.framework */; };
+		D00117F125A36488004BBB98 /* MediaPlayer.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D00117EF25A36488004BBB98 /* MediaPlayer.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D00117F425A364BB004BBB98 /* OpenGLView.m in Sources */ = {isa = PBXBuildFile; fileRef = D00117F325A364BB004BBB98 /* OpenGLView.m */; };
 		D08C324B25A1654800435903 /* Base.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D08C324A25A1654800435903 /* Base.framework */; };
 		D08C324C25A1654800435903 /* Base.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D08C324A25A1654800435903 /* Base.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D08C324E25A1654C00435903 /* FFMpegDecoder.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D08C324D25A1654C00435903 /* FFMpegDecoder.framework */; };
@@ -38,6 +41,7 @@
 			dstSubfolderSpec = 10;
 			files = (
 				D08C324F25A1654C00435903 /* FFMpegDecoder.framework in Embed Frameworks */,
+				D00117F125A36488004BBB98 /* MediaPlayer.framework in Embed Frameworks */,
 				D08C325225A1655000435903 /* FFMpegDemuxer.framework in Embed Frameworks */,
 				D08C325525A1655500435903 /* MediaBase.framework in Embed Frameworks */,
 				D08C324C25A1654800435903 /* Base.framework in Embed Frameworks */,
@@ -48,6 +52,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		D00117EF25A36488004BBB98 /* MediaPlayer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = MediaPlayer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D00117F225A364BB004BBB98 /* OpenGLView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OpenGLView.h; sourceTree = "<group>"; };
+		D00117F325A364BB004BBB98 /* OpenGLView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OpenGLView.m; sourceTree = "<group>"; };
 		D08C324A25A1654800435903 /* Base.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Base.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D08C324D25A1654C00435903 /* FFMpegDecoder.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FFMpegDecoder.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D08C325025A1655000435903 /* FFMpegDemuxer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FFMpegDemuxer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -87,6 +94,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D08C324E25A1654C00435903 /* FFMpegDecoder.framework in Frameworks */,
+				D00117F025A36488004BBB98 /* MediaPlayer.framework in Frameworks */,
 				D08C325125A1655000435903 /* FFMpegDemuxer.framework in Frameworks */,
 				D08C325425A1655500435903 /* MediaBase.framework in Frameworks */,
 				D08C324B25A1654800435903 /* Base.framework in Frameworks */,
@@ -99,6 +107,7 @@
 		D08C324925A1654800435903 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D00117EF25A36488004BBB98 /* MediaPlayer.framework */,
 				D08C325325A1655500435903 /* MediaBase.framework */,
 				D08C325025A1655000435903 /* FFMpegDemuxer.framework */,
 				D08C324D25A1654C00435903 /* FFMpegDecoder.framework */,
@@ -132,6 +141,8 @@
 				D0940E1F1E0380E7001637A5 /* AppDelegate.m */,
 				D0940E211E0380E7001637A5 /* ViewController.h */,
 				D0940E221E0380E7001637A5 /* ViewController.mm */,
+				D00117F225A364BB004BBB98 /* OpenGLView.h */,
+				D00117F325A364BB004BBB98 /* OpenGLView.m */,
 				D0E221B51E15EA3400A98D17 /* OpenGLView20.h */,
 				D0E221B61E15EA3400A98D17 /* OpenGLView20.m */,
 				D0940E241E0380E7001637A5 /* Main.storyboard */,
@@ -255,6 +266,7 @@
 				D0A967851E136380004D4372 /* amf.c in Sources */,
 				D0940E1D1E0380E7001637A5 /* main.m in Sources */,
 				D0A967881E136380004D4372 /* parseurl.c in Sources */,
+				D00117F425A364BB004BBB98 /* OpenGLView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

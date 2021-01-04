@@ -9,7 +9,9 @@
 #import "ViewController.h"
 #include <FFMpegDemuxer/FFMpegDemuxer.h>
 #include <FFMpegDecoder/FFMpegDecoder.h>
+#include <MediaPlayer/IVideoDriver.h>
 
+#import "OpenGLView.h"
 #import "OpenGLView20.h"
 
 #import "rtmp.h"
@@ -22,12 +24,13 @@
     media_decoder::FFMpegDecoderEnumerator    *_ffDecoderEnumerator;
     media_decoder::FFMpegDecoder             *_ffVideoDecoder;
     media_decoder::FFMpegDecoder             *_ffAudioDecoder;
+    media_player::IVideoDriver               *_videoDriver;
     RTMP                                  *_rtmpClient;
     std::vector<media_base::CompassedFrame *> compassedFrameVector;
 }
 
 @property (nonatomic) BOOL                            stopDecoder;
-@property (weak, nonatomic) IBOutlet OpenGLView20        *glView;
+@property (weak, nonatomic) IBOutlet OpenGLView         *glView;
 ///< rtmp live
 @property (nonatomic) int64_t                           startPts;
 @property (atomic)    BOOL                             stopLive;
@@ -37,8 +40,28 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+
     _ffmpegDemuxer = media_demuxer::CreateFFMpegDemuxer();
     _ffDecoderEnumerator = new media_decoder::FFMpegDecoderEnumerator();
+
+    media_player::VideoDriverConfig driverConfig;
+    driverConfig.videoWindow = (__bridge void *)_glView;
+    driverConfig.driverType = media_player::DriverTypeOpenGLES;
+    driverConfig.screenScale = [UIScreen mainScreen].scale;
+
+    _videoDriver = media_player::CreateVideoDriver(driverConfig);
+    media_player::TRect rect;
+    rect.left = self.glView.bounds.origin.x;
+    rect.top = self.glView.bounds.origin.y;
+    rect.width = self.glView.bounds.size.width;
+    rect.height = self.glView.bounds.size.height;
+    _videoDriver->SetDestRect(rect);
+    _videoDriver->Begin();
 }
 
 - (IBAction)testButtonClick:(UIButton *)sender {
@@ -172,12 +195,18 @@
                 videoFrame = _ffVideoDecoder->DecodeVideoFrame(compassedFrame);
             }
             media_base::RawAudioFrame *audioFrame = NULL;
-            if (compassedFrame->streamType == media_base::AudioStream) {
-                audioFrame = _ffAudioDecoder->DecodeAudioFrame(compassedFrame);
-            }
+//            if (compassedFrame->streamType == media_base::AudioStream) {
+//                audioFrame = _ffAudioDecoder->DecodeAudioFrame(compassedFrame);
+//            }
             delete compassedFrame;
             if (videoFrame != NULL){
                 dispatch_async(dispatch_get_main_queue(), ^{
+                    media_player::TRect rect;
+                    rect.left = self.glView.bounds.origin.x;
+                    rect.top = self.glView.bounds.origin.y;
+                    rect.width = self.glView.bounds.size.width;
+                    rect.height = self.glView.bounds.size.height;
+//                    self->_videoDriver->DrawImage(videoFrame, rect, rect);
                     [self renderVideoFrame:videoFrame];
                     delete videoFrame;
                 });
@@ -202,7 +231,7 @@
         memcpy(buffer + bufferIndex, yBuffer + i * lineSizeY, videoFrame->width);
         bufferIndex += videoFrame->width;
     }
-    
+
     ///< copy u data
     media_base::RawVideoFrameBuffer *uFrameBuffer = videoFrame->frameBufferVector[1];
     uint32_t lineSizeU = uFrameBuffer->lineSize;
@@ -219,8 +248,8 @@
         memcpy(buffer + bufferIndex, vBuffer + i * lineSizeV, videoFrame->width/2);
         bufferIndex += videoFrame->width/2;
     }
-    
-    [self.glView displayYUV420pData:buffer width:videoFrame->width height:videoFrame->height];
+
+//    [self.glView displayYUV420pData:buffer width:videoFrame->width height:videoFrame->height];
     free(buffer);
 }
 

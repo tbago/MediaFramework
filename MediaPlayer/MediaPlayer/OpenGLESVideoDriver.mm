@@ -63,11 +63,7 @@ void OpenGLESVideoDriver::Free() {
     delete this;
 }
 
-void OpenGLESVideoDriver::SetDestRect(const TRect &destRect) {
-    _destRect = destRect;
-}
-
-bool OpenGLESVideoDriver::Begin() {
+bool OpenGLESVideoDriver::Init() {
     UIView *pView = (__bridge UIView *)_uiView;
 
     CAEAGLLayer *eaglLayer = (CAEAGLLayer*)pView.layer;
@@ -76,13 +72,14 @@ bool OpenGLESVideoDriver::Begin() {
     eaglLayer.drawableProperties = [NSDictionary dictionaryWithObjectsAndKeys:
                                     [NSNumber numberWithBool:NO], kEAGLDrawablePropertyRetainedBacking,
                                     kEAGLColorFormatRGB565, kEAGLDrawablePropertyColorFormat,
-                                    //[NSNumber numberWithBool:YES], kEAGLDrawablePropertyRetainedBacking,
                                     nil];
     pView.contentScaleFactor = _viewScale;
 
     _glContext = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
 
     if (!_glContext || ![EAGLContext setCurrentContext:_glContext]) {
+        GLenum error = glGetError();
+        printf("set context failed: %d\n", error);
         return false;
     }
 
@@ -100,11 +97,28 @@ bool OpenGLESVideoDriver::Begin() {
     glUniform1i(textureUniformY, 0);
     glUniform1i(textureUniformU, 1);
     glUniform1i(textureUniformV, 2);
+
+    _videoWidth = 0;
+    _videoHeight = 0;
+    return true;
+}
+
+void OpenGLESVideoDriver::SetDestRect(const TRect &destRect) {
+    _destRect = destRect;
+
+    [EAGLContext setCurrentContext:_glContext];
+    DestoryFrameAndRenderBuffer();
+    CreateFrameAndRenderBuffer();
+
+    glViewport(1, 1, _destRect.width*_viewScale - 2, _destRect.height*_viewScale - 2);
+}
+
+bool OpenGLESVideoDriver::Begin() {
     return true;
 }
 
 bool OpenGLESVideoDriver::FillRect(const TRect &destRect, const TColor &fillColor) {
-    //TODO: (anxs) not implement only draw black back
+    //TODO: (anxs) not implement only draw black
     int32_t width = destRect.width;
     int32_t height = destRect.height;
     int8_t *blackData = (int8_t*)malloc(width * height * 1.5);
@@ -127,47 +141,48 @@ bool OpenGLESVideoDriver::FillRect(const TRect &destRect, const TColor &fillColo
 bool OpenGLESVideoDriver::DrawImage(media_base::RawVideoFrame *videoFrame, const TRect &srcRect, const TRect &destRect) {
     GLsizei width = videoFrame->width;
     GLsizei height = videoFrame->height;
-    BuildFrameData(videoFrame);
-    int8_t *data = _frameData;
+    if (width != _videoWidth || height != _videoHeight)
+    {
+        SetVideoSize(width, height);
+    }
+    int8_t *data  = BuildFrameData(videoFrame);
     [EAGLContext setCurrentContext:_glContext];
-     glBindTexture(GL_TEXTURE_2D, _textureYUV[TEXY]);
+    glBindTexture(GL_TEXTURE_2D, _textureYUV[TEXY]);
 
-     //glTexSubImage2D(GLenum target, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, GLenum format, GLenum type, const GLvoid* pixels);
+    glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, width, height, GL_RED_EXT, GL_UNSIGNED_BYTE, data);
 
-     glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, width, height, GL_RED_EXT, GL_UNSIGNED_BYTE, data);
+    glBindTexture(GL_TEXTURE_2D, _textureYUV[TEXU]);
+    glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, width/2, height/2, GL_RED_EXT, GL_UNSIGNED_BYTE, data + width * height);
+    glBindTexture(GL_TEXTURE_2D, _textureYUV[TEXV]);
+    glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, width/2, height/2, GL_RED_EXT, GL_UNSIGNED_BYTE, data + width * height * 5 / 4);
 
-     glBindTexture(GL_TEXTURE_2D, _textureYUV[TEXU]);
-     glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, width/2, height/2, GL_RED_EXT, GL_UNSIGNED_BYTE, data + width * height);
-     glBindTexture(GL_TEXTURE_2D, _textureYUV[TEXV]);
-     glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, width/2, height/2, GL_RED_EXT, GL_UNSIGNED_BYTE, data + width * height * 5 / 4);
+    [EAGLContext setCurrentContext:_glContext];
+    glViewport(1, 1, destRect.width * _viewScale -2, destRect.height * _viewScale - 2);
 
-    glViewport(destRect.left * _viewScale, destRect.top * _viewScale, destRect.width * _viewScale, destRect.height * _viewScale);
-
-     static const GLfloat squareVertices[] = {
-         -1.0f, -1.0f,
-         1.0f, -1.0f,
-         -1.0f,  1.0f,
-         1.0f,  1.0f,
-     };
+    static const GLfloat squareVertices[] = {
+        -1.0f, -1.0f,
+        1.0f, -1.0f,
+        -1.0f,  1.0f,
+        1.0f,  1.0f,
+    };
 
 
-     static const GLfloat coordVertices[] = {
-         0.0f, 1.0f,
-         1.0f, 1.0f,
-         0.0f,  0.0f,
-         1.0f,  0.0f,
-     };
+    static const GLfloat coordVertices[] = {
+        0.0f, 1.0f,
+        1.0f, 1.0f,
+        0.0f,  0.0f,
+        1.0f,  0.0f,
+    };
 
-     // Update attribute values
-     glVertexAttribPointer(ATTRIB_VERTEX, 2, GL_FLOAT, 0, 0, squareVertices);
-     glEnableVertexAttribArray(ATTRIB_VERTEX);
+    // Update attribute values
+    glVertexAttribPointer(ATTRIB_VERTEX, 2, GL_FLOAT, 0, 0, squareVertices);
+    glEnableVertexAttribArray(ATTRIB_VERTEX);
 
-     glVertexAttribPointer(ATTRIB_TEXTURE, 2, GL_FLOAT, 0, 0, coordVertices);
-     glEnableVertexAttribArray(ATTRIB_TEXTURE);
-
-     // Draw
-     glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
-     glBindRenderbuffer(GL_RENDERBUFFER, _renderBuffer);
+    glVertexAttribPointer(ATTRIB_TEXTURE, 2, GL_FLOAT, 0, 0, coordVertices);
+    glEnableVertexAttribArray(ATTRIB_TEXTURE);
+    // Draw
+    glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+    glBindRenderbuffer(GL_RENDERBUFFER, _renderBuffer);
     [_glContext presentRenderbuffer:GL_RENDERBUFFER];
     return true;
 }
@@ -187,9 +202,10 @@ OpenGLESVideoDriver::~OpenGLESVideoDriver() {
         free(_frameData);
         _frameData = NULL;
     }
+    DestoryFrameAndRenderBuffer();
 }
 
-void OpenGLESVideoDriver::BuildFrameData(media_base::RawVideoFrame *videoFrame) {
+int8_t * OpenGLESVideoDriver::BuildFrameData(media_base::RawVideoFrame *videoFrame) {
     //TODO: (anxs) not support width height change
     if (_frameData == NULL) {
         uint32_t bufferSize = videoFrame->width * videoFrame->height * 3 / 2 + 1;
@@ -222,6 +238,7 @@ void OpenGLESVideoDriver::BuildFrameData(media_base::RawVideoFrame *videoFrame) 
         memcpy(_frameData + bufferIndex, vBuffer + i * lineSizeV, videoFrame->width/2);
         bufferIndex += videoFrame->width/2;
     }
+    return _frameData;
 }
 
 bool OpenGLESVideoDriver::SetupYUVTexture() {
@@ -361,7 +378,7 @@ bool OpenGLESVideoDriver::CreateFrameAndRenderBuffer() {
         printf("Create buffer failed 0x%x", glCheckFramebufferStatus(GL_FRAMEBUFFER));
         return false;
     }
-    return false;
+    return true;
 }
 
 void OpenGLESVideoDriver::DestoryFrameAndRenderBuffer() {
@@ -377,5 +394,24 @@ void OpenGLESVideoDriver::DestoryFrameAndRenderBuffer() {
     _renderBuffer = 0;
 }
 
+void OpenGLESVideoDriver::SetVideoSize(GLuint width, GLuint height) {
+    _videoWidth = width;
+    _videoHeight = height;
+
+    int8_t *blackData = (int8_t*)malloc(width * height * 1.5);
+    if(blackData) {
+        memset(blackData, 0x0, width * height * 1.5);
+    }
+
+    [EAGLContext setCurrentContext:_glContext];
+    glBindTexture(GL_TEXTURE_2D, _textureYUV[TEXY]);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RED_EXT, width, height, 0, GL_RED_EXT, GL_UNSIGNED_BYTE, blackData);
+    glBindTexture(GL_TEXTURE_2D, _textureYUV[TEXU]);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RED_EXT, width/2, height/2, 0, GL_RED_EXT, GL_UNSIGNED_BYTE, blackData + width * height);
+
+    glBindTexture(GL_TEXTURE_2D, _textureYUV[TEXV]);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RED_EXT, width/2, height/2, 0, GL_RED_EXT, GL_UNSIGNED_BYTE, blackData + width * height * 5 / 4);
+    free(blackData);
+}
 }   // namespace media_player
 

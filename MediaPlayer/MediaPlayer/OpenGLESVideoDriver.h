@@ -20,6 +20,7 @@ class OpenGLESVideoDriver : public IVideoDriver
 {
 public:
     virtual void Free();
+    virtual bool Init();
     virtual void SetDestRect(const TRect &destRect);
     virtual bool Begin();
     virtual bool FillRect(const TRect &destRect, const TColor &fillColor);
@@ -29,17 +30,20 @@ public:
     OpenGLESVideoDriver(void * uiView, int32_t screenScale);
     virtual ~OpenGLESVideoDriver();
 private:
-    void BuildFrameData(media_base::RawVideoFrame *videoFrame);
+    int8_t * BuildFrameData(media_base::RawVideoFrame *videoFrame);
     bool SetupYUVTexture();
     bool LoadShader();
     GLuint CompileShader(const char * shaderString, GLenum shaderType);
     bool CreateFrameAndRenderBuffer();
     void DestoryFrameAndRenderBuffer();
+    void SetVideoSize(GLuint width, GLuint height);
 private:
     TRect       _destRect;
     void        *_uiView;
     GLsizei     _viewScale;
     int8_t      *_frameData;     ///< frame data
+    int32_t     _videoWidth;
+    int32_t     _videoHeight;
 private:
     EAGLContext *_glContext;     ///<  OpenGL context
     GLuint      _textureYUV[3]; ///<  YUV texture array

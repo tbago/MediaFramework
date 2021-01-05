@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#include <MediaPlayer/IVideoDriver.h>
 
 NS_ASSUME_NONNULL_BEGIN
 

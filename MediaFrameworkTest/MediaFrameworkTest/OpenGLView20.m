@@ -76,26 +76,22 @@ enum TextureType
 - (BOOL)doInit
 {
     CAEAGLLayer *eaglLayer = (CAEAGLLayer*) self.layer;
-    //eaglLayer.opaque = YES;
-    
     eaglLayer.opaque = YES;
+
     eaglLayer.drawableProperties = [NSDictionary dictionaryWithObjectsAndKeys:
                                     [NSNumber numberWithBool:NO], kEAGLDrawablePropertyRetainedBacking,
                                     kEAGLColorFormatRGB565, kEAGLDrawablePropertyColorFormat,
-                                    //[NSNumber numberWithBool:YES], kEAGLDrawablePropertyRetainedBacking,
                                     nil];
     self.contentScaleFactor = [UIScreen mainScreen].scale;
     _viewScale = [UIScreen mainScreen].scale;
     
     _glContext = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
     
-    //[self debugGlError];
-    
     if(!_glContext || ![EAGLContext setCurrentContext:_glContext])
     {
         return NO;
     }
-    
+
     [self setupYUVTexture];
     [self loadShader];
     glUseProgram(_program);
@@ -138,16 +134,10 @@ enum TextureType
 
 - (void)layoutSubviews
 {
-    dispatch_async(dispatch_get_global_queue(0, 0), ^{
-        @synchronized(self)
-        {
-            [EAGLContext setCurrentContext:_glContext];
-            [self destoryFrameAndRenderBuffer];
-            [self createFrameAndRenderBuffer];
-        }
-        
-        glViewport(1, 1, self.bounds.size.width*_viewScale - 2, self.bounds.size.height*_viewScale - 2);
-    });
+    [EAGLContext setCurrentContext:_glContext];
+    [self destoryFrameAndRenderBuffer];
+    [self createFrameAndRenderBuffer];
+    glViewport(1, 1, self.bounds.size.width*_viewScale - 2, self.bounds.size.height*_viewScale - 2);
 }
 
 - (void)setupYUVTexture
@@ -429,37 +419,36 @@ TexCoordOut = TexCoordIn;\
         [self render];
     }
     
-#ifdef DEBUG
-    
-    GLenum err = glGetError();
-    if (err != GL_NO_ERROR)
-    {
-        printf("GL_ERROR=======>%d\n", err);
-    }
-    struct timeval nowtime;
-    gettimeofday(&nowtime, NULL);
-    if (nowtime.tv_sec != _time.tv_sec)
-    {
-        printf("视频 %d 帧率:   %d\n", self.tag, _frameRate);
-        memcpy(&_time, &nowtime, sizeof(struct timeval));
-        _frameRate = 1;
-    }
-    else
-    {
-        _frameRate++;
-    }
-#endif
+//#ifdef DEBUG
+//
+//    GLenum err = glGetError();
+//    if (err != GL_NO_ERROR)
+//    {
+//        printf("GL_ERROR=======>%d\n", err);
+//    }
+//    struct timeval nowtime;
+//    gettimeofday(&nowtime, NULL);
+//    if (nowtime.tv_sec != _time.tv_sec)
+//    {
+//        printf("视频 %d 帧率:   %d\n", self.tag, _frameRate);
+//        memcpy(&_time, &nowtime, sizeof(struct timeval));
+//        _frameRate = 1;
+//    }
+//    else
+//    {
+//        _frameRate++;
+//    }
+//#endif
 }
 
 - (void)setVideoSize:(GLuint)width height:(GLuint)height
 {
     _videoW = width;
     _videoH = height;
-    
     void *blackData = malloc(width * height * 1.5);
-    if(blackData)
-        //bzero(blackData, width * height * 1.5);
+    if(blackData) {
         memset(blackData, 0x0, width * height * 1.5);
+    }
     
     [EAGLContext setCurrentContext:_glContext];
     glBindTexture(GL_TEXTURE_2D, _textureYUV[TEXY]);
@@ -470,20 +459,6 @@ TexCoordOut = TexCoordIn;\
     glBindTexture(GL_TEXTURE_2D, _textureYUV[TEXV]);
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RED_EXT, width/2, height/2, 0, GL_RED_EXT, GL_UNSIGNED_BYTE, blackData + width * height * 5 / 4);
     free(blackData);
-}
-
-
-- (void)clearFrame
-{
-    if ([self window])
-    {
-        [EAGLContext setCurrentContext:_glContext];
-        glClearColor(0.0, 0.0, 0.0, 1.0);
-        glClear(GL_COLOR_BUFFER_BIT);
-        glBindRenderbuffer(GL_RENDERBUFFER, _renderBuffer);
-        [_glContext presentRenderbuffer:GL_RENDERBUFFER];
-    }
-    
 }
 
 @end

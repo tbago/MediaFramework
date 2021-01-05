@@ -30,7 +30,7 @@
 }
 
 @property (nonatomic) BOOL                            stopDecoder;
-@property (weak, nonatomic) IBOutlet OpenGLView         *glView;
+@property (weak, nonatomic) IBOutlet OpenGLView          *glView;
 ///< rtmp live
 @property (nonatomic) int64_t                           startPts;
 @property (atomic)    BOOL                             stopLive;
@@ -50,18 +50,20 @@
     _ffDecoderEnumerator = new media_decoder::FFMpegDecoderEnumerator();
 
     media_player::VideoDriverConfig driverConfig;
-    driverConfig.videoWindow = (__bridge void *)_glView;
+    driverConfig.videoWindow = (__bridge void *)self.glView;
     driverConfig.driverType = media_player::DriverTypeOpenGLES;
     driverConfig.screenScale = [UIScreen mainScreen].scale;
 
     _videoDriver = media_player::CreateVideoDriver(driverConfig);
+
+    _videoDriver->Init();
+
     media_player::TRect rect;
     rect.left = self.glView.bounds.origin.x;
     rect.top = self.glView.bounds.origin.y;
     rect.width = self.glView.bounds.size.width;
     rect.height = self.glView.bounds.size.height;
     _videoDriver->SetDestRect(rect);
-    _videoDriver->Begin();
 }
 
 - (IBAction)testButtonClick:(UIButton *)sender {
@@ -201,13 +203,14 @@
             delete compassedFrame;
             if (videoFrame != NULL){
                 dispatch_async(dispatch_get_main_queue(), ^{
+//                    [self.glView DrawImage:videoFrame];
                     media_player::TRect rect;
                     rect.left = self.glView.bounds.origin.x;
                     rect.top = self.glView.bounds.origin.y;
                     rect.width = self.glView.bounds.size.width;
                     rect.height = self.glView.bounds.size.height;
-//                    self->_videoDriver->DrawImage(videoFrame, rect, rect);
-                    [self renderVideoFrame:videoFrame];
+                    self->_videoDriver->DrawImage(videoFrame, rect, rect);
+//                    [self renderVideoFrame:videoFrame];
                     delete videoFrame;
                 });
             }

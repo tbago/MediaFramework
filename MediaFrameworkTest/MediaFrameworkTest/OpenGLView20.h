@@ -63,9 +63,4 @@
 - (void)displayYUV420pData:(void *)data width:(NSInteger)w height:(NSInteger)h;
 - (void)setVideoSize:(GLuint)width height:(GLuint)height;
 
-/** 
- 清除画面
- */
-- (void)clearFrame;
-
 @end

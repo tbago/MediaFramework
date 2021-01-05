@@ -8,11 +8,28 @@
 
 #import "OpenGLView.h"
 
+
+@interface OpenGLView()
+{
+
+}
+@end
+
 @implementation OpenGLView
 
 + (Class)layerClass
 {
     return [CAEAGLLayer class];
+}
+
+- (id)initWithCoder:(NSCoder *)aDecoder
+{
+    self = [super initWithCoder:aDecoder];
+    if (self)
+    {
+
+    }
+    return self;
 }
 
 @end

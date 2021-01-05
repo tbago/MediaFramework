@@ -9,7 +9,7 @@
 #ifndef MEDIA_PLAYER_I_VIDEO_DRIVER_H_
 #define MEDIA_PLAYER_I_VIDEO_DRIVER_H_
 
-#include "MediaBase/RawVideoFrame.h"
+#include <MediaBase/RawVideoFrame.h>
 
 namespace media_player
 {
@@ -55,6 +55,11 @@ public:
     @brief free current object
     */
     virtual void Free() = 0;
+    /*
+     * @brief Init video driver
+     * @return result for init
+     */
+    virtual bool Init() = 0;
     /*!
     @brief set dest rect size
     @param destRect dest rect size

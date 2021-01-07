@@ -27,6 +27,7 @@ StreamInfo::StreamInfo()
     sampleFormat                = R_SAMPLE_FMT_NB;
     samplerate                  = -1;
     channels                    = -1;
+    frameSize                   = 0;
 
     extraData                   = NULL;
     extraDataSize               = 0;
@@ -70,6 +71,7 @@ void StreamInfo::CopyStreamInfo(const StreamInfo &streamInfo) {
     sampleFormat = streamInfo.sampleFormat;
     samplerate = streamInfo.samplerate;
     channels = streamInfo.channels;
+    frameSize = streamInfo.frameSize;
 
     metaData.clear();
     for (auto it = streamInfo.metaData.begin(); it != streamInfo.metaData.end(); it++) {

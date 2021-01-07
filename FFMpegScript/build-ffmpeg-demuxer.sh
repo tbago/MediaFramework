@@ -9,7 +9,7 @@ SCRATCH="../FFMpegOutput/ScratchDemuxer"
 THIN=`pwd`/"ThinDemuxer"
 
 CONFIGURE_FLAGS="--enable-cross-compile --disable-debug --disable-programs \
-                 --disable-doc --enable-pic --disable-encoders --disable-muxers --disable-decoders --enable-network --enable-protocols --disable-devices --disable-filters --disable-bsfs --disable-ffplay --disable-ffprobe --disable-ffmpeg --disable-iconv"
+                 --disable-doc --enable-pic --disable-encoders --disable-muxers --disable-decoders --enable-decoder=aac --enable-decoder=ac3 --enable-network --enable-protocols --disable-devices --disable-filters --disable-bsfs --disable-ffplay --disable-ffprobe --disable-ffmpeg --disable-iconv"
 
 ARCHS="arm64"
 

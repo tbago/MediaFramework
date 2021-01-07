@@ -291,6 +291,7 @@ void FFMpegDemuxerImp::BuildMovieInfo(const std::string &filePath)
             streamInfo->channels = codecParam->channels;
             streamInfo->samplerate = codecParam->sample_rate;
             streamInfo->sampleFormat = FFMpegSampleFormatToMediaSampleFormat((AVSampleFormat)codecParam->format);
+            streamInfo->frameSize = codecParam->frame_size;
         }
         else if (codecParam->codec_type == AVMEDIA_TYPE_SUBTITLE) {
             streamInfo->streamType = media_base::SubtitleStream;

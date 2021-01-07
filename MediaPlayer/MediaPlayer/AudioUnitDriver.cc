@@ -40,7 +40,11 @@ static OSStatus AudioPlayBack(void *inRefCon,
     return noErr;
 }
 
-bool AudioUnitDriver::Open(uint32_t channels, uint32_t sampleRate, media_base::ResuableSampleFormat sampleFormat, AudioDriverCallback callback, void *callbackParam)
+bool AudioUnitDriver::Open(uint32_t channels,
+                        uint32_t sampleRate,
+                        media_base::ResuableSampleFormat sampleFormat,
+                        int32_t frameSize,
+                        AudioDriverCallback callback, void *callbackParam)
 {
     AudioComponentDescription  desc;
     desc.componentType         = kAudioUnitType_Output;         //audio output
@@ -78,17 +82,35 @@ bool AudioUnitDriver::Open(uint32_t channels, uint32_t sampleRate, media_base::R
     audioFormat.mBitsPerChannel   = GetBitPerChannel(sampleFormat);
     audioFormat.mChannelsPerFrame = channels;
     audioFormat.mFormatID         = kAudioFormatLinearPCM;
-    audioFormat.mFormatFlags      = kAudioFormatFlagIsSignedInteger | kAudioFormatFlagIsPacked;
-    audioFormat.mFramesPerPacket  = 1;
-    audioFormat.mBytesPerPacket   = 2;
-    audioFormat.mBytesPerFrame    = 2;
+    // TODO: (tbago) need support more format
+    if (sampleFormat == media_base::R_SAMPLE_FMT_S16) {
+        audioFormat.mFormatFlags      = kAudioFormatFlagIsSignedInteger | kAudioFormatFlagIsPacked;
+        audioFormat.mBytesPerFrame    = 2;
+    }
+    else if (sampleFormat == media_base::R_SAMPLE_FMT_S16P) {
+        audioFormat.mFormatFlags      = kAudioFormatFlagIsSignedInteger | kAudioFormatFlagIsPacked;
+        audioFormat.mBytesPerFrame    = 2;
+    }
+    else if (sampleFormat == media_base::R_SAMPLE_FMT_FLTP) {
+        audioFormat.mFormatFlags      = kAudioFormatFlagIsFloat| kAudioFormatFlagIsPacked;
+        audioFormat.mBytesPerFrame    = 4;
+    }
+    else if (sampleFormat == media_base::R_SAMPLE_FMT_FLT) {
+        audioFormat.mFormatFlags      = kAudioFormatFlagIsFloat | kAudioFormatFlagIsPacked;
+        audioFormat.mBytesPerFrame    = 4;
+    }
+    else {
+        assert(false);
+    }
+    audioFormat.mFramesPerPacket  = frameSize;
+    audioFormat.mBytesPerPacket   = audioFormat.mChannelsPerFrame * audioFormat.mBytesPerFrame * audioFormat.mFramesPerPacket;
 
     status = AudioUnitSetProperty(_audioPlayer,
-                                  kAudioUnitProperty_StreamFormat,
-                                  kAudioUnitScope_Input,
-                                  0,
-                                  &audioFormat,
-                                  sizeof(audioFormat));
+                               kAudioUnitProperty_StreamFormat,
+                               kAudioUnitScope_Input,
+                               0,
+                               &audioFormat,
+                               sizeof(audioFormat));
     if (status != 0) {
         printf("set audio param failed:%d\n", status);
         return false;

@@ -19,6 +19,7 @@ public:
     virtual bool Open(uint32_t channels,
                     uint32_t sampleRate,
                     media_base::ResuableSampleFormat sampleFormat,
+                    int32_t frameSize,
                     AudioDriverCallback callback, void *callbackParam);
     virtual bool Play();
     virtual bool Close();

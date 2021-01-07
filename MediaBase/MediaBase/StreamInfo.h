@@ -45,7 +45,7 @@ struct StreamInfo
     ResuableSampleFormat     sampleFormat;
     int32_t                samplerate;
     int32_t                channels;
-
+    int32_t                frameSize;                 ///< Compassde audio frame size
     std::map<std::string, std::string>  metaData;       // stream metata map
     uint8_t                          *extraData;     // stream extra data
     int32_t                          extraDataSize;  // stream extra data size

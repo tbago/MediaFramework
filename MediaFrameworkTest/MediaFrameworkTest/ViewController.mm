@@ -128,7 +128,12 @@ media_player::AudioDriverCallbackState AudioDriverCallback(void *callbackParam, 
         }
 
         _audioDriver = media_player::CreateAudioDriver();
-        _audioDriver->Open(audioStreamInfo->channels, audioStreamInfo->sampleFormat, audioStreamInfo->sampleFormat, AudioDriverCallback, (__bridge void *)self);
+        _audioDriver->Open(audioStreamInfo->channels,
+                           audioStreamInfo->samplerate,
+                           audioStreamInfo->sampleFormat,
+                           audioStreamInfo->frameSize,
+                           AudioDriverCallback,
+                           (__bridge void *)self);
         _audioDriver->Play();
     }
 

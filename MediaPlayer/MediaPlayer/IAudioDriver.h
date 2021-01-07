@@ -10,10 +10,26 @@
 #define MEDIA_PLAYER_IAUDIO_DRIVER_H_
 
 #include <MediaBase/ResuableSampleFormat.h>
+#include <stdint.h>
 
 namespace media_player {
 
-class IVideoDriver
+typedef enum
+{
+    CallBackStateContinue = 0,
+    CallBackStateComplete = 1,
+    CallBackStateAbort = 2
+} AudioDriverCallbackState;
+
+/*!
+@brief AudioDriver callback function
+@param callbackParam custom callback param
+@param buffer buffer  is a pointer to the audio buffer you want to fill with information
+@param bufferSize  size is the length of the audio buffer in bytes
+*/
+typedef AudioDriverCallbackState (*AudioDriverCallback)(void *callbackParam, void *buffer, uint32_t bufferSize);
+
+class IAudioDriver
 {
 public:
     /*!
@@ -32,8 +48,11 @@ public:
     /*!
     @brief close Audio Driver
     */
-    virtual void Close() = 0;
+    virtual bool Close() = 0;
 };
+
+// FIXME:(tbag) for now only support one type audio driver for iOS
+IAudioDriver *CreateAudioDriver();
 
 }   // namespace media_player
 #endif  // MEDIA_PLAYER_IAUDIO_DRIVER_H_

@@ -17,6 +17,9 @@
 		D00117EE25A363C0004BBB98 /* VideoDriverFactory.mm in Sources */ = {isa = PBXBuildFile; fileRef = D00117ED25A363C0004BBB98 /* VideoDriverFactory.mm */; };
 		D08C327225A1F91600435903 /* MediaPlayer.h in Headers */ = {isa = PBXBuildFile; fileRef = D08C327025A1F91600435903 /* MediaPlayer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D08C327925A1FB3F00435903 /* MediaPlayer.cc in Sources */ = {isa = PBXBuildFile; fileRef = D08C327825A1FB3F00435903 /* MediaPlayer.cc */; };
+		D08E9CE425A6017700B01604 /* AudioUnitDriver.cc in Sources */ = {isa = PBXBuildFile; fileRef = D08E9CE225A6017700B01604 /* AudioUnitDriver.cc */; };
+		D08E9CE525A6017700B01604 /* AudioUnitDriver.h in Headers */ = {isa = PBXBuildFile; fileRef = D08E9CE325A6017700B01604 /* AudioUnitDriver.h */; };
+		D0B6E3DC25A6A704002A18D3 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0B6E3DB25A6A704002A18D3 /* AudioToolbox.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -36,7 +39,7 @@
 /* Begin PBXFileReference section */
 		D00117DC25A34401004BBB98 /* OpenGLESVideoDriver.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = OpenGLESVideoDriver.mm; sourceTree = "<group>"; };
 		D00117DD25A34401004BBB98 /* OpenGLESVideoDriver.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; path = OpenGLESVideoDriver.h; sourceTree = "<group>"; };
-		D00117E125A34BE6004BBB98 /* IAudioDriver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IAudioDriver.h; sourceTree = "<group>"; };
+		D00117E125A34BE6004BBB98 /* IAudioDriver.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; path = IAudioDriver.h; sourceTree = "<group>"; };
 		D00117E425A35925004BBB98 /* MediaBase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = MediaBase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D00117E825A35E68004BBB98 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		D00117ED25A363C0004BBB98 /* VideoDriverFactory.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = VideoDriverFactory.mm; sourceTree = "<group>"; };
@@ -45,6 +48,11 @@
 		D08C327125A1F91600435903 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D08C327825A1FB3F00435903 /* MediaPlayer.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MediaPlayer.cc; sourceTree = "<group>"; };
 		D08C327A25A1FB9300435903 /* IVideoDriver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IVideoDriver.h; sourceTree = "<group>"; };
+		D08E9CE225A6017700B01604 /* AudioUnitDriver.cc */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = AudioUnitDriver.cc; sourceTree = "<group>"; };
+		D08E9CE325A6017700B01604 /* AudioUnitDriver.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AudioUnitDriver.h; sourceTree = "<group>"; };
+		D0B6E3D725A6A679002A18D3 /* AudioUnit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioUnit.framework; path = System/Library/Frameworks/AudioUnit.framework; sourceTree = SDKROOT; };
+		D0B6E3D925A6A6CD002A18D3 /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
+		D0B6E3DB25A6A704002A18D3 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +62,7 @@
 			files = (
 				D00117E525A35925004BBB98 /* MediaBase.framework in Frameworks */,
 				D00117E925A35E68004BBB98 /* OpenGLES.framework in Frameworks */,
+				D0B6E3DC25A6A704002A18D3 /* AudioToolbox.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -63,6 +72,9 @@
 		D00117E325A35925004BBB98 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D0B6E3DB25A6A704002A18D3 /* AudioToolbox.framework */,
+				D0B6E3D925A6A6CD002A18D3 /* CoreAudio.framework */,
+				D0B6E3D725A6A679002A18D3 /* AudioUnit.framework */,
 				D00117E825A35E68004BBB98 /* OpenGLES.framework */,
 				D00117E425A35925004BBB98 /* MediaBase.framework */,
 			);
@@ -94,6 +106,8 @@
 				D00117DC25A34401004BBB98 /* OpenGLESVideoDriver.mm */,
 				D00117ED25A363C0004BBB98 /* VideoDriverFactory.mm */,
 				D00117E125A34BE6004BBB98 /* IAudioDriver.h */,
+				D08E9CE325A6017700B01604 /* AudioUnitDriver.h */,
+				D08E9CE225A6017700B01604 /* AudioUnitDriver.cc */,
 				D08C327025A1F91600435903 /* MediaPlayer.h */,
 				D08C327825A1FB3F00435903 /* MediaPlayer.cc */,
 				D08C327125A1F91600435903 /* Info.plist */,
@@ -111,6 +125,7 @@
 				D08C327225A1F91600435903 /* MediaPlayer.h in Headers */,
 				D00117E025A3449E004BBB98 /* IVideoDriver.h in Headers */,
 				D00117DF25A34401004BBB98 /* OpenGLESVideoDriver.h in Headers */,
+				D08E9CE525A6017700B01604 /* AudioUnitDriver.h in Headers */,
 				D00117E225A34CD6004BBB98 /* IAudioDriver.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -186,6 +201,7 @@
 			files = (
 				D00117EE25A363C0004BBB98 /* VideoDriverFactory.mm in Sources */,
 				D00117DE25A34401004BBB98 /* OpenGLESVideoDriver.mm in Sources */,
+				D08E9CE425A6017700B01604 /* AudioUnitDriver.cc in Sources */,
 				D08C327925A1FB3F00435903 /* MediaPlayer.cc in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

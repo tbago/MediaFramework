@@ -10,6 +10,10 @@
 
 namespace media_player {
 
+IAudioDriver *CreateAudioDriver() {
+    return new AudioUnitDriver();
+}
+
 static OSStatus AudioPlayBack(void *inRefCon,
                           AudioUnitRenderActionFlags *ioActionFlags,
                           const AudioTimeStamp *inTimeStamp,
@@ -17,6 +21,8 @@ static OSStatus AudioPlayBack(void *inRefCon,
                           uint32_t inNumberFrames,
                           AudioBufferList *ioData)
 {
+    AudioUnitDriver *driver = (AudioUnitDriver *)inRefCon;
+
     for (int i=0; i < ioData->mNumberBuffers; i++) {
         AudioBuffer buffer = ioData->mBuffers[i];
         /*----------------------------------------------------------------------
@@ -27,6 +33,9 @@ static OSStatus AudioPlayBack(void *inRefCon,
          |           frameBuffer[j] = 0;                                        |
          |       }                                                              |
          ----------------------------------------------------------------------*/
+        uint16_t *frameBuffer = (uint16_t *)buffer.mData;
+        printf("require data length:%d", buffer.mDataByteSize);
+        driver->_callback(driver->_callbackParam, frameBuffer, buffer.mDataByteSize);
     }
     return noErr;
 }
@@ -106,6 +115,9 @@ bool AudioUnitDriver::Open(uint32_t channels, uint32_t sampleRate, media_base::R
         printf("Init audio component failed:%d\n", status);
         return false;
     }
+
+    _callback = callback;
+    _callbackParam = callbackParam;
     return true;
 }
 
@@ -129,7 +141,20 @@ bool AudioUnitDriver::Close() {
         printf("Uninitialize audio unit failed:%d", status);
         return false;
     }
+    status = AudioComponentInstanceDispose(_audioPlayer);
+    if (status != 0) {
+        printf("Audio Component Instance dispose failed:%d", status);
+        return false;
+    }
     return true;
+}
+
+AudioUnitDriver::AudioUnitDriver() {
+
+}
+
+AudioUnitDriver::~AudioUnitDriver() {
+
 }
 
 int AudioUnitDriver::GetBitPerChannel(media_base::ResuableSampleFormat sampleFormat) {
@@ -163,5 +188,6 @@ int AudioUnitDriver::GetBitPerChannel(media_base::ResuableSampleFormat sampleFor
             break;
     }
 }
+
 }   // namespace media_player
 

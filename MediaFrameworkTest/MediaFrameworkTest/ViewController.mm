@@ -10,26 +10,28 @@
 #include <FFMpegDemuxer/FFMpegDemuxer.h>
 #include <FFMpegDecoder/FFMpegDecoder.h>
 #include <MediaPlayer/IVideoDriver.h>
+#include <MediaPlayer/IAudioDriver.h>
 
 #import "OpenGLView.h"
 
 @interface ViewController ()
 {
     media_demuxer::FFMpegDemuxer             *_ffmpegDemuxer;
-    media_decoder::FFMpegDecoderEnumerator    *_ffDecoderEnumerator;
+    media_decoder::FFMpegDecoderEnumerator   *_ffDecoderEnumerator;
     media_decoder::FFMpegDecoder             *_ffVideoDecoder;
     media_decoder::FFMpegDecoder             *_ffAudioDecoder;
-    media_player::IVideoDriver               *_videoDriver;
-    RTMP                                  *_rtmpClient;
-    std::vector<media_base::CompassedFrame *> compassedFrameVector;
+    media_player::IVideoDriver                  *_videoDriver;
+    media_player::IAudioDriver                  *_audioDriver;
 }
 
 @property (nonatomic) BOOL                            stopDecoder;
 @property (weak, nonatomic) IBOutlet OpenGLView          *glView;
-///< rtmp live
-@property (nonatomic) int64_t                           startPts;
-@property (atomic)    BOOL                             stopLive;
 @end
+
+media_player::AudioDriverCallbackState AudioDriverCallback(void *callbackParam, void *buffer, uint32_t bufferSize)
+{
+    return media_player::CallBackStateContinue;
+}
 
 @implementation ViewController
 
@@ -74,7 +76,7 @@
 }
 
 - (IBAction)stopLiveButtonClick:(UIButton *)sender {
-    self.stopLive = YES;
+    // TODO: (tbago) not implement
 }
 
 - (void)openDecoderForTest {
@@ -82,8 +84,8 @@
     ///< ffmpeg decoder test
     _ffDecoderEnumerator->InitDecoderArray();
 
-    media_base::StreamInfo *videoStreamInfo = nil;
-    media_base::StreamInfo *audioStreamInfo = nil;
+    media_base::StreamInfo *videoStreamInfo = NULL;
+    media_base::StreamInfo *audioStreamInfo = NULL;
     for (media_base::StreamInfo *streamInfo : sourceMovieInfo->streams) {
         if (streamInfo->streamType == media_base::VideoStream) {
             videoStreamInfo = streamInfo;
@@ -92,7 +94,7 @@
             audioStreamInfo = streamInfo;
         }
     }
-    if (videoStreamInfo == nil) {
+    if (videoStreamInfo == NULL) {
         return;
     }
     _ffVideoDecoder = _ffDecoderEnumerator->CreateFFMpegDecoderByCodecId(videoStreamInfo->codecID);
@@ -111,18 +113,25 @@
             return;
         }
     }
-    _ffAudioDecoder = _ffDecoderEnumerator->CreateFFMpegDecoderByCodecId(audioStreamInfo->codecID);
-    if (_ffAudioDecoder != NULL) {
-        media_decoder::AVCodecParam codecParam;
-        codecParam.sampleFormat = audioStreamInfo->sampleFormat;
-        codecParam.sampleRate   = audioStreamInfo->samplerate;
-        codecParam.channels    = audioStreamInfo->channels;
+    if (audioStreamInfo != NULL) {
+        _ffAudioDecoder = _ffDecoderEnumerator->CreateFFMpegDecoderByCodecId(audioStreamInfo->codecID);
+        if (_ffAudioDecoder != NULL) {
+            media_decoder::AVCodecParam codecParam;
+            codecParam.sampleFormat = audioStreamInfo->sampleFormat;
+            codecParam.sampleRate   = audioStreamInfo->samplerate;
+            codecParam.channels    = audioStreamInfo->channels;
 
-        bool ret = _ffAudioDecoder->OpenCodec(&codecParam);
-        if (!ret) {
-            return;
+            bool ret = _ffAudioDecoder->OpenCodec(&codecParam);
+            if (!ret) {
+                return;
+            }
         }
+
+        _audioDriver = media_player::CreateAudioDriver();
+        _audioDriver->Open(audioStreamInfo->channels, audioStreamInfo->sampleFormat, audioStreamInfo->sampleFormat, AudioDriverCallback, (__bridge void *)self);
+        _audioDriver->Play();
     }
+
     [NSThread detachNewThreadSelector:@selector(loopReadAndDecodeStreamData) toTarget:self withObject:nil];
 }
 
@@ -139,20 +148,18 @@
                 videoFrame = _ffVideoDecoder->DecodeVideoFrame(compassedFrame);
             }
             media_base::RawAudioFrame *audioFrame = NULL;
-//            if (compassedFrame->streamType == media_base::AudioStream) {
-//                audioFrame = _ffAudioDecoder->DecodeAudioFrame(compassedFrame);
-//            }
+            if (compassedFrame->streamType == media_base::AudioStream) {
+                audioFrame = _ffAudioDecoder->DecodeAudioFrame(compassedFrame);
+            }
             delete compassedFrame;
             if (videoFrame != NULL){
                 dispatch_async(dispatch_get_main_queue(), ^{
-//                    [self.glView DrawImage:videoFrame];
                     media_player::TRect rect;
                     rect.left = self.glView.bounds.origin.x;
                     rect.top = self.glView.bounds.origin.y;
                     rect.width = self.glView.bounds.size.width;
                     rect.height = self.glView.bounds.size.height;
                     self->_videoDriver->DrawImage(videoFrame, rect, rect);
-//                    [self renderVideoFrame:videoFrame];
                     delete videoFrame;
                 });
             }

@@ -27,7 +27,7 @@ public:
     ~AudioUnitDriver();
 private:
     int32_t GetBitPerChannel(media_base::ResuableSampleFormat sampleFormat);
-private:
+public:
     AudioDriverCallback     _callback;
     void                  *_callbackParam;
     AudioComponentInstance   _audioPlayer;

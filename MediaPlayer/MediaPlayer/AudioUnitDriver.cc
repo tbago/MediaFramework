@@ -34,7 +34,7 @@ static OSStatus AudioPlayBack(void *inRefCon,
          |       }                                                              |
          ----------------------------------------------------------------------*/
         uint16_t *frameBuffer = (uint16_t *)buffer.mData;
-        printf("require data length:%d", buffer.mDataByteSize);
+        printf("require data %d length:%d\n", i, buffer.mDataByteSize);
         driver->_callback(driver->_callbackParam, frameBuffer, buffer.mDataByteSize);
     }
     return noErr;
@@ -78,9 +78,10 @@ bool AudioUnitDriver::Open(uint32_t channels,
 
     //set describtion format
     AudioStreamBasicDescription audioFormat;
+    memset(&audioFormat, 0, sizeof(audioFormat));
     audioFormat.mSampleRate       = sampleRate;
     audioFormat.mBitsPerChannel   = GetBitPerChannel(sampleFormat);
-    audioFormat.mChannelsPerFrame = channels;
+    audioFormat.mChannelsPerFrame = 1;
     audioFormat.mFormatID         = kAudioFormatLinearPCM;
     // TODO: (tbago) need support more format
     if (sampleFormat == media_base::R_SAMPLE_FMT_S16) {
@@ -92,7 +93,7 @@ bool AudioUnitDriver::Open(uint32_t channels,
         audioFormat.mBytesPerFrame    = 2;
     }
     else if (sampleFormat == media_base::R_SAMPLE_FMT_FLTP) {
-        audioFormat.mFormatFlags      = kAudioFormatFlagIsFloat| kAudioFormatFlagIsPacked;
+        audioFormat.mFormatFlags      = kAudioFormatFlagIsFloat;
         audioFormat.mBytesPerFrame    = 4;
     }
     else if (sampleFormat == media_base::R_SAMPLE_FMT_FLT) {
@@ -102,7 +103,7 @@ bool AudioUnitDriver::Open(uint32_t channels,
     else {
         assert(false);
     }
-    audioFormat.mFramesPerPacket  = frameSize;
+    audioFormat.mFramesPerPacket  = 1;
     audioFormat.mBytesPerPacket   = audioFormat.mChannelsPerFrame * audioFormat.mBytesPerFrame * audioFormat.mFramesPerPacket;
 
     status = AudioUnitSetProperty(_audioPlayer,

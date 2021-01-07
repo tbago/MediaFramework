@@ -93,6 +93,7 @@ bool FFMpegDecoderImp::OpenCodec(AVCodecParam * codecParam)
         _avcodecContext.sample_fmt = MediaSampleFormatToFFMpegSampleFormat(codecParam->sampleFormat);
         _avcodecContext.sample_rate = codecParam->sampleRate;
         _avcodecContext.channels = codecParam->channels;
+        _avcodecContext.frame_size = codecParam->frameSize;
     }
 
     int ret = avcodec_open2(&_avcodecContext, _avcodec, NULL);
@@ -217,10 +218,14 @@ media_base::RawAudioFrame * FFMpegDecoderImp::InnerDecodeAudioFrame(media_base::
     AVFrame *decodedAudioFrame = av_frame_alloc();
     int ret = avcodec_send_packet(&_avcodecContext, &avpkt);
     if (ret != 0) {
-        printf("send video packet failed");
+        printf("send audio packet failed\n");
         av_frame_unref(decodedAudioFrame);
         return NULL;
     }
+
+    media_base::RawAudioFrame *audioFrame = new media_base::RawAudioFrame(FFMpegSampleFormatToMediaSampleFormat(_avcodecContext.sample_fmt),
+                                                                          _avcodecContext.sample_rate,
+                                                                          _avcodecContext.channels);
 
     ret = avcodec_receive_frame(&_avcodecContext, decodedAudioFrame);
     if (ret != 0) {
@@ -235,12 +240,9 @@ media_base::RawAudioFrame * FFMpegDecoderImp::InnerDecodeAudioFrame(media_base::
         }
     }
 
-    media_base::RawAudioFrame *audioFrame = new media_base::RawAudioFrame(FFMpegSampleFormatToMediaSampleFormat(_avcodecContext.sample_fmt),
-                                                                          _avcodecContext.sample_rate,
-                                                                          _avcodecContext.channels);
     for (uint32_t i = 0; i < AV_NUM_DATA_POINTERS; i++) {
-        if (decodedAudioFrame->linesize[i] > 0) {
-            audioFrame->PushFrameData((int8_t *)decodedAudioFrame->data[i], decodedAudioFrame->linesize[i]);
+        if (decodedAudioFrame->data[i] != NULL) {
+            audioFrame->PushFrameData((int8_t *)decodedAudioFrame->data[i], decodedAudioFrame->linesize[0]);
         }
         else {
             break;

@@ -50,6 +50,7 @@ struct AVCodecParam
     media_base::ResuableSampleFormat sampleFormat;
     uint32_t      channels;
     uint32_t      sampleRate;
+    int32_t       frameSize;
 };
 
 /**

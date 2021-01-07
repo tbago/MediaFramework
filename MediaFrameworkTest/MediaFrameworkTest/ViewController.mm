@@ -120,6 +120,9 @@ media_player::AudioDriverCallbackState AudioDriverCallback(void *callbackParam, 
             codecParam.sampleFormat = audioStreamInfo->sampleFormat;
             codecParam.sampleRate   = audioStreamInfo->samplerate;
             codecParam.channels    = audioStreamInfo->channels;
+            codecParam.frameSize    = audioStreamInfo->frameSize;
+            codecParam.extraData    = audioStreamInfo->extraData;
+            codecParam.extraDataSize = audioStreamInfo->extraDataSize;
 
             bool ret = _ffAudioDecoder->OpenCodec(&codecParam);
             if (!ret) {
